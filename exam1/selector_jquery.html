@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<link rel="stylesheet" href="common.css" />
+<script src="../libs/jquery-1.7.1.min.js"></script>
+<script>
+// jQuery default
+$(function(){
+	var examObj1 = $('.exam_wrap:eq(0)'),
+		examObj2 = $('.exam_wrap:eq(1)'),
+		examObj3 = $('.exam_wrap:eq(2)'),
+		examObj4 = $('.exam_wrap:eq(3)'),
+		examObj5 = $('.exam_wrap:eq(4)'),
+		examObj6 = $('.exam_wrap:eq(5)'),
+		examObj7 = $('.exam_wrap:eq(6)'),
+		examObj8 = $('.exam_wrap:eq(7)');
+
+	examObj1.find('button').on('click', function(){
+		examObj1.find('.exam_q *').css('background','yellow');
+	});
+	examObj2.find('button').on('click', function(){
+		examObj2.find('.exam_q span').css('background','yellow');
+	});
+	examObj3.find('button').on('click', function(){
+		examObj3.find('.exam_q em span').css('background','yellow');
+	});
+	examObj4.find('button').on('click', function(){
+		examObj4.find('.exam_q>span').css('background','yellow');
+	});
+	examObj5.find('button').on('click', function(){
+		examObj5.find('.exam_q div+p').css('background','yellow');
+	});
+	examObj6.find('button').on('click', function(){
+		examObj6.find('.exam_q div~span').css('background','yellow');
+	});
+	examObj7.find('button')	.on('click', function(){
+		examObj7.find('.exam_q .active').css('background','yellow');
+	});
+	examObj8.find('button').on('click', function(){
+		examObj8.find('.exam_q #active').css('background','yellow');
+	});
+});
+</script>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+	<!-- header [s] -->
+	<div id="header">
+	</div>
+	<!-- header [e] -->
+	<hr />
+	<!-- container [s] -->
+	<div id="container">
+		<div class="exam_wrap">
+			<h1>Q. <strong class="point">모든 Elements</strong>를 선택</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) $("*")</p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. <strong class="point">태그명이 span 인 Elements</strong>를 선택</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) $("E")</p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. <strong class="point">em의 자손</strong>이면서 <strong class="point">태그명이 span 인 Elements</strong>를 선택</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) $("E F")</p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. <strong class="point">부모(.exam_q)의 바로 아래 자식</strong>이면서 <strong class="point">태그명이 span 인 Elements</strong>를 선택</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) $("E>F")</p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. <strong class="point">div의 형제 Elements</strong>이면서, <strong class="point">바로 다음에 나오는 p Elements</strong>를 선택</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) $("E+F")</p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. <strong class="point">div의 형제 Elements</strong>이면서, <strong class="point">다음에 나오는 모든 span Elements</strong>를 선택</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) $("E~F")</p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. <strong class="point">클래스명이 active인 모든 Elements</strong>를 선택</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<div class="active">div</div>
+				<p class="active">p</p>
+				<span class="active">span</span>
+				<span>span</span>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) $("E.C") E의 생략은 *.C와 동일함.</p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. <strong class="point">아이디명이 active인 Element</strong>를 선택</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div id="active">div</div>
+				<div class="active">div</div>
+				<p class="active">p</p>
+				<span class="active">span</span>
+				<span>span</span>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) $("E#I") E의 생략은 *#I와 동일함.</p>
+		</div>
+	</div>
+	<!-- container [e] -->
+	<hr />
+	<!-- footer [s] -->
+	<div id="footer">
+	</div>
+	<!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+</body>
+</html>
