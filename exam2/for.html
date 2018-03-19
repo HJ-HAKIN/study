@@ -9,14 +9,40 @@
 <script>
 $(function(){
 
-	// exam1 [s]
-	// var exam1 = $('.exam_q').eq(0);
-	// exam1.append('<input type="checkbox">');
-	// exam1 [e]
+	var exam1 = $('.exam_q').eq(0),
+		a = 0;
+	while (a < 5) {
+		exam1.append('<input type="checkbox"><br>');
+		a++;
+	}
 
-	// var exam3 = $('.exam_q').eq(2);
-	// exam3.append('8 X 1 = 8 <br>');
+	var exam2 = $('.exam_q').eq(1),
+		b = 0;	
+	while (b < 5) {
+		if (b == 1 || b == 3) {
+			exam2.append('<input type="text" placeholder="TEXT"><br>');
+		} else {
+			exam2.append('<input type="checkbox"><br>');
+		}
+		b++;
+	}
 
+	var exam3 = $('.exam_q').eq(2),
+		c = 8,
+		d = 1;
+	for (; d<=9; d++) {
+		f = c * d;
+		exam3.append(c + ' * ' + d + ' = ' + f +'<br>');
+	}
+
+	var exam4 = $('.exam_q').eq(3);
+	for(var f = 2; f <= 9; f++) {
+		exam4.append('<br>');
+	    for(var g = 1; g <= 9; g++) {
+	    	h = f * g;
+	        exam4.append(f + ' * ' + g + ' = ' + h +'<br>');
+	    }
+	}
 });
 </script>
 </head>

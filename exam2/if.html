@@ -93,5 +93,98 @@
 	<!-- footer [e] -->
 </div>
 <!-- wrapper [e] -->
+<script>
+$(function () {
+	var target1 = $('.exam_wrap').eq(0),
+		target2 = $('.exam_wrap').eq(1),
+		target3 = $('.exam_wrap').eq(2),
+		target4 = $('.exam_wrap').eq(3),
+		listWrap1 = target1.find('.exam_q > ul'),
+		listWrap2 = target2.find('.exam_q > ul'),
+		listWrap3 = target3.find('.exam_q > ul'),
+		listWrap4 = target4.find('.exam_q > ul'),
+		listChild1 = listWrap1.children(),
+		listChild2 = listWrap2.children(),
+		listChild3 = listWrap3.children(),
+		listChild4 = listWrap4.children(),
+		prevBtn2 = target2.find('button'),
+		prevBtn3 = target3.find('button').eq(0),
+		prevBtn4 = target4.find('button').eq(0),
+		nextBtn1 = target1.find('button'),
+		nextBtn3 = target3.find('button').eq(1),
+		nextBtn4 = target4.find('button').eq(1),
+		minusIndex = -1,
+		targetIndex = 0,
+		lastIndex = listChild2.length,
+		oldIndex = targetIndex;
+
+	var nextFunc1 = function () {
+		minusIndex++;
+		if (minusIndex > listChild1.length -1) {
+			return;
+		};
+		listChild1.eq(minusIndex).css('background', 'yellow');
+	};
+
+	var prevFunc2 = function () {
+		lastIndex--;
+		if (lastIndex < 0) {
+			return;
+		};
+		listChild2.eq(lastIndex).css('background', 'yellow');
+	};
+
+	var nextFunc3 = function () {
+		targetIndex++;
+		if (targetIndex > listChild3.length -1) {
+			return;
+		};
+		listChild3.eq(oldIndex).css('background', '');
+		listChild3.eq(targetIndex).css('background', 'yellow');
+		oldIndex = targetIndex;
+	};
+
+	var prevFunc3 = function () {
+		targetIndex--;
+		if (targetIndex < 0) {
+			return;
+		};
+		listChild3.eq(oldIndex).css('background', '');
+		listChild3.eq(targetIndex).css('background', 'yellow');
+		oldIndex = targetIndex;
+		console.log(targetIndex);
+	};
+	// 정해진 index 수를 넘지 않도록 제어하는 방법
+
+	var nextFunc4 = function () {
+		targetIndex++;
+		if (targetIndex > listChild4.length -1) {
+			targetIndex = 0;
+		};
+		listChild4.eq(oldIndex).removeClass('active');
+		listChild4.eq(targetIndex).addClass('active');
+		oldIndex = targetIndex;
+	};
+
+	var prevFunc4 = function () {
+		targetIndex--;
+		if (targetIndex < 0) {
+			targetIndex = listChild4.length -1;
+		};
+		listChild4.eq(oldIndex).removeClass('active');
+		listChild4.eq(targetIndex).addClass('active');
+		oldIndex = targetIndex;
+		console.log(targetIndex);
+	};
+
+	prevBtn2.on('click', prevFunc2);
+	prevBtn3.on('click', prevFunc3);
+	prevBtn4.on('click', prevFunc4);
+	nextBtn1.on('click', nextFunc1);
+	nextBtn3.on('click', nextFunc3);
+	nextBtn4.on('click', nextFunc4);
+});
+
+</script>
 </body>
 </html>
