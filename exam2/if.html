@@ -115,8 +115,10 @@ $(function () {
 		nextBtn4 = target4.find('button').eq(1),
 		minusIndex = -1,
 		targetIndex = 0,
+		targetIndex2 = 0,
 		lastIndex = listChild2.length,
 		oldIndex = targetIndex;
+		oldIndex2 = targetIndex2;
 
 	var nextFunc1 = function () {
 		minusIndex++;
@@ -135,20 +137,17 @@ $(function () {
 	};
 
 	var nextFunc3 = function () {
+		if (targetIndex > listChild3.length -2) return;
 		targetIndex++;
-		if (targetIndex > listChild3.length -1) {
-			return;
-		};
 		listChild3.eq(oldIndex).css('background', '');
 		listChild3.eq(targetIndex).css('background', 'yellow');
 		oldIndex = targetIndex;
+		console.log(targetIndex);
 	};
 
 	var prevFunc3 = function () {
+		if (targetIndex < 1) return;
 		targetIndex--;
-		if (targetIndex < 0) {
-			return;
-		};
 		listChild3.eq(oldIndex).css('background', '');
 		listChild3.eq(targetIndex).css('background', 'yellow');
 		oldIndex = targetIndex;
@@ -157,24 +156,23 @@ $(function () {
 	// 정해진 index 수를 넘지 않도록 제어하는 방법
 
 	var nextFunc4 = function () {
-		targetIndex++;
-		if (targetIndex > listChild4.length -1) {
-			targetIndex = 0;
+		targetIndex2++;
+		if (targetIndex2 > listChild4.length -1) {
+			targetIndex2 = 0;
 		};
-		listChild4.eq(oldIndex).removeClass('active');
-		listChild4.eq(targetIndex).addClass('active');
-		oldIndex = targetIndex;
+		listChild4.eq(oldIndex2).removeClass('active');
+		listChild4.eq(targetIndex2).addClass('active');
+		oldIndex2 = targetIndex2;
 	};
 
 	var prevFunc4 = function () {
-		targetIndex--;
-		if (targetIndex < 0) {
-			targetIndex = listChild4.length -1;
+		targetIndex2--;
+		if (targetIndex2 < 0) {
+			targetIndex2 = listChild4.length -1;
 		};
-		listChild4.eq(oldIndex).removeClass('active');
-		listChild4.eq(targetIndex).addClass('active');
-		oldIndex = targetIndex;
-		console.log(targetIndex);
+		listChild4.eq(oldIndex2).removeClass('active');
+		listChild4.eq(targetIndex2).addClass('active');
+		oldIndex2 = targetIndex2;
 	};
 
 	prevBtn2.on('click', prevFunc2);
