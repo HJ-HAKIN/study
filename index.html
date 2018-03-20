@@ -1,29 +1,60 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<title>HJ Study</title>
+<meta charset="UTF-8">
+<title>HJ Study</title>
+<style>
+blockquote,body,button,dd,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,legend,li,ol,p,select,table,td,textarea,th,ul{margin:0;padding:0}
+body,button,input,select,table,textarea{font-size:14px;font-family:"나눔고딕",nanumgothic,se_NanumGothic,AppleSDGothicNeo,"malgun gothic","맑은 고딕",sans-serif}
+button{background-color:transparent;border:none;border-radius:0;cursor:pointer}
+body{color:#333;-webkit-text-size-adjust:none;word-break:break-all}
+body,html{height:100%}
+fieldset,img{border:0}
+img{vertical-align:middle}
+ol,ul{list-style:none}
+address{font-style:normal}
+b,h1,h2,h3,h4,h5,h6,strong{font-weight:600}
+a{color:#000;text-decoration:none}
+:root a:active,_:-ms-input-placeholder{background-color:transparent}
+#wrap{width:800px;margin:0 auto}
+#wrap:before{display:block;height:10px;background:#ccc;content:''}
+#wrap:after{display:block;height:5px;background:#ccc;content:''}
+.group{padding:20px 10px 15px}
+.tit{padding-bottom:15px;border-bottom:1px dashed #ddd;font-size:30px;font-weight:800;text-align:center}
+.sub_tit{display:inline-block;position:relative;margin-top:20px;padding:0 5px 0 10px;font-size:22px;font-weight:700;vertical-align:middle}
+.sub_tit:before{position:absolute;top:50%;left:1px;width:5px;height:5px;margin-top:-3px;border-radius:50%;background:#D34017;content:''}
+.desc{display:inline-block;position:relative;;margin:20px 0 0 6px;padding:4px 6px 3px;border-radius:0 4px 4px 0;background:#D34017;font-size:11px;color:#fff;vertical-align:middle}
+.desc:before{position:absolute;top:0;left:-10px;width:0;height:0;border-top:10px solid transparent;border-bottom: 10px solid transparent;border-right:10px solid #D34017; content:''}
+.lst_exam{padding:15px 0;font-size:0}
+.lst_exam:after{display:block;margin:20px 0 -10px;font-size:12px;font-weight:400;color:#ddd;text-align:center;content:'- * - * - * - * - * - * - * - * - * -'}
+.lst_exam:last-child:after{display:none}
+.lst_exam li{display:inline-block}
+.lst_exam a{display:inline-block;padding:10px 15px;border-radius:8px;font-size:14px;color:#787878;font-weight: 500}
+.lst_exam a:hover,.lst_exam a:active,.lst_exam a:focus{background:#60B99A;color:#fff}
+.lst_exam a:before{display:inline-block;margin-right:4px;content:'>>'}
+</style>
 </head>
 <body>
-	<div id="wrap">
-		<h1>JS Stydy List</h1>
-		<h2>[20180307] 1주차</h2>
-		<p>주어진 조건을 JS/jQuery selector로 표기</p>
-		<ul>
+<div id="wrap">
+	<div class="group">
+		<h1 class="tit">JS Stydy List</h1>
+		<h2 class="sub_tit">[20180307] 1주차</h2>
+		<p class="desc">주어진 조건을 JS/jQuery selector로 표기</p>
+		<ul class="lst_exam">
 		<li><a href="exam1/selector_js.html">Selector JS</a></li>
 		<li><a href="exam1/selector_jquery.html">Selector jQuery</a></li>
 		<li><a href="exam1/selector2_js.html">Selector2 JS</a></li>
 		<li><a href="exam1/selector2_jquery.html">Selector2 jQuery</a></li>
 		</ul>
-		<h2>[20180314] 2주차</h2>
-		<p>각 prototype의 property 정리, if/for 문 문제 풀이</p>
-		<ul>
+		<h2 class="sub_tit">[20180314] 2주차</h2>
+		<p class="desc">각 prototype의 property 정리, if/for 문 문제 풀이</p>
+		<ul class="lst_exam">
 		<li><a href="https://github.com/HJ-HAKIN/study/wiki/Prototype">Prototype Wiki</a></li>
 		<li><a href="exam2/if.html">if 문</a></li>
 		<li><a href="exam2/for.html">for 문</a></li>
 		</ul>
-
-
 	</div>
+
+</div>
 </body>
 </html>
