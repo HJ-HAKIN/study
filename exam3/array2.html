@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<link rel="stylesheet" href="common.css" />
+<script src="../libs/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+	<!-- header [s] -->
+	<div id="header">
+	</div>
+	<!-- header [e] -->
+	<hr />
+	<!-- container [s] -->
+	<div id="container">
+		<div class="exam_wrap">
+			<h1>Q. 배열에 본인 이름을 한글자씩 담은 다음 문자열로 출력하세요.</h1>
+			<div class="exam_q">예시) ['Lee', 'Hwan'] => 'Lee Hwan'</div>
+			<button type="button">버튼</button>
+			<p class="show"></p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 'question' 문자열을 거꾸로 출력하세요. (for문 사용)</h1>
+			<div class="exam_q">예시) 'question' => 'noitseuq'</div>
+			<button type="button">버튼</button>
+			<p class="show"></p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. [40, 100, 1, 5, 25, 10] 에서 가장 큰 수 순서대로 index 를 배열로 출력하세요.  (for/if문 사용)</h1>
+			<div class="exam_q">예시) [40, 100, 1, 5, 25, 10] => [1, 0, 5, 4, 2, 3]</div>
+			<button type="button">버튼</button>
+			<p class="show"></p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 2중 배열로 구구단을 만드세요. (for문 사용)</h1>
+			<div class="exam_q">예시) [[2,4,6...],[3,6,9...]...]</div>
+			<button type="button">버튼</button>
+			<p class="show"></p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 배열에 숫자 0 ~ 9까지 담아보세요. (for문 사용)</h1>
+			<div class="exam_q">예시) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</div>
+			<button type="button">버튼</button>
+			<p class="show"></p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 6개 담아보세요. (for문 사용)</h1>
+			<div class="exam_q">예시) [4, 2, 3, 2, 3, 0]</div>
+			<button type="button">버튼</button>
+			<p class="show"></p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 배열에 숫자 0 ~ 9까지 담고, 버튼 클릭시 랜덤한 숫자를 하나씩 빼주세요.</h1>
+			<div class="exam_q">예시) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] => [0, 1, 2, 3, 4, 5, 7, 8, 9] => [0, 1, 3, 4, 5, 7, 8, 9]</div>
+			<button type="button">버튼</button>
+			<p class="show"></p>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 중복되는 값이 없도록 6개 담아보세요. (for/if문 사용)</h1>
+			<div class="exam_q">예시) [4, 2, 3, 1, 5, 0]</div>
+			<button type="button">버튼</button>
+			<p class="show"></p>
+		</div>
+	</div>
+	<!-- container [e] -->
+	<hr />
+	<!-- footer [s] -->
+	<div id="footer">
+	</div>
+	<!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+<script>
+$(function () {
+	// var arrayExam = {
+	// 	init : function(){
+	// 		this.setElements();
+	// 		this.indexView();
+	// 		this.bindEventHandlers();
+	// 	},
+	// 	setElements : function(){
+	// 		this.exam = $('.exam_wrap');
+	// 		this.list = [];
+	// 		this.btn = exam.find('button');
+	// 		this.result = exam.find('.show');
+	// 	},
+	// 	bindEventHandlers : function(){
+	// 		this.btn.on('click', $.proxy(this.btnFunc, this));
+	// 	},
+	// 	findEqFunc : function () {
+	// 		var c = 0;
+	// 	},
+	// 	indexFunc : function () {
+	// 		if (exam.eq(0)) {
+	// 			this.index = ['Kim', 'Hyo', 'Jung']
+	// 		} else {
+	// 			for (var i = 0; i < list.length; i++) {
+	// 		list.push(i);
+	// 		}
+	// 	},
+	// 	randomFunc : function () {
+	// 	},
+	// 	btnFunc : function () {
+	// 	}
+	// };
+	// arrayExam.init();
+	// var count = 0;
+	// var varArray = [];
+	// for (var c = 0; c < 8; c++) {
+	// 	var num = c + 1;
+	// 	var varName = 'exam' + num;
+	// 	varArray.push(varName);
+	// }
+	// console.log(varArray)
+	var exam1 = $('.exam_wrap').eq(0),
+		exam2 = $('.exam_wrap').eq(1),
+		exam3 = $('.exam_wrap').eq(2),
+		exam4 = $('.exam_wrap').eq(3),
+		exam5 = $('.exam_wrap').eq(4),
+		exam6 = $('.exam_wrap').eq(5),
+		exam7 = $('.exam_wrap').eq(6),
+		exam8 = $('.exam_wrap').eq(7),
+		btn1 = exam1.find('button'),
+		btn2 = exam2.find('button'),
+		btn3 = exam3.find('button'),
+		btn4 = exam4.find('button'),
+		btn5 = exam5.find('button'),
+		btn6 = exam6.find('button'),
+		btn7 = exam7.find('button'),
+		btn8 = exam8.find('button'),
+		result1 = exam1.find('.show'),
+		result2 = exam2.find('.show'),
+		result3 = exam3.find('.show'),
+		result4 = exam4.find('.show'),
+		result5 = exam5.find('.show'),
+		result6 = exam6.find('.show'),
+		result7 = exam7.find('.show'),
+		result8 = exam8.find('.show');
+
+	var arrayFunc1 = function () {
+		var list = ['Kim', 'Hyo', 'Jung'];
+		$(result1).html(list.join(' '));
+	};
+
+	var arrayFunc5 = function () {
+		var list = [];
+		for (var i = 0; i < 10; i++) {
+			list.push(i);
+		}
+		$(result5).html(list.join(', '));
+	};
+
+	var arrayFunc6 = function () {
+		var list = [];
+		for (var i = 0; i < 6; i++) {
+			var j = Math.floor(Math.random() * 6);
+			list.push(j);
+		}
+		$(result6).html(list.join(', '));
+	};
+
+	var arrayNum = [];
+	for (var i = 0; i < 10; i++) {
+		arrayNum.push(i);
+	};
+
+	var arrayFunc7 = function () {
+		if (arrayNum.length == 0) return;
+		var j = Math.floor(Math.random() * arrayNum.length);
+		if (arrayNum.length == 10) {	
+			$(result7).append('[' + arrayNum.join(', ') + ']');
+		} else {
+			$(result7).append(' => [' + arrayNum.join(', ') + ']');
+		}
+		arrayNum.splice(j, 1);
+	};
+
+
+	btn1.on('click', arrayFunc1);
+	// btn2.on('click', arrayFunc2);
+	// btn3.on('click', arrayFunc3);
+	// btn4.on('click', arrayFunc4);
+	btn5.on('click', arrayFunc5);
+	btn6.on('click', arrayFunc6);
+	btn7.on('click', arrayFunc7);
+	// btn8.on('click', arrayFunc8);
+});
+</script>
+</body>
+</html>
