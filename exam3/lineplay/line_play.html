@@ -88,5 +88,67 @@
     </div>
     <button type="button" class="btn_random"><span>다른 아바타 보기</span></button>
 </div>
+
+<script src="../../libs/jquery-1.7.1.min.js"></script>
+<script>
+$(function(){
+    var lineplay = {
+        init : function(){
+            this.setElements();
+            this.setLayout();
+            this.bindEventHandlers();
+        },
+        setElements : function(){
+            this.wrap = $('.create_wrap');
+            this.container = this.wrap.find('.swiper-container');
+            this.wrapper = this.container.find('.swiper-wrapper');
+            this.slide = this.wrapper.children();
+            this.randomBtn = this.wrap.find('.btn_random');
+        },
+        setLayout : function(){
+            this.resetArray();
+            this.slide.eq(this.createRandom()).show().siblings().hide();
+            // slide 중 createRandom으로 선택된 것만 show하고, 그 형제 요소는 hide한다.
+            this.oldNum = this.arrayIndex[this.currentNum];
+            // arrayIndex 중 currentNum 함수 실행 결과 노출(랜덤 노출)
+            this.removeArray();
+        },
+        bindEventHandlers : function(){
+            this.randomBtn.on('click', $.proxy(this.randomView, this));
+        },
+        resetArray : function(){
+            //규칙 리셋 = 삭제한 인덱스 초기화
+            this.arrayIndex = [];
+            for(var i=0; i<this.slide.length; i++){
+                this.arrayIndex.push(i);
+                // i가 slide의 갯수보다 작아지면 arrayIndex의 뒤에 i를 추가(리셋)한다.
+            };
+        },
+        removeArray : function(){
+            this.arrayIndex.splice(this.currentNum, 1);
+            // arrayIndex를 1씩 제거한다.
+            if(!this.arrayIndex.length){
+                this.resetArray();
+                // arrayIndex의 갯수와 같지 않으면 resetArray 실행
+            };
+        },
+        createRandom : function(){
+            this.currentNum = Math.floor(Math.random() * this.arrayIndex.length);
+            // arrayIndex의 갯수를 확인하여 그 중 하나를 랜덤으로 보여준다.
+            return this.currentNum;
+        },
+        randomView : function(){
+            this.slide.eq(this.oldNum).stop(true,true).fadeOut();
+            // slide 중 이전에 선택됐던 것을 fadeOut 시킨다.
+            this.slide.eq(this.arrayIndex[this.createRandom()]).stop(true,true).fadeIn();
+            // slide의 arrayIndex 중 랜덤으로 하나를 fadeIn 시킨다.
+            this.oldNum = this. arrayIndex[this.currentNum];
+            console.log(this.arrayIndex);
+            this.removeArray();
+        }
+    };
+    lineplay.init();
+});
+</script>
 </body>
 </html>

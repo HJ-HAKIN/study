@@ -9,6 +9,8 @@ hr{display:none}
 #wrapper{padding:0 10px}
 .exam_wrap{padding:10px 0}
 .exam_wrap h1{margin:5px 0;font-size:1em}
+.exam_wrap p{margin-top:10px;padding:10px 15px;background:#eee}
+.exam_wrap .ing{display:inline-block;padding:3px 5px 1px;border-radius:3px;background:#f00;font-size:11px;color:#fff}
 .exam_q ul{zoom:1}
 .exam_q ul:after{display:block;clear:both;content:''}
 .exam_q ul li{float:left;width:100px;margin-left:-1px;padding:5px 0;border:1px solid #ccc;text-align:center}

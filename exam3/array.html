@@ -30,7 +30,7 @@
 			<p class="show"></p>
 		</div>
 		<div class="exam_wrap">
-			<h1>Q. [40, 100, 1, 5, 25, 10] 에서 가장 큰 수 순서대로 index 를 배열로 출력하세요.  (for/if문 사용)</h1>
+			<h1>Q. [40, 100, 1, 5, 25, 10] 에서 가장 큰 수 순서대로 index 를 배열로 출력하세요. (for/if문 사용) <span class="ing">추가 정리 필요</span></h1>
 			<div class="exam_q">예시) [40, 100, 1, 5, 25, 10] => [1, 0, 5, 4, 2, 3]</div>
 			<button type="button">버튼</button>
 			<p class="show"></p>
@@ -60,7 +60,7 @@
 			<p class="show"></p>
 		</div>
 		<div class="exam_wrap">
-			<h1>Q. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 중복되는 값이 없도록 6개 담아보세요. (for/if문 사용)</h1>
+			<h1>Q. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 중복되는 값이 없도록 6개 담아보세요. (for/if문 사용) <span class="ing">추가 정리 필요</span></h1>
 			<div class="exam_q">예시) [4, 2, 3, 1, 5, 0]</div>
 			<button type="button">버튼</button>
 			<p class="show"></p>
@@ -135,7 +135,7 @@ $(function () {
 			finalIndex.push(indexes[j][1]);
 			console.log('finalIndex: ' + finalIndex);
 		}
-		$(result3).html(finalIndex.join(', '));
+		$(result3).html(indexes.join(', '));
 		// list 순서대로 indexes의 정보를 finalIndex에 넣기
 	};
 
@@ -200,7 +200,7 @@ $(function () {
 			console.log('random: ' + j);
 		}
 		$(result8).html(list.join(', '));
-		// 중복 숫자 빼기 필요
+		// 중복 숫자 빼기 및 출력 갯수 고정 필요
 	};
 
 
