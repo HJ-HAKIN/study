@@ -26,7 +26,7 @@
 			obj();<br>
 			// new obj();
 			</div>
-			<p>obj();를 실행하면 해당 함수 안의 내용만 실행하지만, <br>new obj();를 실행하면 해당 함수를 저장하여 실행한다.</p>
+			<p class="show">obj();를 실행하면 해당 함수 안의 내용만 실행하지만, <br>new obj();를 실행하면 해당 함수를 저장하여 실행한다.</p>
 		</div>
 		<div class="exam_wrap">
 			<h1>Q. 객체 내에서의 this 를 설명하세요.</h1>
@@ -38,7 +38,7 @@
 			};<br>
 			obj.init();<br>
 			</div>
-			<p>메서드의 객체를 가리킴</p>
+			<p class="show">메서드의 객체를 가리킴</p>
 		</div>
 		<div class="exam_wrap">
 			<h1>Q. 객체 내의 다른 메서드를 호출해보세요.</h1>
@@ -53,7 +53,7 @@
 			};<br>
 			obj.init();<br>
 			</div>
-			<p>
+			<p class="show">
 			var obj = {<br>
 			&nbsp;&nbsp;&nbsp;init : function () {<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.setElements();<br>
@@ -79,7 +79,7 @@
 			};<br>
 			obj.init();<br>
 			</div>
-			<p>
+			<p class="show">
 			var obj = {<br>
 			&nbsp;&nbsp;&nbsp;init : function () {<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj2.init();<br>
@@ -105,7 +105,7 @@
 			console.log(obj.func);<br>
 			console.log(obj.num);
 			</div>
-			<p>
+			<p class="show">
 			var obj = {<br>
 			&nbsp;&nbsp;&nbsp;func : function () {<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log('func');<br>
@@ -130,11 +130,11 @@
 			&nbsp;&nbsp;&nbsp;a : 'a'<br>
 			};<br>
 			</div>
-			<p></p>
+			<p class="show"></p>
 		</div>
 		<div class="exam_wrap">
 			<h1>Q. 'bcaebe' 문자열을 hasOwnProperty 를 사용해서, {a : 1, b : 2, c : 1, e : 2} 로 변경해보세요. <span class="ing">추가 정리 필요</span></h1>
-			<p></p>
+			<p class="show"></p>
 		</div>
 	</div>
 	<!-- container [e] -->
@@ -147,6 +147,11 @@
 <!-- wrapper [e] -->
 <script>
 $(function () {
+	var exam6 = $('.exam_wrap').eq(5),
+		result6 = exam6.find('.show'),
+		exam7 = $('.exam_wrap').eq(6),
+		result7 = exam7.find('.show');
+
 	var obj = {
 	   e : 'e',
 	   d : 'd',
@@ -156,23 +161,19 @@ $(function () {
 	   f : 'f',
 	   a : 'a'
 	};
-	objArray = ['obj'];
-	objArray.sort(function(a, b) {
-		return a - b;
-	});
-	console.log(obj);
-	console.log(objArray);
-	// var exam6 = $('.exam_wrap').eq(5);
-	// var ex6Item = {
-	// 	a : '1',
-	// 	b : '2',
-	// 	c : '1',
-	// 	e : '2'
-	// };
-	// var ex6Array = [b, c, a, e, b, e];
+	// obj와 array 연결?
+	var array = ['e', 'd', 'b', 'g', 'c', 'f', 'a'];
+	var array2 = array.sort();
+	$(result6).html(array2.join(''));
 
-
-	// $(exam6).html(ex6Result.join(', '));
+	var ex7Item = {
+		a : '1',
+		b : '2',
+		c : '1',
+		e : '2'
+	};
+	var ex7Array = ['b', 'c', 'a', 'e', 'b', 'e'];
+	$(result7).html(ex7Array.join(', '));
 
 
 });
