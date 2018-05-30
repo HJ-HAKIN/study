@@ -118,7 +118,7 @@
 			console.log(obj.num);</p>
 		</div>
 		<div class="exam_wrap">
-			<h1>Q. 객체내의 모든 속성들의 값을 배열에 저장한후, abc 순으로 sorting 하여, 'abcdefg' 문자열로 출력해보세요. <span class="ing">추가 정리 필요</span></h1>
+			<h1>Q. 객체내의 모든 속성들의 값을 배열에 저장한후, abc 순으로 sorting 하여, 'abcdefg' 문자열로 출력해보세요.</h1>
 			<div class="exam_q">예시)<br>
 			var obj = {<br>
 			&nbsp;&nbsp;&nbsp;e : 'e',<br>
@@ -161,8 +161,7 @@ $(function () {
 	   f : 'f',
 	   a : 'a'
 	};
-	// obj와 array 연결?
-	var array = ['e', 'd', 'b', 'g', 'c', 'f', 'a'];
+	var array = [obj.e, obj.d, obj.b, obj.g, obj.c, obj.f, obj.a];
 	var array2 = array.sort();
 	$(result6).html(array2.join(''));
 
