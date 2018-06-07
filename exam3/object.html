@@ -152,7 +152,7 @@ $(function () {
 		exam7 = $('.exam_wrap').eq(6),
 		result7 = exam7.find('.show');
 
-	var obj = {
+	var ex6Obj = {
 	   e : 'e',
 	   d : 'd',
 	   b : 'b',
@@ -161,18 +161,21 @@ $(function () {
 	   f : 'f',
 	   a : 'a'
 	};
-	var array = [obj.e, obj.d, obj.b, obj.g, obj.c, obj.f, obj.a];
-	var array2 = array.sort();
-	$(result6).html(array2.join(''));
+	var ex6Array = [ex6Obj.e, ex6Obj.d, ex6Obj.b, ex6Obj.g, ex6Obj.c, ex6Obj.f, ex6Obj.a];
+	var ex6Array2 = ex6Array.sort();
+	$(result6).html(ex6Array2.join(''));
 
-	var ex7Item = {
-		a : '1',
-		b : '2',
-		c : '1',
-		e : '2'
+	var ex7Obj = {
+	   a : 'a',
+	   b : 'b',
+	   c : 'c',
+	   e : 'e'
 	};
-	var ex7Array = ['b', 'c', 'a', 'e', 'b', 'e'];
-	$(result7).html(ex7Array.join(', '));
+	var ex7Array = [ex7Obj.b, ex7Obj.c, ex7Obj.a, ex7Obj.e, ex7Obj.b, ex7Obj.e];
+	var ex7Array2 = [];
+
+
+	$(result7).html(ex7Array2.join());
 
 
 });
