@@ -133,8 +133,8 @@
 			<p class="show"></p>
 		</div>
 		<div class="exam_wrap">
-			<h1>Q. 'bcaebe' 문자열을 hasOwnProperty 를 사용해서, {a : 1, b : 2, c : 1, e : 2} 로 변경해보세요. <span class="ing">추가 정리 필요</span></h1>
-			<p class="show"></p>
+			<h1>Q. 'bcaebe' 문자열을 hasOwnProperty 를 사용해서, {a : 1, b : 2, c : 1, e : 2} 로 변경해보세요.</h1>
+			<p class="show">* console -&gt;</p>
 		</div>
 	</div>
 	<!-- container [e] -->
@@ -152,7 +152,7 @@ $(function () {
 		exam7 = $('.exam_wrap').eq(6),
 		result7 = exam7.find('.show');
 
-	var ex6Obj = {
+	var ex6obj = {
 	   e : 'e',
 	   d : 'd',
 	   b : 'b',
@@ -161,22 +161,24 @@ $(function () {
 	   f : 'f',
 	   a : 'a'
 	};
-	var ex6Array = [ex6Obj.e, ex6Obj.d, ex6Obj.b, ex6Obj.g, ex6Obj.c, ex6Obj.f, ex6Obj.a];
-	var ex6Array2 = ex6Array.sort();
-	$(result6).html(ex6Array2.join(''));
+	var ex6array = [];
+	for (var key in ex6obj) {
+		ex6array.push(ex6obj[key]);
+	}
+	var result = ex6array.sort().join('');
+	$(result6).html(result);
 
-	var ex7Obj = {
-	   a : 'a',
-	   b : 'b',
-	   c : 'c',
-	   e : 'e'
-	};
-	var ex7Array = [ex7Obj.b, ex7Obj.c, ex7Obj.a, ex7Obj.e, ex7Obj.b, ex7Obj.e];
-	var ex7Array2 = [];
-
-
-	$(result7).html(ex7Array2.join());
-
+	var ex7Txt = 'bcaebe',
+	    ex7obj = {};
+	var ex7array = ex7Txt.split('').sort();
+	for (var i = 0, max = ex7array.length; i < max; i++) {
+	    if (!ex7obj.hasOwnProperty(ex7array[i])) {
+	        ex7obj[ex7array[i]] = 1;
+	    } else {
+	        ex7obj[ex7array[i]] += 1;
+	    }
+	}
+	console.log(ex7obj);
 
 });
 </script>
