@@ -48,7 +48,7 @@
     <div style="height:2000px"></div>
 </div>
 <script>
-setEvent();
+// setEvent();
 $(function(){
     var coke = {
         init : function(){
@@ -98,10 +98,11 @@ $(function(){
         },
         slideAct : function(){
             if(this.select === true){
+                alert("곰을 선택해주세요.");
             } else {
                 this.offset = this.evtArea2.offset();
                 this.offsetSlide = this.offset.top;
-                $('body').animate({scrollTop:this.offsetSlide}, 2000, 'swing', $.proxy(this.evtAct, this));
+                $('body').animate({scrollTop:this.offsetSlide}, 1000, 'swing', $.proxy(this.evtAct, this));
             }
         },
         evtAct : function(){ // 애니메이트
@@ -114,11 +115,16 @@ $(function(){
     };
     coke.init();
 });
-function setEvent(){
-    $('label').unbind('click').bind('click',function(){
-        alert('이미 참여한 이벤트입니다.');
-    });
-}
+
+// label 미선택 시 곰을 선택해주세요 alert, 1회 이상 선택하여 버튼을 클릭했을 때  이미 참여하였습니다 alert
+// 액션을 세분화? 정리 필요
+
+// function setEvent(){
+//     $('label').unbind('click').bind('click',function(){
+//         alert('이미 참여한 이벤트입니다.');
+//     });
+// }
+
 /*
 1. radio 버튼 선택 후
 - rabx index 순서에 따라서 아래 결과 결정
