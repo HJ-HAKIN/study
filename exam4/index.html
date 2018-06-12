@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi"> -->
+<title>bear</title>
+<link rel="stylesheet" type="text/css" href="css/coca.css">
+<script src="../libs/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+<div class="evt_wrap">
+    <div class="evt_tit">
+        <div class="tit_area">
+            <h2 class="blind">1등 곰도 맞추고 100% 경품까지 폴라베어를 잡아라!</h2>
+        </div>
+    </div>
+    
+    <div class="evt_ct">
+        <div class="evt_area">
+            <p class="blind">100% 당첨! 가장먼저 도착하는 폴라베어를 맞춰주세요</p>
+            <ul class="bxlst" id="clickLst">
+            <li class="rabx">
+                <input type="radio" name="beautybox" id="bx"/>
+                <label for="bx"><span class="blind">스키타는 베어</span></label>
+            </li>
+            <li class="rabx">
+                <input type="radio" name="beautybox" id="bx2"/>
+                <label for="bx2"><span class="blind">보드타는 베어</span></label>
+            </li>
+            <li class="rabx">
+                <input type="radio" name="beautybox" id="bx3"/>
+                <label for="bx3"><span class="blind">스케이트 베어</span></label>
+            </li>
+            </ul>
+            <a href="#" class="btn btn_app">choice</a>
+        </div>
+    </div>
+    
+    <div class="evt_ct2">
+        <ul class="game_area sp" id="gameLst">
+        <!-- active : li에 winlane 클래스 추가  -->
+        <li class="lane"><div class="sp gom"></div></li>
+        <li class="lane2"><div class="sp gom"></div></li>
+        <li class="lane3"><div class="sp gom"></div></li>
+        </ul>
+    </div>
+
+    <div style="height:2000px"></div>
+</div>
+<script>
+setEvent();
+$(function(){
+    var coke = {
+        init : function(){
+            this.setElements();
+            this.initLayout();
+            this.bindEventHandlers();
+        },
+        setElements : function(){
+            this.evtWrap = $('.evt_wrap');
+            this.evtArea1 = this.evtWrap.find('.evt_ct');
+            this.evtArea2 = this.evtWrap.find('.evt_ct2');
+            this.evtList = this.evtWrap.find('.bxlst');
+            this.evtChoose = this.evtList.children();
+            this.evtLabel = this.evtChoose.find('label');
+            this.evtGame = this.evtWrap.find('.game_area');
+            this.evtResult = this.evtGame.children();
+            this.evtBtn = this.evtWrap.find('a.btn_app');
+        },
+        initLayout : function(){
+            this.win = false;
+            this.select = false;
+            this.arrayAct();
+        },
+        bindEventHandlers : function(){
+            this.evtLabel.on('click', $.proxy(this.labelAct, this));
+            this.evtBtn.on('click', $.proxy(this.slideAct, this));
+        },
+        arrayAct : function(){ // index array 가져오기
+            this.arrayIndex = [];
+            for (i=0; i<this.evtChoose.length; i++){
+                this.arrayIndex.push(i);
+            }
+        },
+        labelAct : function(e){ // label li index 가져오기
+            if(this.select === true){
+                alert("이미 참여하였습니다.");
+            } else {
+                this.labelIndex = $(e.currentTarget).closest('li').index();
+                if(this.win === true){
+                    this.initIndex = this.labelIndex;
+                } else {
+                    this.arrayIndex.splice(this.labelIndex, 1);
+                    this.randomIndex = Math.floor(Math.random() * this.arrayIndex.length);
+                    this.initIndex = this.arrayIndex[this.randomIndex];
+                }
+            }
+        },
+        slideAct : function(){
+            if(this.select === true){
+            } else {
+                this.offset = this.evtArea2.offset();
+                this.offsetSlide = this.offset.top;
+                $('body').animate({scrollTop:this.offsetSlide}, 2000, 'swing', $.proxy(this.evtAct, this));
+            }
+        },
+        evtAct : function(){ // 애니메이트
+            if(this.select === true){
+            } else {
+                this.evtResult.eq(this.initIndex).addClass('winlane').find('.gom').animate({top: "98px"}, 500);
+                this.select = true;
+            }
+        }
+    };
+    coke.init();
+});
+function setEvent(){
+    $('label').unbind('click').bind('click',function(){
+        alert('이미 참여한 이벤트입니다.');
+    });
+}
+/*
+1. radio 버튼 선택 후
+- rabx index 순서에 따라서 아래 결과 결정
+2. 선택하기 버튼을 눌렀을 때
+- true: 선택과 동일한 뚜껑 / false: 선택한 것 이외의 뚜껑 중 하나
+3. 빨대를 따라 뚜껑이 이동한다
+- animate
+
+1. index 값 체크
+    this.arrayIndex = [];
+    for(var i=0; i<this.evtChoose.length; i++){
+        this.arrayIndex.push(i);
+    }
+2. 매치
+    this.labelIndex = $(e.currentTarget).closest('li').index();
+    if(this.win === true){
+        this.initIndex = this.labelIndex;
+    } else {
+        this.arrayIndex.splice(this.labelIndex, 1);
+        console.log(this.arrayIndex);
+        // 남은 배열에서 랜덤돌리기
+        this.randomNum = Math.floor(Math.random() * this.arrayIndex.length);
+        // 랜덤돌린 수를 array에서 값을 가져오기
+        this.initIndex = this.arrayIndex[this.randomNum];
+    }
+3. 이동
+    this.evtResult.eq(this.initIndex).closest('li').addClass('winlane').find('.gom').animate({top: "98px"}, 500);
+*/
+</script>
+</body>
+</html>
