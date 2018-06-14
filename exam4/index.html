@@ -48,82 +48,74 @@
     <div style="height:2000px"></div>
 </div>
 <script>
-// setEvent();
-$(function(){
-    var coke = {
-        init : function(){
-            this.setElements();
-            this.initLayout();
-            this.bindEventHandlers();
-        },
-        setElements : function(){
-            this.evtWrap = $('.evt_wrap');
-            this.evtArea1 = this.evtWrap.find('.evt_ct');
-            this.evtArea2 = this.evtWrap.find('.evt_ct2');
-            this.evtList = this.evtWrap.find('.bxlst');
-            this.evtChoose = this.evtList.children();
-            this.evtLabel = this.evtChoose.find('label');
-            this.evtGame = this.evtWrap.find('.game_area');
-            this.evtResult = this.evtGame.children();
-            this.evtBtn = this.evtWrap.find('a.btn_app');
-        },
-        initLayout : function(){
-            this.win = false;
-            this.select = false;
-            this.arrayAct();
-        },
-        bindEventHandlers : function(){
-            this.evtLabel.on('click', $.proxy(this.labelAct, this));
-            this.evtBtn.on('click', $.proxy(this.slideAct, this));
-        },
-        arrayAct : function(){ // index array 가져오기
-            this.arrayIndex = [];
-            for (i=0; i<this.evtChoose.length; i++){
-                this.arrayIndex.push(i);
-            }
-        },
-        labelAct : function(e){ // label li index 가져오기
-            if(this.select === true){
-                alert("이미 참여하였습니다.");
-            } else {
-                this.labelIndex = $(e.currentTarget).closest('li').index();
-                if(this.win === true){
-                    this.initIndex = this.labelIndex;
-                } else {
-                    this.arrayIndex.splice(this.labelIndex, 1);
-                    this.randomIndex = Math.floor(Math.random() * this.arrayIndex.length);
-                    this.initIndex = this.arrayIndex[this.randomIndex];
-                }
-            }
-        },
-        slideAct : function(){
-            if(this.select === true){
-                alert("곰을 선택해주세요.");
-            } else {
-                this.offset = this.evtArea2.offset();
-                this.offsetSlide = this.offset.top;
-                $('body').animate({scrollTop:this.offsetSlide}, 1000, 'swing', $.proxy(this.evtAct, this));
-            }
-        },
-        evtAct : function(){ // 애니메이트
-            if(this.select === true){
-            } else {
-                this.evtResult.eq(this.initIndex).addClass('winlane').find('.gom').animate({top: "98px"}, 500);
-                this.select = true;
-            }
+var polarEvent = {
+    init : function () {
+        this.setElements();
+        this.initOpts();
+        this.bindEvents();
+    },
+    setElements : function () {
+        this.container = $('.evt_wrap');
+        this.topArea = this.container.find('.evt_area');
+        this.bottomArea = this.container.find('.evt_ct2');
+        this.inputRadio = this.topArea.find('input[type="radio"]');
+        this.selectBtn = this.topArea.find('.btn_app');
+        this.slideList = this.bottomArea.find('.game_area').children();
+    },
+    initOpts : function () {
+        this.gameType = false; //type : 해당 index, false : 랜덤 index
+        this.selectBear = false;
+        this.joinEvent = false;
+        this.setTime = 400;
+    },
+    bindEvents : function () {
+        this.inputRadio.on('change', $.proxy(this.onClickBear, this));
+        this.selectBtn.on('click', $.proxy(this.onClickBtn, this));
+    },
+    onClickBear : function (e) {
+        var target = $(e.currentTarget);
+        this.selectBear = true;
+        this.currentIndex = target.closest('li').index();
+        this.createArray();
+        this.setIndex();
+    },
+    onClickBtn : function () {
+        if (this.joinEvent) {
+            alert('이미 참여하셨습니다.');
+        } else if (!this.selectBear) {
+            alert('곰을 선택해 주세요.');
+        } else {
+            this.playGame = (this.gameType) ? this.setView() : this.removeArray();
+        } 
+    },
+    createArray : function () {
+        this.array = [];
+        for (var i = 0, max = this.slideList.length; i < max; i++) {
+            this.array.push(i);
         }
-    };
-    coke.init();
-});
-
-// label 미선택 시 곰을 선택해주세요 alert, 1회 이상 선택하여 버튼을 클릭했을 때  이미 참여하였습니다 alert
-// 액션을 세분화? 정리 필요
-
-// function setEvent(){
-//     $('label').unbind('click').bind('click',function(){
-//         alert('이미 참여한 이벤트입니다.');
-//     });
-// }
+    },
+    removeArray : function () {
+        this.array.splice(this.currentIndex, 1);
+        this.radomIndex = Math.floor(Math.random() * this.array.length);
+        this.currentIndex = this.array[this.radomIndex];
+        this.setView();
+    },
+    setIndex : function () {
+        this.currentIndex = this.array[this.currentIndex];
+    },
+    setView : function () {
+        $('html, body').animate({scrollTop : '400'}, this.setTime);
+        this.slideList.eq(this.currentIndex).find('.gom').delay(this.setTime).animate({
+            transition : 'all ' + this.setTime/1000 + 's ease',
+            top : '100px'
+        }, $.proxy(this.setClass, this));
+    },
+    setClass : function () {
+        this.joinEvent = true;
+        this.slideList.eq(this.currentIndex).addClass('winlane');
+    }
+}
+polarEvent.init();
 
 /*
 1. radio 버튼 선택 후
