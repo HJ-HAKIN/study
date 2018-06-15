@@ -48,24 +48,24 @@
     <div style="height:2000px"></div>
 </div>
 <script>
-var polarEvent = {
+var coca = {
     init : function () {
         this.setElements();
         this.initOpts();
         this.bindEvents();
     },
     setElements : function () {
-        this.container = $('.evt_wrap');
-        this.topArea = this.container.find('.evt_area');
-        this.bottomArea = this.container.find('.evt_ct2');
+        this.evtWrap = $('.evt_wrap');
+        this.topArea = this.evtWrap.find('.evt_area');
+        this.bottomArea = this.evtWrap.find('.evt_ct2');
         this.inputRadio = this.topArea.find('input[type="radio"]');
         this.selectBtn = this.topArea.find('.btn_app');
-        this.slideList = this.bottomArea.find('.game_area').children();
+        this.resultList = this.bottomArea.find('.game_area').children();
     },
     initOpts : function () {
-        this.gameType = false; //type : 해당 index, false : 랜덤 index
-        this.selectBear = false;
-        this.joinEvent = false;
+        this.resultType = false; //type : 해당 index, false : 랜덤 index
+        this.selectBear = false; // 곰 선택
+        this.joinEvent = false; // 이벤트 참여
         this.setTime = 400;
     },
     bindEvents : function () {
@@ -80,17 +80,17 @@ var polarEvent = {
         this.setIndex();
     },
     onClickBtn : function () {
-        if (this.joinEvent) {
-            alert('이미 참여하셨습니다.');
-        } else if (!this.selectBear) {
-            alert('곰을 선택해 주세요.');
+        if (this.joinEvent) { // joinEvent = true
+            alert('이미 해당 이벤트에 참여하셨습니다.');
+        } else if (!this.selectBear) { // selectBear = false
+            alert('폴라베어를 선택해 주세요.');
         } else {
-            this.playGame = (this.gameType) ? this.setView() : this.removeArray();
+            this.playGame = (this.resultType) ? this.setView() : this.removeArray();
         } 
     },
     createArray : function () {
         this.array = [];
-        for (var i = 0, max = this.slideList.length; i < max; i++) {
+        for (var i = 0, max = this.resultList.length; i < max; i++) {
             this.array.push(i);
         }
     },
@@ -105,17 +105,17 @@ var polarEvent = {
     },
     setView : function () {
         $('html, body').animate({scrollTop : '400'}, this.setTime);
-        this.slideList.eq(this.currentIndex).find('.gom').delay(this.setTime).animate({
+        this.resultList.eq(this.currentIndex).find('.gom').delay(this.setTime).animate({ // 캡 이동 액션
             transition : 'all ' + this.setTime/1000 + 's ease',
-            top : '100px'
+            top : '98px'
         }, $.proxy(this.setClass, this));
     },
     setClass : function () {
         this.joinEvent = true;
-        this.slideList.eq(this.currentIndex).addClass('winlane');
+        this.resultList.eq(this.currentIndex).addClass('winlane');
     }
 }
-polarEvent.init();
+coca.init();
 
 /*
 1. radio 버튼 선택 후
