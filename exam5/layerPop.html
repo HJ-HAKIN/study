@@ -111,7 +111,7 @@ button::-moz-focus-inner{padding:0;border:0}
             }, this), 30);
         },
         onCloseLayer : function () {
-            this.layerPos.trigger('clickoutside');
+            this.layerPos.triggerHandler('clickoutside');
         },
         onlayerBeforeFocus : function () {
             this.layerCloseBtn.focus();
