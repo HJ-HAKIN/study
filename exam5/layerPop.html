@@ -90,7 +90,7 @@ button::-moz-focus-inner{padding:0;border:0}
         },
         onLayerOutside : function (type) {
             if (type) {
-                this.layerPos.on('clickoutside', $.proxy(this. onLayerOutsideFunc, this));
+                this.layerPos.on('clickoutside', $.proxy(this.onLayerOutsideFunc, this));
             } else {
                 this.layerPos.off('clickoutside');
             }
