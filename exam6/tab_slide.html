@@ -8,12 +8,13 @@
 /* temporary css */
 *{margin:0;padding:0}
 body{font-size:14px;font-family:"나눔고딕",NanumGothic,"굴림",Gulim,Sans-serif;line-height:1.5}
-h1,h2,h3,h4,h5,h6{font-size:14px}
+h1,h2,h3,h4,h5,h6{padding:20px 0 10px;font-size:14px;text-align:center}
+h1{padding-bottom:0;font-size:18px}
 ul,li{list-style:none}
 button{font-size:14px;font-family:"나눔고딕",NanumGothic,"굴림",Gulim,Sans-serif;line-height:1.5;cursor:pointer}
 button::-moz-focus-inner{padding:0;border:0}
+#container{padding-bottom:30px}
 .cast_box{width:880px;margin:0 auto;border:1px solid #ccc}
-.cast_tab{}
 .cast_tab ul{zoom:1}
 .cast_tab ul:after{display:block;clear:both;content:''}
 .cast_tab ul li{float:left;width:12.5%;text-align:center}
@@ -29,7 +30,7 @@ button::-moz-focus-inner{padding:0;border:0}
 .cast_setting .cast_num{float:right;margin-right:5px}
 .cast_num .total{font-weight:bold}
 
-.slide_box{position:relative;width:880px;margin:0 auto}
+.slide_box{position:relative;width:880px;height:440px;margin:0 auto}
 .slide_tab{position:absolute;left:0;bottom:0;right:0;z-index:30;padding:15px 0;font-size:0;line-height:0;text-align:center}
 .slide_tab ul{display:inline-block;vertical-align:top}
 .slide_tab ul li{float:left;margin:0 3px}
@@ -51,16 +52,20 @@ button::-moz-focus-inner{padding:0;border:0}
 .slide_setting .slide_btn button:nth-child(2){right:0}
 /* //temporary css */
 </style>
+<script src="../libs/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 <!-- wrapper [s] -->
 <div id="wrapper">
     <!-- header [s] -->
-    <div id="header">@</div>
+    <div id="header"></div>
     <!-- header [e] -->
-    <hr />
+
     <!-- container [s] -->
     <div id="container">
+        <h1>Tab & Slide</h1>
+        <h2>Tab</h2>
         <div class="cast_box js-tab-wrap">
             <div class="cast_tab">
                 <ul>
@@ -91,7 +96,7 @@ button::-moz-focus-inner{padding:0;border:0}
                 <div class="cast_num"><span class="current">1</span> / <span class="total">8</span></div>
             </div>
         </div>
-
+        <!-- <h2>Slide</h2>
         <div class="slide_box js-slide-wrap">
             <div class="slide_tab">
                 <ul>
@@ -121,11 +126,41 @@ button::-moz-focus-inner{padding:0;border:0}
                 </div>
             </div>
         </div>
+        <h2>Slide <small>(FadeIn & Out)</small></h2>
+        <div class="slide_box js-slide-wrap2">
+            <div class="slide_tab">
+                <ul>
+                    <li class="active"><a href="#slide1">테마1</a></li>
+                    <li><a href="#slide2">테마2</a></li>
+                    <li><a href="#slide3">테마3</a></li>
+                    <li><a href="#slide4">테마4</a></li>
+                    <li><a href="#slide5">테마5</a></li>
+                    <li><a href="#slide6">테마6</a></li>
+                    <li><a href="#slide7">테마7</a></li>
+                    <li><a href="#slide8">테마8</a></li>
+                </ul>
+            </div>
+            <div class="slide_cont">
+                <div id="slide1" class="slide_article">컨텐츠1</div>
+                <div id="slide2" class="slide_article">컨텐츠2</div>
+                <div id="slide3" class="slide_article">컨텐츠3</div>
+                <div id="slide4" class="slide_article">컨텐츠4</div>
+                <div id="slide5" class="slide_article">컨텐츠5</div>
+                <div id="slide6" class="slide_article">컨텐츠6</div>
+                <div id="slide7" class="slide_article">컨텐츠7</div>
+                <div id="slide8" class="slide_article">컨텐츠8</div>
+            </div>
+            <div class="slide_setting">
+                <div class="slide_btn">
+                    <button type="button" class="btn_prev">이전</button><button type="button" class="btn_next">다음</button>
+                </div>
+            </div>
+        </div> -->
     </div>
     <!-- container [e] -->
-    <hr />
+
     <!-- footer [s] -->
-    <div id="footer">@</div>
+    <div id="footer"></div>
     <!-- footer [e] -->
 </div>
 </body>
