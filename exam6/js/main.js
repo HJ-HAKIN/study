@@ -16,30 +16,32 @@ $(function() {
         },
         initLayout : function() {
             this.currentIndex = 0;
-            this.oldIndex = this.currentIndex;
-            // this.tabMenuChild.removeClass('.active');
-            // this.tabMenuChild.eq(0).addClass('.active');
-            // this.tabContChild.hide();
-            // this.tabContChild.eq(0).show();
-            this.setArray();
+            this.tabMenuChild.removeClass('.active');
+            this.tabContChild.removeClass('.active');
+            this.setView();
         },
-        setArray : function(){
-            //규칙 리셋 = 삭제한 인덱스 초기화
-            this.arrayIndex = [];
-            for(var i = 0; i < this.tabMenuChild.length; i++){
-                this.arrayIndex.push(i);
-                // i가 listChild의 갯수보다 작아지면 arrayIndex의 뒤에 i를 추가(리셋)한다.
-            };
+        setView : function() {
+            this.tabMenuChild.eq(this.oldIndex).removeClass('.active');
+            this.tabContChild.eq(this.oldIndex).removeClass('.active');
+            this.tabContChild.eq(this.currentIndex).addClass('.active');
+            this.tabMenuChild.eq(this.currentIndex).addClass('.active');
+            this.oldIndex = this.currentIndex;
         },
         bindEvent : function() {
             this.prevBth.on('click', $.proxy(this.btnPrevFunc, this));
             this.nextBth.on('click', $.proxy(this.btnNextFunc, this));
         },
         btnPrevFunc : function() {
-            
+            this.currentIndex--;
+            if (this.currentIndex < 0) {
+                this.currentIndex = this.tabMenuChild.length - 1;
+            }
         },
         btnNextFunc : function() {
-
+            this.currentIndex++;
+            if (this.currentIndex >= this.tabMenuChild.length) {
+                this.currentIndex = 0;
+            }
         }
     };
     // var slideMenu = {
