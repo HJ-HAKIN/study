@@ -53,22 +53,24 @@ $(function() {
         btnPrevFunc : function(e) {
             this.currentIndex = this.currentIndex - 1;
             if (this.currentIndex < 0) {
-                this.currentIndex = this.countIndex.length - 1;
+                // this.currentIndex = this.countIndex.length - 1;
                 return;
-            }
-            this.findIndex();
-            this.countIndex();
-        },
-        btnNextFunc : function(e) {
-            this.currentIndex = this.currentIndex + 1;
-            if (this.currentIndex >= this.countIndex.length) {
-                this.currentIndex = 0;
             }
             this.findIndex();
             this.countIndex();
             console.log(this.currentIndex);
             console.log(this.countIndex);
-            // ?????????????
+        },
+        btnNextFunc : function(e) {
+            this.currentIndex = this.currentIndex + 1;
+            if (this.currentIndex >= this.countIndex.length){
+                this._index = 0;
+                // ????????????
+            }
+            this.findIndex();
+            this.countIndex();
+            console.log(this.currentIndex);
+            console.log(this.countIndex);
         },
         onHashChange : function () {
             // hash의 값이 바뀌기 때문에 누를 때마다 뜸
