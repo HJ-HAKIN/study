@@ -53,7 +53,7 @@ $(function() {
         btnPrevFunc : function(e) {
             this.currentIndex = this.currentIndex - 1;
             if (this.currentIndex < 0) {
-                // this.currentIndex = this.countIndex.length - 1;
+                this.currentIndex = this.countIndex.length - 1;
                 return;
             }
             this.findIndex();
@@ -65,7 +65,6 @@ $(function() {
             this.currentIndex = this.currentIndex + 1;
             if (this.currentIndex >= this.countIndex.length){
                 this._index = 0;
-                // ????????????
             }
             this.findIndex();
             this.countIndex();
