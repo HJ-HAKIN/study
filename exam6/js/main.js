@@ -20,6 +20,7 @@ $(function() {
         initLayout : function() {
             this.currentIndex = 0;
             this.oldIndex = this.currentIndex;
+            this.filterHash();
             this.tabMenuChild.eq(this.currentIndex).addClass('active');
             this.tabContChild.eq(this.currentIndex).addClass('active');
             this.countIndex();
@@ -28,7 +29,7 @@ $(function() {
             this.tabMenuLink.on('click', $.proxy(this.btnTabFunc, this));
             this.prevBth.on('click', $.proxy(this.btnPrevFunc, this));
             this.nextBth.on('click', $.proxy(this.btnNextFunc, this));
-            $(window).on('hashChange', $.proxy(this.onHashChange, this));
+            $(window).on('hashchange', $.proxy(this.onHashChange, this));
         },
         btnTabFunc : function(e) {
             var target = $(e.currentTarget);
@@ -36,10 +37,11 @@ $(function() {
             this.currentIndex = targetIndex;
             this.findIndex();
             this.countIndex();
+            this.getHashId();
         },
         findIndex : function() {
-            this.tabMenuChild.eq(this.oldIndex).removeClass('active');
-            this.tabContChild.eq(this.oldIndex).removeClass('active');
+            this.tabMenuChild.removeClass('active');
+            this.tabContChild.removeClass('active');
             this.tabMenuChild.eq(this.currentIndex).addClass('active');
             this.tabContChild.eq(this.currentIndex).addClass('active');
             this.oldIndex = this.currentIndex;
@@ -53,86 +55,120 @@ $(function() {
         btnPrevFunc : function(e) {
             this.currentIndex = this.currentIndex - 1;
             if (this.currentIndex < 0) {
-                this.currentIndex = this.countIndex.length - 1;
-                return;
+                this.currentIndex = this.countMax - 1;
             }
             this.findIndex();
             this.countIndex();
-            console.log(this.currentIndex);
-            console.log(this.countIndex);
+            this.getHashId();
         },
         btnNextFunc : function(e) {
-            this.currentIndex = this.currentIndex + 1;
-            if (this.currentIndex >= this.countIndex.length){
-                this._index = 0;
+            if (this.currentIndex >= this.countMax - 1) {
+                this.currentIndex = 0;
+            } else {
+                this.currentIndex = this.currentIndex + 1;
             }
             this.findIndex();
             this.countIndex();
-            console.log(this.currentIndex);
-            console.log(this.countIndex);
+            this.getHashId();
         },
         onHashChange : function () {
-            // hash의 값이 바뀌기 때문에 누를 때마다 뜸
+            this.filterHash();
+            this.findIndex();
+            this.getHashId();
         },
-        getHashFunc : function () {
-            var getHash = window.location.href;
-            window.location.href = 'e' + id;
+        filterHash : function () {
+            var getHash = window.location.hash;
+            var hashTarget = this.tabContChild.filter(getHash);
+            this.currentIndex = (hashTarget.length) ? hashTarget.index() : 0;
+        },
+        getHashId : function () {
+            var hashNum = this.tabContChild.eq(this.currentIndex).attr('id');
+            window.location.hash = '#' + hashNum;
         }
     };
-    // var slideMenu = {
-    //     init : function() {
-    //         this.setElements();
-    //         this.initLayout();
-    //         this.bindEvent();
-    //     },
-    //     setElements : function() {
-    //         this.slideWrap = $('.js-slide-wrap');
-    //         this.slideWrap2 = $('.js-slide-wrap2');
-    //         this.slideMenu = this.slideWrap.find('.slide_tab ul');
-    //         this.slideMenu2 = this.slideWrap2.find('.slide_tab ul');
-    //         this.slideMenuChild = this.slideMenu.children();
-    //         this.slideMenuChild2 = this.slideMenu2.children();
-    //         this.slideCont = this.slideWrap.find('.slide_cont');
-    //         this.slideCont2 = this.slideWrap2.find('.slide_cont');
-    //         this.slideContChild = this.slideCont.children();
-    //         this.slideContChild2 = this.slideCont2.children();
-    //         this.prevBth = this.slideWrap.find('.btn_prev');
-    //         this.nextBth = this.slideWrap.find('.btn_next');
-    //         this.prevBth2 = this.slideWrap2.find('.btn_prev');
-    //         this.nextBth2 = this.slideWrap2.find('.btn_next');
-    //     },
-    //     initLayout : function() {
-    //         this.slideMenuChild.removeClass('.active');
-    //         this.slideMenuChild2.removeClass('.active');
-    //         this.slideMenuChild.eq(0).addClass('.active');
-    //         this.slideMenuChild2.eq(0).addClass('.active');
-    //         this.slideContChild.hide();
-    //         this.slideContChild2.hide();
-    //         this.slideContChild.eq(0).show();
-    //         this.slideContChild2.eq(0).show();
-    //         this.setArray();
-    //     },
-    //     setArray : function(){
-    //         //규칙 리셋 = 삭제한 인덱스 초기화
-    //         this.arrayIndex = [];
-    //         for(var i = 0; i < this.slideContChild.length; i++){
-    //             this.arrayIndex.push(i);
-    //             // i가 listChild의 갯수보다 작아지면 arrayIndex의 뒤에 i를 추가(리셋)한다.
-    //         };
-    //     },
-    //     bindEvent : function() {
-    //         this.prevBth.on('click', $.proxy(this.btnPrevFunc, this));
-    //         this.nextBth.on('click', $.proxy(this.btnNextFunc, this));
-    //         this.prevBth2.on('click', $.proxy(this.btnPrevFunc, this));
-    //         this.nextBth2.on('click', $.proxy(this.btnNextFunc, this));
-    //     },
-    //     btnPrevFunc : function() {
-            
-    //     },
-    //     btnNextFunc : function() {
-
-    //     }
-    // };
+    var slideMenu = {
+        init : function() {
+            this.setElements();
+            this.initLayout();
+            this.bindEvent();
+        },
+        setElements : function() {
+            this.slideWrap = $('.js-slide-wrap');
+            this.slideMenu = this.slideWrap.find('.slide_tab ul');
+            this.slideMenuChild = this.slideMenu.children();
+            this.slideMenuLink = this.slideMenuChild.find('a');
+            this.slideCont = this.slideWrap.find('.slide_cont');
+            this.slideContChild = this.slideCont.children();
+            this.prevBth = this.slideWrap.find('.btn_prev');
+            this.nextBth = this.slideWrap.find('.btn_next');
+        },
+        initLayout : function() {
+            this.currentIndex = 0;
+            this.oldIndex = this.currentIndex;
+            this.slideMenuChild.removeClass('active');
+            this.slideContChild.hide();
+            this.slideMenuChild.eq(0).addClass('active');
+            this.slideContChild.eq(0).show();
+            this.countIndex();
+        },
+        bindEvent : function() {
+            this.slideMenuLink.on('click', $.proxy(this.btnDotFunc, this));
+            this.prevBth.on('click', $.proxy(this.btnPrevFunc, this));
+            this.nextBth.on('click', $.proxy(this.btnNextFunc, this));
+        },
+        btnDotFunc : function(e) {
+            var target = $(e.currentTarget);
+            var targetIndex = target.parent().index();
+            this.currentIndex = targetIndex;
+            this.fadeFunc();
+            this.findIndex();
+            this.countIndex();
+        },
+        findIndex : function() {
+            this.slideMenuChild.eq(this.oldIndex).removeClass('active');
+            this.slideContChild.eq(this.oldIndex).show();
+            this.slideMenuChild.eq(this.currentIndex).addClass('active');
+            this.slideContChild.eq(this.currentIndex).show();
+            this.oldIndex = this.currentIndex;
+        },
+        countIndex : function() {
+            this.countMax = this.slideMenuChild.length;
+        },
+        btnPrevFunc : function(e) {
+            this.direction = 'prev';
+            this.currentIndex = this.currentIndex - 1;
+            if (this.currentIndex < 0) {
+                this.currentIndex = this.countMax - 1;
+            }
+            this.slideFunc();
+            this.findIndex();
+            this.countIndex();
+        },
+        btnNextFunc : function(e) {
+            this.direction = 'next';
+            if (this.currentIndex >= this.countMax - 1) {
+                this.currentIndex = 0;
+            } else {
+                this.currentIndex = this.currentIndex + 1;
+            }
+            this.slideFunc();
+            this.findIndex();
+            this.countIndex();
+        },
+        slideFunc : function() {
+            if (this.direction == 'next') {
+                this.slideContChild.eq(this.oldIndex).stop(true,true).animate({left: '-100%'});
+                this.slideContChild.eq(this.currentIndex).css('left', '100%').stop(true,true).animate({left: '0'});
+            } else {
+                this.slideContChild.eq(this.oldIndex).stop(true,true).animate({left: '100%'});
+                this.slideContChild.eq(this.currentIndex).css('left', '-100%').stop(true,true).animate({left: '0'});
+            }
+        },
+        fadeFunc : function() {
+            this.slideContChild.eq(this.oldIndex).fadeOut();
+            this.slideContChild.eq(this.currentIndex).fadeIn();
+        }
+    };
     tabMenu.init();
-    // slideMenu.init();
+    slideMenu.init();
 });

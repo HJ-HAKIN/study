@@ -38,18 +38,18 @@ button::-moz-focus-inner{padding:0;border:0}
 .slide_tab ul li.active a{background:#000}
 .slide_cont{overflow:hidden;position:relative;height:440px}
 .slide_article{display:block;position:absolute;left:0;top:0;width:100%;height:440px}
-.slide_article:nth-child(1){background:red}
-.slide_article:nth-child(2){background:orange}
-.slide_article:nth-child(3){background:yellow}
-.slide_article:nth-child(4){background:green}
-.slide_article:nth-child(5){background:blue;color:#fff}
-.slide_article:nth-child(6){background:skyblue;color:#fff}
-.slide_article:nth-child(7){background:navy;color:#fff}
-.slide_article:nth-child(8){background:gray;color:#fff}
 .slide_setting{font-size:0;line-height:0}
 .slide_setting .slide_btn button{position:absolute;top:50%;z-index:30;margin:0 20px}
 .slide_setting .slide_btn button:nth-child(1){left:0}
 .slide_setting .slide_btn button:nth-child(2){right:0}
+#thema1.cast_article,#slide1.slide_article{background:#f369a2}
+#thema2.cast_article,#slide2.slide_article{background:#feb65c}
+#thema3.cast_article,#slide3.slide_article{background:#b1d46e}
+#thema4.cast_article,#slide4.slide_article{background:#00b4b0}
+#thema5.cast_article,#slide5.slide_article{background:#338ac6}
+#thema6.cast_article,#slide6.slide_article{background:#4f6fb2}
+#thema7.cast_article,#slide7.slide_article{background:#5f529d}
+#thema8.cast_article,#slide8.slide_article{background:#8c589e}
 /* //temporary css */
 </style>
 <script src="../libs/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -80,14 +80,14 @@ button::-moz-focus-inner{padding:0;border:0}
                 </ul>
             </div>
             <div class="cast_cont">
-                <div id="thema1" class="cast_article" style="background:#dee">컨텐츠1</div>
-                <div id="thema2" class="cast_article" style="background:#dde">컨텐츠2</div>
-                <div id="thema3" class="cast_article" style="background:#dcc">컨텐츠3</div>
-                <div id="thema4" class="cast_article" style="background:#ddc">컨텐츠4</div>
-                <div id="thema5" class="cast_article" style="background:#daa">컨텐츠5</div>
-                <div id="thema6" class="cast_article" style="background:#dda">컨텐츠6</div>
-                <div id="thema7" class="cast_article" style="background:#d99">컨텐츠7</div>
-                <div id="thema8" class="cast_article" style="background:#dd9">컨텐츠8</div>
+                <div id="thema1" class="cast_article">컨텐츠1</div>
+                <div id="thema2" class="cast_article">컨텐츠2</div>
+                <div id="thema3" class="cast_article">컨텐츠3</div>
+                <div id="thema4" class="cast_article">컨텐츠4</div>
+                <div id="thema5" class="cast_article">컨텐츠5</div>
+                <div id="thema6" class="cast_article">컨텐츠6</div>
+                <div id="thema7" class="cast_article">컨텐츠7</div>
+                <div id="thema8" class="cast_article">컨텐츠8</div>
             </div>
             <div class="cast_setting">
                 <div class="cast_btn">
@@ -96,11 +96,11 @@ button::-moz-focus-inner{padding:0;border:0}
                 <div class="cast_num"><span class="current"></span> / <span class="total"></span></div>
             </div>
         </div>
-        <!-- <h2>Slide</h2>
+        <h2>Slide</h2>
         <div class="slide_box js-slide-wrap">
             <div class="slide_tab">
                 <ul>
-                    <li class="active"><a href="#slide1">테마1</a></li>
+                    <li><a href="#slide1">테마1</a></li>
                     <li><a href="#slide2">테마2</a></li>
                     <li><a href="#slide3">테마3</a></li>
                     <li><a href="#slide4">테마4</a></li>
@@ -126,36 +126,6 @@ button::-moz-focus-inner{padding:0;border:0}
                 </div>
             </div>
         </div>
-        <h2>Slide <small>(FadeIn & Out)</small></h2>
-        <div class="slide_box js-slide-wrap2">
-            <div class="slide_tab">
-                <ul>
-                    <li class="active"><a href="#slide1">테마1</a></li>
-                    <li><a href="#slide2">테마2</a></li>
-                    <li><a href="#slide3">테마3</a></li>
-                    <li><a href="#slide4">테마4</a></li>
-                    <li><a href="#slide5">테마5</a></li>
-                    <li><a href="#slide6">테마6</a></li>
-                    <li><a href="#slide7">테마7</a></li>
-                    <li><a href="#slide8">테마8</a></li>
-                </ul>
-            </div>
-            <div class="slide_cont">
-                <div id="slide1" class="slide_article">컨텐츠1</div>
-                <div id="slide2" class="slide_article">컨텐츠2</div>
-                <div id="slide3" class="slide_article">컨텐츠3</div>
-                <div id="slide4" class="slide_article">컨텐츠4</div>
-                <div id="slide5" class="slide_article">컨텐츠5</div>
-                <div id="slide6" class="slide_article">컨텐츠6</div>
-                <div id="slide7" class="slide_article">컨텐츠7</div>
-                <div id="slide8" class="slide_article">컨텐츠8</div>
-            </div>
-            <div class="slide_setting">
-                <div class="slide_btn">
-                    <button type="button" class="btn_prev">이전</button><button type="button" class="btn_next">다음</button>
-                </div>
-            </div>
-        </div> -->
     </div>
     <!-- container [e] -->
 
