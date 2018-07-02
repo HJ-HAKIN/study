@@ -120,9 +120,9 @@ $(function() {
             var target = $(e.currentTarget);
             var targetIndex = target.parent().index();
             this.currentIndex = targetIndex;
-            this.fadeFunc();
+            this.slideContChild.eq(this.oldIndex).fadeOut();
+            this.slideContChild.eq(this.currentIndex).fadeIn();
             this.findIndex();
-            this.countIndex();
         },
         findIndex : function() {
             this.slideMenuChild.eq(this.oldIndex).removeClass('active');
@@ -142,7 +142,6 @@ $(function() {
             }
             this.slideFunc();
             this.findIndex();
-            this.countIndex();
         },
         btnNextFunc : function(e) {
             this.direction = 'next';
@@ -153,20 +152,15 @@ $(function() {
             }
             this.slideFunc();
             this.findIndex();
-            this.countIndex();
         },
         slideFunc : function() {
-            if (this.direction == 'next') {
-                this.slideContChild.eq(this.oldIndex).stop(true,true).animate({left: '-100%'});
+            if (this.direction === 'next') {
                 this.slideContChild.eq(this.currentIndex).css('left', '100%').stop(true,true).animate({left: '0'});
+                this.slideContChild.eq(this.oldIndex).stop(true,true).animate({left: '-100%'});
             } else {
-                this.slideContChild.eq(this.oldIndex).stop(true,true).animate({left: '100%'});
                 this.slideContChild.eq(this.currentIndex).css('left', '-100%').stop(true,true).animate({left: '0'});
+                this.slideContChild.eq(this.oldIndex).stop(true,true).animate({left: '100%'});
             }
-        },
-        fadeFunc : function() {
-            this.slideContChild.eq(this.oldIndex).fadeOut();
-            this.slideContChild.eq(this.currentIndex).fadeIn();
         }
     };
     tabMenu.init();
