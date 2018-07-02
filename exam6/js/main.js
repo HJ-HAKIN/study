@@ -1,4 +1,4 @@
-$(function() {
+(function (win, $) {
     var tabMenu = {
         init : function() {
             this.setElements();
@@ -29,7 +29,7 @@ $(function() {
             this.tabMenuLink.on('click', $.proxy(this.btnTabFunc, this));
             this.prevBth.on('click', $.proxy(this.btnPrevFunc, this));
             this.nextBth.on('click', $.proxy(this.btnNextFunc, this));
-            $(window).on('hashchange', $.proxy(this.onHashChange, this));
+            $(win).on('hashchange', $.proxy(this.onHashChange, this));
         },
         btnTabFunc : function(e) {
             var target = $(e.currentTarget);
@@ -77,13 +77,13 @@ $(function() {
             this.getHashId();
         },
         filterHash : function () {
-            var getHash = window.location.hash;
+            var getHash = win.location.hash;
             var hashTarget = this.tabContChild.filter(getHash);
             this.currentIndex = (hashTarget.length) ? hashTarget.index() : 0;
         },
         getHashId : function () {
             var hashNum = this.tabContChild.eq(this.currentIndex).attr('id');
-            window.location.hash = '#' + hashNum;
+            win.location.hash = '#' + hashNum;
         }
     };
     var slideMenu = {
@@ -117,11 +117,11 @@ $(function() {
             this.nextBth.on('click', $.proxy(this.btnNextFunc, this));
         },
         btnDotFunc : function(e) {
+            this.direction = 'next';
             var target = $(e.currentTarget);
             var targetIndex = target.parent().index();
             this.currentIndex = targetIndex;
-            this.slideContChild.eq(this.oldIndex).fadeOut();
-            this.slideContChild.eq(this.currentIndex).fadeIn();
+            this.fadeFunc();
             this.findIndex();
         },
         findIndex : function() {
@@ -153,16 +153,22 @@ $(function() {
             this.slideFunc();
             this.findIndex();
         },
+        fadeFunc : function() {
+            this.slideContChild.eq(this.oldIndex).css({left: '0'}).stop().fadeOut();
+            this.slideContChild.eq(this.currentIndex).css({left: '0'}).stop().fadeIn();
+        },
         slideFunc : function() {
-            if (this.direction === 'next') {
-                this.slideContChild.eq(this.currentIndex).css('left', '100%').stop(true,true).animate({left: '0'});
-                this.slideContChild.eq(this.oldIndex).stop(true,true).animate({left: '-100%'});
+            if (this.direction != 'prev') {
+                this.slideContChild.eq(this.oldIndex).stop().animate({left: '-100%'});
+                this.slideContChild.eq(this.currentIndex).css({left: '100%'}).stop().animate({left: '0'});
             } else {
-                this.slideContChild.eq(this.currentIndex).css('left', '-100%').stop(true,true).animate({left: '0'});
-                this.slideContChild.eq(this.oldIndex).stop(true,true).animate({left: '100%'});
+                this.slideContChild.eq(this.oldIndex).stop().animate({left: '100%'});
+                this.slideContChild.eq(this.currentIndex).css({left: '-100%'}).stop().animate({left: '0'});
             }
         }
     };
-    tabMenu.init();
-    slideMenu.init();
-});
+    $(function () {
+        tabMenu.init();
+        slideMenu.init();
+    });
+})(window, window.jQuery);
