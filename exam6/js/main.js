@@ -32,6 +32,7 @@
             $(win).on('hashchange', $.proxy(this.onHashChange, this));
         },
         btnTabFunc : function(e) {
+            e.preventDefault();
             var target = $(e.currentTarget);
             var targetIndex = target.parent().index();
             this.currentIndex = targetIndex;
@@ -53,6 +54,7 @@
             this.pageMax.text(this.countMax);
         },
         btnPrevFunc : function(e) {
+            e.preventDefault();
             this.currentIndex = this.currentIndex - 1;
             if (this.currentIndex < 0) {
                 this.currentIndex = this.countMax - 1;
@@ -62,6 +64,7 @@
             this.getHashId();
         },
         btnNextFunc : function(e) {
+            e.preventDefault();
             if (this.currentIndex >= this.countMax - 1) {
                 this.currentIndex = 0;
             } else {
@@ -117,6 +120,7 @@
             this.nextBth.on('click', $.proxy(this.btnNextFunc, this));
         },
         btnDotFunc : function(e) {
+            e.preventDefault();
             this.direction = 'next';
             var target = $(e.currentTarget);
             var targetIndex = target.parent().index();
@@ -135,6 +139,7 @@
             this.countMax = this.slideMenuChild.length;
         },
         btnPrevFunc : function(e) {
+            e.preventDefault();
             this.direction = 'prev';
             this.currentIndex = this.currentIndex - 1;
             if (this.currentIndex < 0) {
@@ -144,6 +149,7 @@
             this.findIndex();
         },
         btnNextFunc : function(e) {
+            e.preventDefault();
             this.direction = 'next';
             if (this.currentIndex >= this.countMax - 1) {
                 this.currentIndex = 0;
@@ -154,16 +160,34 @@
             this.findIndex();
         },
         fadeFunc : function() {
-            this.slideContChild.eq(this.oldIndex).css({left: '0'}).stop().fadeOut();
-            this.slideContChild.eq(this.currentIndex).css({left: '0'}).stop().fadeIn();
+            this.slideContChild.eq(this.oldIndex).css({
+                'left' : '0'
+            }).stop().fadeOut();
+            this.slideContChild.eq(this.currentIndex).css({
+                'left' : '0'
+            }).stop().fadeIn();
         },
         slideFunc : function() {
             if (this.direction != 'prev') {
-                this.slideContChild.eq(this.oldIndex).stop().animate({left: '-100%'});
-                this.slideContChild.eq(this.currentIndex).css({left: '100%'}).stop().animate({left: '0'});
+                this.slideContChild.eq(this.oldIndex).stop().animate({
+                    'left' : '-100%'
+                });
+                this.slideContChild.eq(this.currentIndex).css({
+                    'left' : '100%', 
+                    'display' : 'block'
+                }).stop().animate({
+                    'left' : '0'
+                });
             } else {
-                this.slideContChild.eq(this.oldIndex).stop().animate({left: '100%'});
-                this.slideContChild.eq(this.currentIndex).css({left: '-100%'}).stop().animate({left: '0'});
+                this.slideContChild.eq(this.oldIndex).stop().animate({
+                    'left' : '100%'
+                });
+                this.slideContChild.eq(this.currentIndex).css({
+                    'left' : '-100%', 
+                    'display' : 'block'
+                }).stop().animate({
+                    'left' : '0'
+                });
             }
         }
     };
