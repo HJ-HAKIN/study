@@ -120,7 +120,7 @@
             this.nextBth.on('click', $.proxy(this.btnNextFunc, this));
         },
         btnDotFunc : function(e) {
-            e.preventDefault();
+            e.preventDefault(); // a 링크 튀는 현상 방지 후 아래 스크립트 읽기
             this.direction = 'next';
             var target = $(e.currentTarget);
             var targetIndex = target.parent().index();
@@ -174,7 +174,7 @@
                 });
                 this.slideContChild.eq(this.currentIndex).css({
                     'left' : '100%', 
-                    'display' : 'block'
+                    'display' : 'block' // CSS로 제어 시 액션 이슈 = 순서나 시간차 문제(딜레이가 좀 있게 스크립트로 제어)
                 }).stop().animate({
                     'left' : '0'
                 });
