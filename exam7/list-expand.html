@@ -29,16 +29,6 @@ hr{display:none}
 </head>
 <body>
 <!-- wrapper [s] -->
-
-<!-- ​
-.인터렉션 : 
-- 아코디언 인터렉션 구현
-- 아코디언의 열림/닫힘은 hash의 변화로 구현
-- 새 탭에서 주소를 복사하여 열었을 때, 주소 끝의 hash에 해당하는 아코디언이 열려 있어야 함
-- 보너스) data-global-text로 열림/닫힘 텍스트 변경, aria-expanded 상태 변경
- -->
-
-
 <div id="wrap">
     <div class="s-toggle-layer">
         <ul>
@@ -83,5 +73,47 @@ hr{display:none}
     </div>
 </div>
 <!-- wrapper [e] -->
+
+<!-- ​
+.인터렉션 : 
+- 아코디언 인터렉션 구현
+- 아코디언의 열림/닫힘은 hash의 변화로 구현
+- 새 탭에서 주소를 복사하여 열었을 때, 주소 끝의 hash에 해당하는 아코디언이 열려 있어야 함
+- 보너스) data-global-text로 열림/닫힘 텍스트 변경, aria-expanded 상태 변경
+
+slideToggle
+ -->
+
+<script src="../libs/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script>
+(function (win, $) {
+    var accor = {
+        init : function() {
+            this.setElements();
+            this.initLayout();
+            this.bindEvent();
+        },
+        setElements : function() {
+            this.expandWrap = $('.s-toggle-layer');
+            this.expandChild = this.expandWrap.children;
+            this.expandBtn = this.expandChild.find('a');
+            this.expandDetail = this.expandChild.find('.s-toggle-content');
+        },
+        initLayout : function() {
+        },
+        bindEvent : function() {
+            this.expandBtn.on('click', $.proxy(this.slideFunc, this));
+        },
+        slideFunc : function() {
+          this.expandDetail.slideToggle( "slow", function() {
+            // Animation complete.
+          });
+        }
+    };
+    $(function () {
+        accor.init();
+    });
+})(window, window.jQuery);
+</script>
 </body>
 </html>
