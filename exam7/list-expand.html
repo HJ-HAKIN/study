@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+<title>List Expand</title>
+<style>
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,table,th,td,form,fieldset,legend,textarea,input,select,textarea,button{margin:0;padding:0}
+html,body{height:100%}
+body{}
+h1,h2,h3,h4,h5,h6{font-weight:normal}
+fieldset,li,img{border:0;vertical-align:top}
+ul,ol{list-style:none}
+button{overflow:visible;border:0;background-color:transparent;cursor:pointer}
+button::-moz-focus-inner{padding:0;border:0}
+address,caption,em{font-style:normal}
+a,a:focus,a:active,a:hover{text-decoration:none;color:#333}
+table{border-collapse:collapse;border-spacing:0}
+hr{display:none}
+.blind,legend{overflow:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:1px;line-height:100px;white-space:nowrap}
+.s-toggle-layer{width:300px}
+.s-toggle-list a{display:block;position:relative;padding:15px;background:#000;color:#fff;text-decoration: none}
+.s-toggle-content{padding:15px;background:#f1f1f1;}
+.s-ico-toggle{position:absolute;top:50%;right:15px;width:10px;height:10px;margin-top:-5px;}
+.s-ico-toggle:before{position:absolute;top:50%;left:0;width:10px;height:2px;background:#fff;margin-top:-1px;content:'';}
+.s-ico-toggle:after{position:absolute;top:0;left:50%;width:2px;height:10px;background:#fff;margin-left:-1px;content:'';}
+.s-toggle-list.active .s-ico-toggle:after{display:none;}
+</style>
+</head>
+<body>
+<!-- wrapper [s] -->
+
+<!-- ​
+.인터렉션 : 
+- 아코디언 인터렉션 구현
+- 아코디언의 열림/닫힘은 hash의 변화로 구현
+- 새 탭에서 주소를 복사하여 열었을 때, 주소 끝의 hash에 해당하는 아코디언이 열려 있어야 함
+- 보너스) data-global-text로 열림/닫힘 텍스트 변경, aria-expanded 상태 변경
+ -->
+
+
+<div id="wrap">
+    <div class="s-toggle-layer">
+        <ul>
+        <!-- [D] active 시 .active 추가, aria-expanded="true"로 변경 -->
+        <li class="s-toggle-list" aria-expanded="true" data-global-text='{
+                "Expand" : "열림",
+                "Collapse" : "닫힘"
+            }'>
+            <a href="#list1" class="s-toggler-title">
+                <em>title</em>
+                <span class="s-ico-toggle">
+                    <span class="blind">열림</span>
+                </span>
+            </a>
+            <div class="s-toggle-content" id="list1">
+                @content
+            </div>
+        </li>
+        <li class="s-toggle-list" aria-expanded="false">
+            <a href="#list2" class="s-toggler-title">
+                <em>title</em>
+                <span class="s-ico-toggle">
+                    <span class="blind">열림</span>
+                </span>
+            </a>
+            <div class="s-toggle-content" id="list2">
+                @content
+            </div>
+        </li>
+        <li class="s-toggle-list" aria-expanded="false">
+            <a href="#list3" class="s-toggler-title">
+                <em>title</em>
+                <span class="s-ico-toggle">
+                    <span class="blind">열림</span>
+                </span>
+            </a>
+            <div class="s-toggle-content" id="list3">
+                @content
+            </div>
+        </li>
+        </ul>
+    </div>
+</div>
+<!-- wrapper [e] -->
+</body>
+</html>
