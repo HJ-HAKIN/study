@@ -103,24 +103,44 @@ slideToggle
         initLayout : function() {
             this.currentIndex = 0;
             this.oldIndex = this.currentIndex;
+            this.expandChild.removeClass('active');
             this.expandDetail.hide();
         },
         bindEvent : function() {
             this.expandBtn.on('click', $.proxy(this.btnFunc, this));
+            $(win).on('hashchange', $.proxy(this.onHashChange, this));
         },
         btnFunc : function(e) {
             e.preventDefault();
             var target = $(e.currentTarget);
             var targetIndex = target.parent().index();
             this.currentIndex = targetIndex;
+            this.findIndex();
             this.slideFunc();
+            this.getHashId();
         },
-        findIndex : function(e) {
+        findIndex : function() {
+            this.expandChild.eq(this.currentIndex).toggleClass('active');
+            this.oldIndex = this.currentIndex;
         },
         slideFunc : function() {
-          this.expandDetail.slideToggle( "slow", function() {
+          this.expandDetail.eq(this.currentIndex).slideToggle( "slow", function() {
             // Animation complete.
           });
+        },
+        onHashChange : function () {
+            this.findIndex();
+            this.filterHash();
+            this.getHashId();
+        },
+        filterHash : function () {
+            var getHash = win.location.hash;
+            var hashTarget = this.expandDetail.filter(getHash);
+            this.currentIndex = (hashTarget.length) ? hashTarget.index() : 0;
+        },
+        getHashId : function () {
+            var hashNum = this.expandDetail.eq(this.currentIndex).attr('id');
+            win.location.hash = '#' + hashNum;
         }
     };
     $(function () {
