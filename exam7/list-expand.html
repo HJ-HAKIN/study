@@ -95,16 +95,28 @@ slideToggle
         },
         setElements : function() {
             this.expandWrap = $('.s-toggle-layer');
-            this.expandChild = this.expandWrap.children;
+            this.expandList = this.expandWrap.find('ul');
+            this.expandChild = this.expandList.children();
             this.expandBtn = this.expandChild.find('a');
             this.expandDetail = this.expandChild.find('.s-toggle-content');
         },
         initLayout : function() {
+            this.currentIndex = 0;
+            this.oldIndex = this.currentIndex;
         },
         bindEvent : function() {
-            this.expandBtn.on('click', $.proxy(this.slideFunc, this));
+            this.expandBtn.on('click', $.proxy(this.btnFunc, this));
         },
-        slideFunc : function() {
+        btnFunc : function(e) {
+            e.preventDefault();
+            var target = $(e.currentTarget);
+            var targetIndex = target.parent().index();
+            this.currentIndex = targetIndex;
+            this.slideFunc();
+        },
+        findIndex : function(e) {
+        },
+        slideFunc : function(e) {
           this.expandDetail.slideToggle( "slow", function() {
             // Animation complete.
           });
