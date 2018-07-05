@@ -38,7 +38,7 @@ hr{display:none}
                 "Collapse" : "닫힘"
             }'>
             <a href="#list1" class="s-toggler-title">
-                <em>title</em>
+                <em>title1</em>
                 <span class="s-ico-toggle">
                     <span class="blind">열림</span>
                 </span>
@@ -49,7 +49,7 @@ hr{display:none}
         </li>
         <li class="s-toggle-list" aria-expanded="false">
             <a href="#list2" class="s-toggler-title">
-                <em>title</em>
+                <em>title2</em>
                 <span class="s-ico-toggle">
                     <span class="blind">열림</span>
                 </span>
@@ -60,7 +60,7 @@ hr{display:none}
         </li>
         <li class="s-toggle-list" aria-expanded="false">
             <a href="#list3" class="s-toggler-title">
-                <em>title</em>
+                <em>title3</em>
                 <span class="s-ico-toggle">
                     <span class="blind">열림</span>
                 </span>
@@ -103,6 +103,7 @@ slideToggle
         initLayout : function() {
             this.currentIndex = 0;
             this.oldIndex = this.currentIndex;
+            this.expandDetail.hide();
         },
         bindEvent : function() {
             this.expandBtn.on('click', $.proxy(this.btnFunc, this));
@@ -116,7 +117,7 @@ slideToggle
         },
         findIndex : function(e) {
         },
-        slideFunc : function(e) {
+        slideFunc : function() {
           this.expandDetail.slideToggle( "slow", function() {
             // Animation complete.
           });
