@@ -103,7 +103,7 @@ slideToggle
         initLayout : function () {
             this.currentIndex = 0;
             this.oldIndex = null;
-            this.expandChild.removeClass('active').attr('aria-expanded', false);
+            this.expandChild.removeClass('active').attr('aria-expanded', false).attr('data-global-text', '닫힘');
             this.expandDetail.hide();
         },
         bindEvent : function () {
@@ -118,9 +118,9 @@ slideToggle
             this.getHashId();
         },
         slideFunc : function () {
-            this.expandChild.eq(this.oldIndex).removeClass('active').attr('aria-expanded', false);
+            this.expandChild.eq(this.oldIndex).removeClass('active').attr('aria-expanded', false).attr('data-global-text', '닫힘');
             this.expandDetail.eq(this.oldIndex).slideUp();
-            this.expandChild.eq(this.currentIndex).addClass('active').attr('aria-expanded', true);
+            this.expandChild.eq(this.currentIndex).addClass('active').attr('aria-expanded', true).attr('data-global-text', '열림');
             this.expandDetail.eq(this.currentIndex).slideDown();
         },
         onHashChange : function () {
