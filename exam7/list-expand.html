@@ -88,25 +88,25 @@ slideToggle
 <script>
 (function (win, $) {
     var accor = {
-        init : function() {
+        init : function () {
             this.setElements();
             this.initLayout();
             this.bindEvent();
         },
-        setElements : function() {
+        setElements : function () {
             this.expandWrap = $('.s-toggle-layer');
             this.expandList = this.expandWrap.find('ul');
             this.expandChild = this.expandList.children();
             this.expandBtn = this.expandChild.find('a');
             this.expandDetail = this.expandChild.find('.s-toggle-content');
         },
-        initLayout : function() {
+        initLayout : function () {
             this.currentIndex = 0;
             this.oldIndex = null;
-            this.expandChild.removeClass('active');
+            this.expandChild.removeClass('active').attr('aria-expanded', false);
             this.expandDetail.hide();
         },
-        bindEvent : function() {
+        bindEvent : function () {
             this.expandBtn.on('click', $.proxy(this.btnFunc, this));
             $(win).on('hashchange', $.proxy(this.onHashChange, this));
         },
@@ -117,10 +117,10 @@ slideToggle
             if (this.currentIndex == this.oldIndex) return;
             this.getHashId();
         },
-        slideFunc : function() {
-            this.expandChild.eq(this.oldIndex).removeClass('active');
+        slideFunc : function () {
+            this.expandChild.eq(this.oldIndex).removeClass('active').attr('aria-expanded', false);
             this.expandDetail.eq(this.oldIndex).slideUp();
-            this.expandChild.eq(this.currentIndex).addClass('active');
+            this.expandChild.eq(this.currentIndex).addClass('active').attr('aria-expanded', true);
             this.expandDetail.eq(this.currentIndex).slideDown();
         },
         onHashChange : function () {
