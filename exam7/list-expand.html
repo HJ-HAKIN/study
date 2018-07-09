@@ -102,7 +102,7 @@ slideToggle
         },
         initLayout : function() {
             this.currentIndex = 0;
-            this.oldIndex = this.currentIndex;
+            this.oldIndex = null;
             this.expandChild.removeClass('active');
             this.expandDetail.hide();
         },
@@ -113,31 +113,30 @@ slideToggle
         btnFunc : function(e) {
             e.preventDefault();
             var target = $(e.currentTarget);
-            var targetIndex = target.parent().index();
-            this.currentIndex = targetIndex;
-            this.expandChild.eq(this.currentIndex).toggleClass('active');
-            this.oldIndex = this.currentIndex;
-            this.slideFunc();
+            this.currentIndex = target.closest('li').index();
+            if (this.currentIndex == this.oldIndex) return;
             this.getHashId();
         },
         slideFunc : function() {
-          this.expandDetail.eq(this.currentIndex).slideToggle( "slow", function() {
-            // Animation complete.
-          });
+            this.expandChild.eq(this.oldIndex).removeClass('active');
+            this.expandDetail.eq(this.oldIndex).slideUp();
+            this.expandChild.eq(this.currentIndex).addClass('active');
+            this.expandDetail.eq(this.currentIndex).slideDown();
         },
         onHashChange : function () {
             this.filterHash();
-            this.getHashId();
+            this.slideFunc();
+            this.oldIndex = this.currentIndex;
         },
         filterHash : function () {
             var getHash = win.location.hash;
-            var hashTarget = this.expandDetail.filter(getHash);
-            this.currentIndex = (hashTarget.length) ? hashTarget.index() : 0;
+            var hashTarget = this.expandDetail.filter(getHash),
+            hashIndex = hashTarget.parent().index();
+            this.currentIndex = (hashTarget.length) ? hashIndex : 0;
         },
         getHashId : function () {
             var hashNum = this.expandDetail.eq(this.currentIndex).attr('id');
             win.location.hash = '#' + hashNum;
-            console.log(hashNum);
         }
     };
     $(function () {
