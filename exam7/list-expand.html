@@ -44,7 +44,7 @@ hr{display:none}
                 </span>
             </a>
             <div class="s-toggle-content" id="list1">
-                @content
+                @content1
             </div>
         </li>
         <li class="s-toggle-list" aria-expanded="false">
@@ -55,7 +55,7 @@ hr{display:none}
                 </span>
             </a>
             <div class="s-toggle-content" id="list2">
-                @content
+                @content2
             </div>
         </li>
         <li class="s-toggle-list" aria-expanded="false">
@@ -66,7 +66,7 @@ hr{display:none}
                 </span>
             </a>
             <div class="s-toggle-content" id="list3">
-                @content
+                @content3
             </div>
         </li>
         </ul>
@@ -115,13 +115,10 @@ slideToggle
             var target = $(e.currentTarget);
             var targetIndex = target.parent().index();
             this.currentIndex = targetIndex;
-            this.findIndex();
-            this.slideFunc();
-            this.getHashId();
-        },
-        findIndex : function() {
             this.expandChild.eq(this.currentIndex).toggleClass('active');
             this.oldIndex = this.currentIndex;
+            this.slideFunc();
+            this.getHashId();
         },
         slideFunc : function() {
           this.expandDetail.eq(this.currentIndex).slideToggle( "slow", function() {
@@ -129,7 +126,6 @@ slideToggle
           });
         },
         onHashChange : function () {
-            this.findIndex();
             this.filterHash();
             this.getHashId();
         },
@@ -141,6 +137,7 @@ slideToggle
         getHashId : function () {
             var hashNum = this.expandDetail.eq(this.currentIndex).attr('id');
             win.location.hash = '#' + hashNum;
+            console.log(hashNum);
         }
     };
     $(function () {
