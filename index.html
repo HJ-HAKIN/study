@@ -21,11 +21,12 @@ a{color:#000;text-decoration:none}
 #wrap:after{display:block;height:5px;background:#ccc;content:''}
 .group{padding:20px 10px 15px}
 .tit{position:relative;padding-bottom:15px;border-bottom:1px dashed #ddd;font-size:30px;font-weight:800;text-align:center}
-.tit .desc{background:#60B99A;font-size:14px;vertical-align:baseline}
+.tit .desc{display:inline-block;background:#60B99A;font-size:14px;vertical-align:baseline}
 .tit .desc:before{left:-11px;border-top:11px solid transparent;border-bottom: 11px solid transparent;border-right:11px solid #60B99A}
+.area{display:inline-block;width:48%;margin-left:1%;vertical-align:top;box-sizing:border-box}
 .sub_tit{display:inline-block;position:relative;margin-top:20px;padding:0 5px 0 10px;font-size:22px;font-weight:700;vertical-align:middle}
 .sub_tit:before{position:absolute;top:50%;left:1px;width:5px;height:5px;margin-top:-3px;border-radius:50%;background:#D34017;content:''}
-.desc{display:inline-block;position:relative;;margin:20px 0 0 6px;padding:4px 6px 3px;border-radius:0 4px 4px 0;background:#D34017;font-size:11px;color:#fff;vertical-align:middle}
+.desc{display:block;position:relative;;margin:20px 0 0 6px;padding:4px 6px 3px;border-radius:0 4px 4px 0;background:#D34017;font-size:11px;color:#fff;vertical-align:middle}
 .desc:before{position:absolute;top:0;left:-10px;width:0;height:0;border-top:10px solid transparent;border-bottom: 10px solid transparent;border-right:10px solid #D34017;content:''}
 .lst_exam{padding:15px 0;font-size:0}
 .lst_exam:after{display:block;margin:20px 0 -10px;font-size:12px;font-weight:400;color:#ddd;text-align:center;content:'- * - * - * - * - * - * - * - * - * -'}
@@ -40,48 +41,62 @@ a{color:#000;text-decoration:none}
 <div id="wrap">
 	<div class="group">
 		<h1 class="tit">JS Stydy <span class="desc">HYOJUNG</span></h1>
-		<h2 class="sub_tit">[20180307] 1주차</h2>
-		<p class="desc">주어진 조건을 JS/jQuery selector로 표기</p>
-		<ul class="lst_exam">
-		<li><a href="exam1/selector_js.html">Selector JS</a></li>
-		<li><a href="exam1/selector_jquery.html">Selector jQuery</a></li>
-		<li><a href="exam1/selector2_js.html">Selector2 JS</a></li>
-		<li><a href="exam1/selector2_jquery.html">Selector2 jQuery</a></li>
-		</ul>
-		<h2 class="sub_tit">[20180314] 2주차</h2>
-		<p class="desc">각 prototype의 property 정리, if/for 문 문제 풀이</p>
-		<ul class="lst_exam">
-		<li><a href="https://github.com/HJ-HAKIN/study/wiki/Prototype">Prototype Wiki</a></li>
-		<li><a href="exam2/if.html">if 문</a></li>
-		<li><a href="exam2/for.html">for 문</a></li>
-		</ul>
-		<h2 class="sub_tit">[20180321] 3주차</h2>
-		<p class="desc">array/object 퀴즈 풀기, lineplay 인터렉션 구현하기</p>
-		<ul class="lst_exam">
-		<li><a href="exam3/array.html">array 퀴즈</a></li>
-		<li><a href="exam3/object.html">object 퀴즈</a></li>
-		<li><a href="exam3/lineplay/line_play.html">LINE Play</a></li>
-		</ul>
-		<h2 class="sub_tit">[20180608] 4주차</h2>
-		<p class="desc">코카콜라 곰 선택 이벤트 인터렉션 구현하기</p>
-		<ul class="lst_exam">
-		<li><a href="exam4/index.html">Cocacola</a></li>
-		</ul>
-		<h2 class="sub_tit">[20180615] 5주차</h2>
-		<p class="desc">레이어 팝업 탭 포커스 구현하기</p>
-		<ul class="lst_exam">
-		<li><a href="exam5/layerPop.html">Layer Popup</a></li>
-		</ul>
-		<h2 class="sub_tit">[20180621] 6주차</h2>
-		<p class="desc">Tab & Slide 인터렉션 구현하기</p>
-		<ul class="lst_exam">
-		<li><a href="exam6/tab_slide.html">Tab & Slide</a></li>
-		</ul>
-		<h2 class="sub_tit">[20180704] 7주차</h2>
-		<p class="desc">아코디언 메뉴 구현하기</p>
-		<ul class="lst_exam">
-		<li><a href="exam7/list-expand.html">아코디언 메뉴</a></li>
-		</ul>
+		<div class="area">
+			<h2 class="sub_tit">[20180307] 1주차</h2>
+			<p class="desc">주어진 조건을 JS/jQuery selector로 표기</p>
+			<ul class="lst_exam">
+			<li><a href="exam1/selector_js.html">Selector JS</a></li>
+			<li><a href="exam1/selector_jquery.html">Selector jQuery</a></li>
+			<li><a href="exam1/selector2_js.html">Selector2 JS</a></li>
+			<li><a href="exam1/selector2_jquery.html">Selector2 jQuery</a></li>
+			</ul>
+		</div>
+		<div class="area">
+			<h2 class="sub_tit">[20180314] 2주차</h2>
+			<p class="desc">각 prototype의 property 정리, if/for 문 문제 풀이</p>
+			<ul class="lst_exam">
+			<li><a href="https://github.com/HJ-HAKIN/study/wiki/Prototype">Prototype Wiki</a></li>
+			<li><a href="exam2/if.html">if 문</a></li>
+			<li><a href="exam2/for.html">for 문</a></li>
+			</ul>
+		</div>
+		<div class="area">
+			<h2 class="sub_tit">[20180321] 3주차</h2>
+			<p class="desc">array/object 퀴즈 풀기, lineplay 인터렉션 구현하기</p>
+			<ul class="lst_exam">
+			<li><a href="exam3/array.html">array 퀴즈</a></li>
+			<li><a href="exam3/object.html">object 퀴즈</a></li>
+			<li><a href="exam3/lineplay/line_play.html">LINE Play</a></li>
+			</ul>
+		</div>
+		<div class="area">
+			<h2 class="sub_tit">[20180608] 4주차</h2>
+			<p class="desc">코카콜라 곰 선택 이벤트 인터렉션 구현하기</p>
+			<ul class="lst_exam">
+			<li><a href="exam4/index.html">Cocacola</a></li>
+			</ul>
+		</div>
+		<div class="area">
+			<h2 class="sub_tit">[20180615] 5주차</h2>
+			<p class="desc">레이어 팝업 탭 포커스 구현하기</p>
+			<ul class="lst_exam">
+			<li><a href="exam5/layerPop.html">Layer Popup</a></li>
+			</ul>
+		</div>
+		<div class="area">
+			<h2 class="sub_tit">[20180621] 6주차</h2>
+			<p class="desc">Tab & Slide 인터렉션 구현하기</p>
+			<ul class="lst_exam">
+			<li><a href="exam6/tab_slide.html">Tab & Slide</a></li>
+			</ul>
+		</div>
+		<div class="area">
+			<h2 class="sub_tit">[20180704] 7주차</h2>
+			<p class="desc">아코디언 메뉴 구현하기</p>
+			<ul class="lst_exam">
+			<li><a href="exam7/list-expand.html">아코디언 메뉴</a></li>
+			</ul>
+		</div>
 	</div>
 
 </div>
