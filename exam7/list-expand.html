@@ -99,12 +99,15 @@ slideToggle
             this.expandChild = this.expandList.children();
             this.expandBtn = this.expandChild.find('a');
             this.expandDetail = this.expandChild.find('.s-toggle-content');
+            this.currentIndex = null;
+            this.oldIndex = null;
         },
         initLayout : function () {
-            this.currentIndex = 0;
-            this.oldIndex = null;
             this.expandChild.removeClass('active').attr('aria-expanded', false).attr('data-global-text', '닫힘');
             this.expandDetail.hide();
+            if (win.location.hash) {
+                this.onHashChange();
+            }
         },
         bindEvent : function () {
             this.expandBtn.on('click', $.proxy(this.btnFunc, this));
