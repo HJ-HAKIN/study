@@ -7,15 +7,15 @@
 <style>
 /* temporary css */
 *{margin:0;padding:0}
-body{font-size:14px;font-family:"나눔고딕",NanumGothic,"굴림",Gulim,Sans-serif;color:#da0707;line-height:1.5}
+body{font-size:14px;font-family:"나눔고딕",NanumGothic,"굴림",Gulim,Sans-serif;color:#787878;line-height:1.5}
 h1,h2,h3,h4,h5,h6{font-size:14px}
 ul,li{list-style:none}
 button{font-size:14px;font-family:"나눔고딕",NanumGothic,"굴림",Gulim,Sans-serif;line-height:1.5;cursor:pointer}
 button::-moz-focus-inner{padding:0;border:0}
-p{margin-bottom:30px;padding-bottom:10px;border-bottom:2px solid #da0707;font-size:20px}
+p{margin-bottom:30px;padding-bottom:10px;border-bottom:2px solid #787878;font-size:20px}
 #container{width:880px;margin:0 auto;padding:50px 0}
 .box{margin-top:50px;font-size:0}
-.box a{color:#da0707;text-decoration:none}
+.box a{color:#787878;text-decoration:none}
 .box:first-child{margin-top:0}
 .box1{position:relative}
 .box1 label{position:relative;padding-left:44px;font-size:16px;line-height:32px}
@@ -27,14 +27,14 @@ p{margin-bottom:30px;padding-bottom:10px;border-bottom:2px solid #da0707;font-si
 .ipt_chk:checked + .chk_box{background-position:-36px 0}
 .ipt_chk:focus + .chk_box,.ipt_rdo:focus + .rdo_box{outline:#00FF00 dotted thick}
 .select_box{position:relative;width:200px}
-.select_box>a{display:block;border:1px solid #da0707;padding:5px 10px;font-size:16px}
-.select_box ul{position:absolute;top:100%;left:0;right:0;border:1px solid #da0707;border-width:0 1px;background:#fff}
-.select_box li{border-bottom:1px solid #da0707}
+.select_box>a{display:block;border:1px solid #787878;padding:5px 10px;font-size:16px}
+.select_box ul{position:absolute;top:100%;left:0;right:0;border:1px solid #787878;border-width:0 1px;background:#fff}
+.select_box li{border-bottom:1px solid #787878}
 .select_box li a{display:block;padding:5px 10px;font-size:16px}
 .select_menu{position:relative}
-.select_menu:after{position:absolute;top:14px;right:15px;width:0;height:0;border-top:5px solid red;border-bottom:0 solid transparent;border-right:5px solid transparent;border-left:5px solid  transparent;content:''}
+.select_menu:after{position:absolute;top:14px;right:15px;width:0;height:0;border-top:5px solid #787878;border-bottom:0 solid transparent;border-right:5px solid transparent;border-left:5px solid  transparent;content:''}
 .select_box.opened{z-index:30}
-.select_box.opened .select_menu:after{top:14px;border-top:0 solid transparent;border-bottom:5px solid red}
+.select_box.opened .select_menu:after{top:14px;border-top:0 solid transparent;border-bottom:5px solid #787878}
 .box2 label{position:relative;padding-left:28px;font-size:16px;line-height:18px}
 .radio_box{display:inline-block;position:relative;margin-right:10px}
 .rdo_box{position:absolute;left:0;width:18px;height:18px;margin-top:2px;background:url(img/sp_radio.png) no-repeat;background-position:0 0;vertical-align:middle}
@@ -53,10 +53,11 @@ p{margin-bottom:30px;padding-bottom:10px;border-bottom:2px solid #da0707;font-si
     <!-- header [e] -->
     <hr />
     <!-- container [s] -->
+
     <div id="container">
         <div class="box box1">
             <p>1. 체크박스</p>
-            <div class="check_box chk_active">
+            <div class="check_box">
                 <input type="checkbox" id="agree_v1" class="ipt_chk">
                 <span class="chk_box"></span>
             </div>
@@ -64,7 +65,7 @@ p{margin-bottom:30px;padding-bottom:10px;border-bottom:2px solid #da0707;font-si
         </div>
         <div class="box box2">
             <p>2. 라디오버튼</p>
-            <span class="radio_box chk_active">
+            <span class="radio_box">
                 <input type="radio" id="radio1" name="radio1" class="ipt_rdo">
                 <span class="rdo_box"></span>
                 <label for="radio1">라디오1</label>
@@ -77,7 +78,7 @@ p{margin-bottom:30px;padding-bottom:10px;border-bottom:2px solid #da0707;font-si
         </div>
         <div class="box box3">
             <p>3. 셀렉트박스</p>
-            <div class="select_box opened">
+            <div class="select_box">
                 <a href="javascript:;" class="select_menu">선택</a>
                 <ul>
                 <li><a href="#">메뉴 1</a></li>
@@ -95,46 +96,9 @@ p{margin-bottom:30px;padding-bottom:10px;border-bottom:2px solid #da0707;font-si
     <!-- footer [e] -->
 <!-- [ Javascript Area ] -->
 <!-- Libs -->
-<script src="../js/libs/jquery-1.12.4.min.js"></script>
-<script>
-(function (win, $) {
-    var obj = function (container, args) {
-        console.log(args);
-        var defParams = {
-            container : container || '.box',
-            viewType : null
-        };
-        this.opts = $.extend(defParams, (args || {}));
-        this.init();
-        // console.log(this);
-    };
-    obj.prototype = {
-        init : function () {
-            console.log(this.opts.container);
-            console.log(this.opts.viewType);
-        }
-    };
-    // $.fn.pluginCall = function () {
-    //     for (var i = 0, max = this.length; i < max; i++) {
-    //         new obj(this.eq(i), {viewType : true});
-    //     }
-    // };
-
-    $(function () {
-        var objCall = new obj();
-        var objCall2 = new obj('.wrap', {
-            viewType : false
-        });
-
-        // $('.wrapper').pluginCall();
-    });
-})(window, window.jQuery);
-
-// .인터렉션 : 
-// - form, 셀렉트박스 구현
-// - form은 checked의 true, false로 체크 (prop)
-// - 셀렉트 박스는 outside 추가, 플러그인 제작
-</script>
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/jquery.ba-outside-events.js"></script>
 </div>
 </body>
 </html>
