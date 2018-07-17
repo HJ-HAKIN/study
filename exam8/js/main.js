@@ -7,7 +7,7 @@
             checkBox : '.check_box',
             radioBox : '.radio_box',
             selectBox : '.select_box',
-            selectBtn : 'a',
+            selectBtn : '.select_menu',
             selectList : 'ul',
             selectTxt : 'li a',
             checkInput : '.ipt_chk',
@@ -47,6 +47,7 @@
             this.checkInput.on('change', $.proxy(this.checkEvt, this));
             this.radioInput.on('change', $.proxy(this.radioEvt, this));
             this.selectBtn.on('click', $.proxy(this.selectEvt, this));
+            this.selectTxt.on('click', $.proxy(this.selectOpt, this));
         },
         checkEvt : function () {
             if (this.checkWrap.find(this.checkInput).filter(':checked')) {
@@ -66,16 +67,17 @@
             var selectOutsideTime = setTimeout($.proxy(function () {
                 this.onSelectOutside(true);
             }, this), 30);
-            // this.changeTxt();
         },
         slideEvt : function () {
+            if (this.selectList.is(':visible')) return false;
+            this.selectList.stop().slideDown(150);
             this.selectWrap.toggleClass(this.opts.openClass);
-            this.selectList.slideToggle();
         },
-        changeTxt : function () {
-            var targetText = this.selectTxt.text();
-            this.selectTxt.text() = this.selectBtn.text()
-            console.log(targetText);
+        selectOpt :function (e) {
+            var targetOpt = e.currentTarget;
+            this.targetTxt = targetOpt.text;
+            this.selectBtn.text(this.targetTxt);
+            this.onSelectOutsideFunc();
         },
         onSelectOutside : function (type) {
             if (type) {
@@ -107,7 +109,7 @@
         $('#container').pluginCall();
         // 
     });
-    
+
 })(window, window.jQuery);
 
 // .인터렉션 : 
@@ -124,3 +126,6 @@
 
 // targetText = target.text()
 // a.text(targetText)
+
+
+// select 텍스트 픽해서 넣기/옆에 버튼 상태 세분화?
