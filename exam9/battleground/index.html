@@ -158,20 +158,23 @@ ins{text-decoration:none}
         checkHeight: function () {
             this.winTop = $(win).scrollTop();
             this.fixFunc();
-            console.log(this.winTop);
+            this.findHeight();
+            // console.log(this.winTop);
         },
         findHeight : function () {
-            if (this.winTop === this.secTopFirst) {
+            if (this.winTop >= this.secTopFirst && this.winTop < this.secTopSecond) {
+                this.quickItem.removeClass(this.opts.activeClass);
                 this.quickItem.eq(0).addClass(this.opts.activeClass);
-            } else if (this.winTop === this.secTopSecond) {
+            } else if (this.winTop >= this.secTopSecond && this.winTop < this.secTopThird) {
+                this.quickItem.removeClass(this.opts.activeClass);
                 this.quickItem.eq(1).addClass(this.opts.activeClass);
-            } else if (this.winTop === this.secTopThird) {
-                this.quickItem.eq(2).addClass(this.opts.activeClass);
             }
-            console.log(this.secTopFirst);
-            console.log(this.secTopSecond);
-            console.log(this.secTopThird);
-            
+             else if (this.winTop >= this.secTopThird) {
+                this.quickItem.removeClass(this.opts.activeClass);
+                this.quickItem.eq(2).addClass(this.opts.activeClass);
+            } else {
+                this.quickItem.removeClass(this.opts.activeClass);
+            }
         },
         fixFunc : function () {
             if (this.winTop >= this.secTopFirst) {
