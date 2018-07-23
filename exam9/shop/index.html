@@ -162,7 +162,7 @@ ins{text-decoration:none}
 .prdt_artbx .card_template2.type2 .prdt_tit{width:auto}
 .prdt_artbx .btn_more_view{margin-top:46px}
 .prdt_artbx .group_header{margin-bottom:-8px}
-.btn_top{position:fixed;right:20px;bottom:20px}
+.btn_top{position:fixed;right:20px;bottom:20px;z-index:1}
 .btn_top a{display:inline-block;padding:10px;background:#000;color:#fff;vertical-align:top}
 /* //temporary css */
 </style>
@@ -724,9 +724,19 @@ ins{text-decoration:none}
             container : container || '#container',
             stickyWrap : '.filter_sort_wrap',
             stickyClass : 'sticky',
+            topBtn : '.btn_top',
             viewType : null
         };
         this.obj = $(container);
+        this.opts = $.extend(defParams, (args || {}));
+        this.init();
+    };
+    var footer = function (footer, args) {
+        var defParams = {
+            footer : footer || '#footer',
+            viewType : null
+        };
+        this.obj = $(footer);
         this.opts = $.extend(defParams, (args || {}));
         this.init();
     };
@@ -738,10 +748,13 @@ ins{text-decoration:none}
         },
         setElements : function () {
             this.stickyWrap = this.obj.find(this.opts.stickyWrap);
+            this.topBtn = this.obj.find(this.opts.topBtn);
             this.secTop = this.stickyWrap.offset().top;
+            this.footerHeight = $('#footer').outerHeight();
         },
         initLayout : function () {
             this.stickyWrap.removeClass(this.opts.stickyClass);
+            this.topBtn.attr('href', '#top');
             this.objTop = this.obj.offset().top;
             this.initHeight();
         },
@@ -754,7 +767,15 @@ ins{text-decoration:none}
         },
         checkHeight: function () {
             this.winTop = $(win).scrollTop();
+            this.winHeight = $(win).height();
             this.fixFunc();
+            var winBottom = this.winHeight;
+            var scrollBottom = $('body').height() - this.footerHeight - this.winTop;
+            if (scrollBottom < -1090) {
+                this.topBtn.hide();
+            } else {
+                this.topBtn.show();
+            }
         },
         fixFunc : function () {
             if (this.winTop >= this.secTop) {
