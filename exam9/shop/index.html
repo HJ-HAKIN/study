@@ -716,11 +716,64 @@ ins{text-decoration:none}
     <!-- footer [e] -->
 <!-- [ Javascript Area ] -->
 <!-- Libs -->
-<script src="../js/libs/jquery-1.12.4.min.js"></script>
+<script src="../../libs/jquery-1.12.4.min.js"></script>
 <script>
 (function (win, $) {
-
-
+    var obj = function (container, args) {
+        var defParams = {
+            container : container || '#container',
+            stickyWrap : '.filter_sort_wrap',
+            stickyClass : 'sticky',
+            viewType : null
+        };
+        this.obj = $(container);
+        this.opts = $.extend(defParams, (args || {}));
+        this.init();
+    };
+    obj.prototype = {
+        init : function () {
+            this.setElements();
+            this.initLayout();
+            this.bindEvents();
+        },
+        setElements : function () {
+            this.stickyWrap = this.obj.find(this.opts.stickyWrap);
+            this.secTop = this.stickyWrap.offset().top;
+        },
+        initLayout : function () {
+            this.stickyWrap.removeClass(this.opts.stickyClass);
+            this.objTop = this.obj.offset().top;
+            this.initHeight();
+        },
+        bindEvents : function () {
+            $(win).on('scroll', $.proxy(this.checkHeight, this));
+        },
+        initHeight : function () {
+            this.stickyWrap.wrap('<div class="js-' + this.stickyWrap.attr('class') + '">');
+            this.objWrap = this.stickyWrap.parent();
+        },
+        checkHeight: function () {
+            this.winTop = $(win).scrollTop();
+            this.fixFunc();
+        },
+        fixFunc : function () {
+            if (this.winTop >= this.secTop) {
+                this.stickyWrap.addClass(this.opts.stickyClass);
+                this.objWrap.css('padding-top', '96px');
+            } else {
+                this.stickyWrap.removeClass(this.opts.stickyClass);
+                this.objWrap.css('padding-top', '0');
+            }
+        }
+    };
+    $.fn.pluginCall = function () {
+        for (var i = 0, max = this.length; i < max; i++) {
+            new obj(this.eq(i), {viewType : true});
+        }
+    };
+    $(function () {
+        $('#container').pluginCall();
+    });
 })(window, window.jQuery);
 </script>
 </div>
