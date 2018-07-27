@@ -103,13 +103,52 @@
     </div>
 </div>
 <!-- wrapper [e] -->
-<script src="../js/libs/jquery-1.12.4.min.js"></script>
+<script src="../libs/jquery-1.12.4.min.js"></script>
 <script>
 (function (win, $) {
     'use strict';
-    
 
+    var resizeTest = function () {
+        var defParams = {
+            breakPoint : 768,
+            viewType : null
+        };
+        this.opts = $.extend(defParams, {});
+        this.init();
+    };
+    resizeTest.prototype = {
+        init : function () {
+            this.bindEvents();
+            this.resizeFunc();
+        },
+        bindEvents : function () {
+            $(win).on('resize', $.proxy(this.resizeFunc, this));
+        },
+        resizeFunc : function () {
+
+        },
+        setLayout : function () {
+            if (winWidth > this.opts.breakPoint) {
+                if (this.opts.viewType != 'pc') {
+                    this.opts.viewType = 'pc';
+                    // PC Event
+                }
+                console.log('PC');
+            } else {
+                if (this.opts.viewType != 'mo') {
+                    this.opts.viewType = 'mo';
+                    // MO Event
+                }
+            console.log('MO');
+            }
+        }
+    }
 })(window, window.jQuery);
+
+// - 반응형 인터렉션 구현
+// - PC/MO 이벤트를 각각 구현하고, 해당하는 구간의 이벤트만 on
+// - IE8 대응 고려 (반응형X)
+// - 리사이즈 시 이벤트가 매번 일어나는 것과 아닌것을 분리하여 최적화
 </script>
 </body>
 </html>
