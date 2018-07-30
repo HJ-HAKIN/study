@@ -110,39 +110,75 @@
 
     var resizeTest = function () {
         var defParams = {
+            container : container || '#wrap',
+            gnbWrap : '.gnb_wrap',
+            gnbBx : '.box',
+            gnbMenu : '.btn',
+            gnbOpen : '.gnb_open',
+            gnbClose : '.gnb_close',
             breakPoint : 768,
             viewType : null
         };
+        this.obj = $(container);
         this.opts = $.extend(defParams, {});
         this.init();
     };
     resizeTest.prototype = {
         init : function () {
+            this.setElements();
+            this.initLayout();
             this.bindEvents();
-            this.resizeFunc();
+            // this.resizeFunc();
+            this.setLayout();
+        },
+        setElements : function () {
+            this.gnbWrap = this.obj.find(this.opts.gnbWrap);
+            this.gnbBx = this.obj.find(this.opts.gnbBx);
+            this.gnbMenu = this.obj.find(this.opts.gnbMenu);
+            this.gnbOpen = this.obj.find(this.opts.gnbOpen);
+            this.gnbClose = this.obj.find(this.opts.gnbClose);
+        },
+        initLayout : function () {
+            console.log('initLayout');
         },
         bindEvents : function () {
+            this.gnbMenu.on('mouseover', $.proxy(this.showMenu, this));
             $(win).on('resize', $.proxy(this.resizeFunc, this));
         },
         resizeFunc : function () {
 
         },
         setLayout : function () {
-            if (winWidth > this.opts.breakPoint) {
-                if (this.opts.viewType != 'pc') {
-                    this.opts.viewType = 'pc';
-                    // PC Event
-                }
-                console.log('PC');
-            } else {
+            var winWidth = $(win).outerWidth();
+            if (winWidth <= this.opts.breakPoint) {
                 if (this.opts.viewType != 'mo') {
                     this.opts.viewType = 'mo';
                     // MO Event
                 }
-            console.log('MO');
+                console.log('MO View');
+            } else {
+                if (this.opts.viewType != 'pc') {
+                    this.opts.viewType = 'pc';
+                    // PC Event
+                }
+                console.log('PC View');
             }
+        },
+        showMenu : function (e) {
+            var target = $(e.currentTarget);
+            this.currentIndex = target.parent().index();
+            this.gnbBx.eq(this.currentIndex).show();
+            console.log(111);
         }
-    }
+    };
+    $.fn.pluginCall = function () {
+        for (var i = 0, max = this.length; i < max; i++) {
+            new resizeTest(this.eq(i), {viewType : true});
+        }
+    };
+    $(function () {
+        $('#wrap').pluginCall();
+    });
 })(window, window.jQuery);
 
 // - 반응형 인터렉션 구현
