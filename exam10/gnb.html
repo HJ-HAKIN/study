@@ -111,7 +111,7 @@
     var resizeTest = function () {
         var defParams = {
             container : container || '#wrap',
-            gnbWrap : '.gnb_wrap',
+            gnbWrap : '#gnb',
             gnbBx : '.box',
             gnbMenu : '.btn',
             gnbOpen : '.gnb_open',
@@ -119,14 +119,13 @@
             breakPoint : 768,
             viewType : null
         };
-        this.obj = $(container);
+        this.obj = $(wrap);
         this.opts = $.extend(defParams, {});
         this.init();
     };
     resizeTest.prototype = {
         init : function () {
             this.setElements();
-            this.initLayout();
             this.bindEvents();
             // this.resizeFunc();
             this.setLayout();
@@ -138,15 +137,15 @@
             this.gnbOpen = this.obj.find(this.opts.gnbOpen);
             this.gnbClose = this.obj.find(this.opts.gnbClose);
         },
-        initLayout : function () {
-            console.log('initLayout');
-        },
         bindEvents : function () {
-            this.gnbMenu.on('mouseover', $.proxy(this.showMenu, this));
+            this.gnbMenu.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
+            this.gnbBx.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
+            this.gnbOpen.on('click', $.proxy(this.showMoMenu, this));
+            this.gnbClose.on('click', $.proxy(this.showMoMenuClose, this));
             $(win).on('resize', $.proxy(this.resizeFunc, this));
         },
         resizeFunc : function () {
-
+            // 사이즈 변할 때 refresh?
         },
         setLayout : function () {
             var winWidth = $(win).outerWidth();
@@ -165,15 +164,28 @@
             }
         },
         showMenu : function (e) {
-            var target = $(e.currentTarget);
-            this.currentIndex = target.parent().index();
-            this.gnbBx.eq(this.currentIndex).show();
-            console.log(111);
+            if (this.opts.viewType === 'pc') {
+                var target = $(e.currentTarget);
+                this.currentIndex = target.parent().index();
+                this.gnbBx.eq(this.currentIndex).show();
+                this.oldIndex = this.currentIndex;
+                if (e.type == "mouseleave") this.gnbBx.eq(this.oldIndex).hide();
+            }
+        },
+        showMoMenu : function () {
+            this.gnbWrap.animate({
+                'left' : '0'
+            });
+        },
+        showMoMenuClose : function () {
+            this.gnbWrap.animate({
+                'left' : '-100%'
+            });
         }
     };
     $.fn.pluginCall = function () {
         for (var i = 0, max = this.length; i < max; i++) {
-            new resizeTest(this.eq(i), {viewType : true});
+            new resizeTest(this.eq(i));
         }
     };
     $(function () {
