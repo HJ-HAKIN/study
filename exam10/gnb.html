@@ -127,7 +127,6 @@
         init : function () {
             this.setElements();
             this.bindEvents();
-            // this.resizeFunc();
             this.setLayout();
         },
         setElements : function () {
@@ -136,20 +135,31 @@
             this.gnbMenu = this.obj.find(this.opts.gnbMenu);
             this.gnbOpen = this.obj.find(this.opts.gnbOpen);
             this.gnbClose = this.obj.find(this.opts.gnbClose);
+            this.winWidth = $(win).width();
         },
-        bindEvents : function () {
-            this.gnbMenu.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
-            this.gnbBx.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
-            this.gnbOpen.on('click', $.proxy(this.showMoMenu, this));
-            this.gnbClose.on('click', $.proxy(this.showMoMenuClose, this));
+        bindEvents : function (type) {
+            if (type) {
+                this.gnbOpen.on('click', $.proxy(this.showMoMenu, this));
+                this.gnbClose.on('click', $.proxy(this.showMoMenuClose, this));
+                this.gnbMenu.off('mouseover focus mouseleave');
+                this.gnbBx.off('mouseover focus mouseleave');
+            } else {
+                this.gnbMenu.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
+                this.gnbBx.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
+                this.gnbOpen.off('click');
+                this.gnbClose.off('click');
+            }
             $(win).on('resize', $.proxy(this.resizeFunc, this));
         },
         resizeFunc : function () {
-            // 사이즈 변할 때 refresh?
+            if (this.winWidth >= this.opts.breakPoint) {
+                this.gnbBx.hide();
+            } else {
+                this.gnbBx.show();
+            }
         },
         setLayout : function () {
-            var winWidth = $(win).outerWidth();
-            if (winWidth <= this.opts.breakPoint) {
+            if (!this.bindEvents(true)) {
                 if (this.opts.viewType != 'mo') {
                     this.opts.viewType = 'mo';
                     // MO Event
@@ -190,6 +200,7 @@
     };
     $(function () {
         $('#wrap').pluginCall();
+        $(win).trigger('resize');
     });
 })(window, window.jQuery);
 
