@@ -139,35 +139,39 @@
         },
         bindEvents : function (type) {
             if (type) {
-                this.gnbOpen.on('click', $.proxy(this.showMoMenu, this));
-                this.gnbClose.on('click', $.proxy(this.showMoMenuClose, this));
-                this.gnbMenu.off('mouseover focus mouseleave');
-                this.gnbBx.off('mouseover focus mouseleave');
-            } else {
                 this.gnbMenu.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
                 this.gnbBx.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
                 this.gnbOpen.off('click');
                 this.gnbClose.off('click');
+            } else {
+                this.gnbOpen.on('click', $.proxy(this.showMoMenu, this));
+                this.gnbClose.on('click', $.proxy(this.showMoMenuClose, this));
+                this.gnbMenu.off('mouseover focus mouseleave');
+                this.gnbBx.off('mouseover focus mouseleave');
             }
             $(win).on('resize', $.proxy(this.resizeFunc, this));
         },
         resizeFunc : function () {
             if (this.winWidth >= this.opts.breakPoint) {
-                this.gnbBx.hide();
+                this.opts.viewType = 'pc';
+                this.bindEvents(true);
             } else {
-                this.gnbBx.show();
+                this.opts.viewType = 'mo';
+                this.bindEvents(false);
             }
         },
         setLayout : function () {
-            if (!this.bindEvents(true)) {
+            if (this.winWidth < this.opts.breakPoint) {
                 if (this.opts.viewType != 'mo') {
                     this.opts.viewType = 'mo';
+                    this.bindEvents(false);
                     // MO Event
                 }
                 console.log('MO View');
             } else {
                 if (this.opts.viewType != 'pc') {
                     this.opts.viewType = 'pc';
+                    this.bindEvents(true);
                     // PC Event
                 }
                 console.log('PC View');
