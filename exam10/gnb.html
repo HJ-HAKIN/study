@@ -135,46 +135,69 @@
             this.gnbMenu = this.obj.find(this.opts.gnbMenu);
             this.gnbOpen = this.obj.find(this.opts.gnbOpen);
             this.gnbClose = this.obj.find(this.opts.gnbClose);
-            this.winWidth = $(win).width();
         },
-        bindEvents : function (type) {
+        bindEvents : function () {
+            this.gnbMenu.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
+            this.gnbBx.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
+            this.gnbOpen.on('click', $.proxy(this.showMoMenu, this));
+            this.gnbClose.on('click', $.proxy(this.showMoMenuClose, this));
+            $(win).on('resize', $.proxy(this.resizeFunc, this));
+            this.winWidth = $(win).width();
+            console.log('bindEvents: act');
+        },
+        bindResponsiveEvents : function (type) {
+            this.winWidth = $(win).width();
             if (type) {
+                this.gnbBx.hide();
                 this.gnbMenu.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
                 this.gnbBx.on('mouseover focus mouseleave', $.proxy(this.showMenu, this));
                 this.gnbOpen.off('click');
                 this.gnbClose.off('click');
+                console.log('bindResponsiveEvents: true = pc');
             } else {
                 this.gnbOpen.on('click', $.proxy(this.showMoMenu, this));
                 this.gnbClose.on('click', $.proxy(this.showMoMenuClose, this));
                 this.gnbMenu.off('mouseover focus mouseleave');
                 this.gnbBx.off('mouseover focus mouseleave');
+                console.log('bindResponsiveEvents: false = mo');
+                
             }
-            $(win).on('resize', $.proxy(this.resizeFunc, this));
         },
         resizeFunc : function () {
             if (this.winWidth >= this.opts.breakPoint) {
-                this.opts.viewType = 'pc';
-                this.bindEvents(true);
+                console.log('resizeFunc: pc');
+                this.bindResponsiveEvents(true);
+                if (this.winWidth < this.opts.breakPoint) {
+                    this.opts.viewType = 'mo';
+                    this.bindResponsiveEvents(false);
+                    console.log('resizeFunc: pc to mo');
+                }
             } else {
-                this.opts.viewType = 'mo';
-                this.bindEvents(false);
+                console.log('resizeFunc: mo');
+                this.bindResponsiveEvents(false);
+                if (this.winWidth >= this.opts.breakPoint) {
+                    this.opts.viewType = 'pc';
+                    this.bindResponsiveEvents(true);
+                    console.log('resizeFunc: mo to pc');
+                }
             }
+            // $(win).triggerHandler('resize');
+            console.log('winWidth ' + this.winWidth);
+            console.log('acting');
         },
         setLayout : function () {
-            if (this.winWidth < this.opts.breakPoint) {
-                if (this.opts.viewType != 'mo') {
-                    this.opts.viewType = 'mo';
-                    this.bindEvents(false);
-                    // MO Event
-                }
-                console.log('MO View');
-            } else {
-                if (this.opts.viewType != 'pc') {
+            if (this.winWidth >= this.opts.breakPoint) {
+                this.bindResponsiveEvents(true);
+                if (this.opts.viewType !== 'pc') {
                     this.opts.viewType = 'pc';
-                    this.bindEvents(true);
-                    // PC Event
                 }
-                console.log('PC View');
+                console.log('setLayout: pc');
+            } else {
+                this.bindResponsiveEvents(false);
+                if (this.opts.viewType !== 'mo') {
+                    this.opts.viewType = 'mo';
+                }
+                console.log('setLayout: mo');
             }
         },
         showMenu : function (e) {
@@ -187,12 +210,13 @@
             }
         },
         showMoMenu : function () {
-            this.gnbWrap.animate({
+            this.gnbWrap.stop().animate({
                 'left' : '0'
             });
+            this.gnbBx.show();
         },
         showMoMenuClose : function () {
-            this.gnbWrap.animate({
+            this.gnbWrap.stop().animate({
                 'left' : '-100%'
             });
         }
