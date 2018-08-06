@@ -173,6 +173,9 @@
                     console.log('resizeFunc: pc to mo');
                 }
             } else {
+                if (document.all && document.querySelector && !document.addEventListener) {
+                    this.bindResponsiveEvents(true);
+                }
                 console.log('resizeFunc: mo');
                 this.bindResponsiveEvents(false);
                 if (this.winWidth >= this.opts.breakPoint) {
