@@ -173,7 +173,7 @@
                     console.log('resizeFunc: pc to mo');
                 }
             } else {
-                if (document.all && document.querySelector && !document.addEventListener) {
+                if (!document.addEventListener) {
                     this.bindResponsiveEvents(true);
                 }
                 console.log('resizeFunc: mo');
@@ -196,6 +196,9 @@
                 }
                 console.log('setLayout: pc');
             } else {
+                if (!document.addEventListener) {
+                    this.bindResponsiveEvents(true);
+                }
                 this.bindResponsiveEvents(false);
                 if (this.opts.viewType !== 'mo') {
                     this.opts.viewType = 'mo';
