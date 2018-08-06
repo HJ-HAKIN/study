@@ -173,15 +173,16 @@
                     console.log('resizeFunc: pc to mo');
                 }
             } else {
-                if (!document.addEventListener) {
-                    this.bindResponsiveEvents(true);
-                }
                 console.log('resizeFunc: mo');
                 this.bindResponsiveEvents(false);
                 if (this.winWidth >= this.opts.breakPoint) {
                     this.opts.viewType = 'pc';
                     this.bindResponsiveEvents(true);
                     console.log('resizeFunc: mo to pc');
+                }
+                if (document.all && document.querySelector && !document.addEventListener) {
+                    this.opts.viewType = 'pc';
+                    this.bindResponsiveEvents(true);
                 }
             }
             // $(win).triggerHandler('resize');
@@ -196,14 +197,15 @@
                 }
                 console.log('setLayout: pc');
             } else {
-                if (!document.addEventListener) {
-                    this.bindResponsiveEvents(true);
-                }
                 this.bindResponsiveEvents(false);
                 if (this.opts.viewType !== 'mo') {
                     this.opts.viewType = 'mo';
                 }
                 console.log('setLayout: mo');
+                if (document.all && document.querySelector && !document.addEventListener) {
+                    this.opts.viewType = 'pc';
+                    this.bindResponsiveEvents(true);
+                }
             }
         },
         showMenu : function (e) {
