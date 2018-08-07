@@ -260,14 +260,14 @@
             this.setFilterRange();
         },
         createHeightFunc : function () {
-            if (!UTIL.isSupportTransform) {
+            if (!UTIL.isSupportTransform) { // isSupportTransform이 아니면
                 this.filterObjWrap.css('height', '');
                 this.filterArea.css('top', '');
-            } else {
-                if (UTIL.winSize().w > BREAKPOINTS.MOBILE) {
+            } else { // 맞으면
+                if (UTIL.winSize().w > BREAKPOINTS.MOBILE) { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 클 때 아래 함수 실행
                     this.filterObjWrap.css('height', '');
                     this.filterArea.css('top', '');
-                } else {
+                } else { // 그 외의 경우
                     this.anchorObjHeight = this.anchorObj.outerHeight(true);
                     this.filterObjHeight = this.filterArea.outerHeight(true);
                     this.filterObjPosition = (this.anchorObj.length) ? this.anchorObjHeight : 0;
@@ -307,20 +307,20 @@
                 filterOffsetTop = (lockType) ? lockScroll.top + this.obj.offset().top : this.obj.offset().top,
                 filterEndRange = filterWrapHeight + filterOffsetTop - this.filterObjHeight;
             
-            if (scrollTop >= filterEndRange) {
-                this.filterArea.hide();
-            } else {
-                this.filterArea.show();
+            if (scrollTop >= filterEndRange) { // scrollTop이 filterEndRange보다 크거나 같으면
+                this.filterArea.hide(); // filterArea 숨기기
+            } else { // 아니면
+                this.filterArea.show(); // filterArea 보이기
             }
         },
         setPosition : function () {
-            if (this.opts.viewType === 'pc') {
-                this.filterArea.css('top', '');
-            } else {
-                if (this.filterArea.hasClass(this.opts.filterFixedClass)) {
-                    this.filterArea.css('top', this.filterObjPosition);
-                } else {
-                    this.filterArea.css('top', '');
+            if (this.opts.viewType === 'pc') { // viewType이 pc일 때
+                this.filterArea.css('top', ''); // filterArea의 top 값을 리셋
+            } else { // 아니면
+                if (this.filterArea.hasClass(this.opts.filterFixedClass)) { // filterArea에 filterFixedClass가 있으면
+                    this.filterArea.css('top', this.filterObjPosition); // filterArea의 top 값을 filterObjPosition으로
+                } else { // 아니면
+                    this.filterArea.css('top', ''); // filterArea의 top 값을 리셋
                 }
             }
         },
@@ -415,9 +415,9 @@
             this.filterMoToggler.attr(this.opts.accessData.accessAria, this.layerViewType);
         },
         bindOutsideEvents : function (type) {
-            if (type) {
+            if (type) { // bindOutsideEvents가 true일 때
                 this.filterLayerArea.on('clickoutside touchendoutside', $.proxy(this.onLayerOutsideFunc, this));
-            } else {
+            } else { // false일 때
                 this.filterLayerArea.off('clickoutside touchendoutside');
             }
         },
