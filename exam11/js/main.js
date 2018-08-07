@@ -9,7 +9,7 @@
         BREAKPOINTS = win.smg.support.common.breakpoints,
         PAGE = win.smg.support.page,
         pluginName = 'manualDownloadFilterNew',
-        filterpluginName = 'productManualDownloadNewPlugin',
+        filterpluginName = '가',
         personaPluginName = 'manualPersonaPlugin';
 
     win.smg.support[pluginName] = function (container, args) {
@@ -31,24 +31,24 @@
             this.manualDownloadPluginCall();
         },
         setElements : function () {
-            this.filterModule = this.obj.find(this.opts.filterModule);
-            this.personaAnchor = this.obj.find(this.opts.personaAnchor);
+            this.filterModule = this.obj.find(this.opts.filterModule); // Manual & Download 개별 컴포넌트 영역 
+            this.personaAnchor = this.obj.find(this.opts.personaAnchor); // User Guide 포함 그룹 컴포넌트 영역
         },
         manualDownloadPluginCall : function () {
             var _this = this;
-            for (var i = 0, max = this.filterModule.length; i < max; i++) {
+            for (var i = 0, max = this.filterModule.length; i < max; i++) { // i는 0, 최대값은 filterModule 갯수이며 i가 최대값보다 작으면 1씩 증가한다.
                 (function (index) {
-                    var target = _this.filterModule.eq(index);
+                    var target = _this.filterModule.eq(index); // target은 filterModule의 순서 index 값
                     _this.opts.ManualDownloadPlugins.push(new win.smg.support[filterpluginName](target, {
                         loadAfter : $.proxy(_this.loadAfterFunc, _this)
-                    }));
+                    })); // ManualDownloadPlugins 배열 끝에 () 괄호 안의 내용을 추가
                 })(i);
             }
-            for (var i = 0, max = this.personaAnchor.length; i < max; i++) {
+            for (var i = 0, max = this.personaAnchor.length; i < max; i++) { // i는 0, 최대값은 filterModule 갯수이며 i가 최대값보다 작으면 1씩 증가한다.
                 (function (index) {
                     var target = _this.personaAnchor.eq(index);
                     _this.opts.personaAnchorPlugins.push(new win.smg.support[personaPluginName](target));
-                })(i);
+                })(i); // personaAnchorPlugins 배열 끝에 () 괄호 안의 내용을 추가
             }
         },
         loadAfterFunc : function () {
@@ -61,7 +61,7 @@
         },
         reInit : function () {
             var _this = this;
-            for (var i = 0, max = this.opts.ManualDownloadPlugins.length; i < max; i++) {
+            for (var i = 0, max = this.opts.ManualDownloadPlugins.length; i < max; i++) { // i는 0, 최대값은 ManualDownloadPlugins 갯수이며 i가 최대값보다 작으면 1씩 증가한다.
                 (function (index) {
                     var target = _this.opts.ManualDownloadPlugins[i];
                     target.reInit();
@@ -147,9 +147,9 @@
             this.accessText = this.filterWrap.find(this.opts.accessText);
         },
         initOpts : function () {
-            var globalText = this.filterObj.data('global-text');
+            var globalText = this.filterObj.data('global-text'); // data-global-text
             this.globalText = {
-                Collapse : (globalText && globalText.Collapse) ? $.trim(globalText.Collapse) : '',
+                Collapse : (globalText && globalText.Collapse) ? $.trim(globalText.Collapse) : '', // 현재 개체에서 선행 공백과 후행 공백을 모두 제거
                 Expand : (globalText && globalText.Expand) ? $.trim(globalText.Expand) : '',
                 showMore : (globalText && globalText.showMore) ? $.trim(globalText.showMore) : '',
                 showLess : (globalText && globalText.showLess) ? $.trim(globalText.showLess) : ''
@@ -164,96 +164,96 @@
             this.initListView();
         },
         initFilterArea : function () {
-            var stickyWrapClass = this.filterArea.attr('class'),
-                jsStickyWrapClass = 'js-' + stickyWrapClass;
-            this.filterArea.wrap('<div class="' + jsStickyWrapClass + '"/>');
-            this.filterObjWrap = this.filterArea.parent();
+            var stickyWrapClass = this.filterArea.attr('class'), // stickyWrapClass는 filterArea의 class값
+                jsStickyWrapClass = 'js-' + stickyWrapClass; // stickyWrapClass 앞에 js- 붙인 것을 jsStickyWrapClass로 명명
+            this.filterArea.wrap('<div class="' + jsStickyWrapClass + '"/>'); // filterArea 밖에 div.jsStickyWrapClass 생성
+            this.filterObjWrap = this.filterArea.parent(); // filterArea의 부모 요소를 filterObjWrap로 지정
         },
         changeEvents : function (event) {
-            var events = [],
-                eventNames = event.split(' ');
-            for (var key in eventNames) {
+            var events = [], // events라는 배열 생성
+                eventNames = event.split(' '); // event의 문자열을 부분 문자열의 배열로 나눔
+            for (var key in eventNames) { // 개체의 각 속성이나 배열의 각 요소에 대해 하나 이상의 문을 실행
                 events.push(eventNames[key] + this.opts.customEvent);
             }
-            return events.join(' ');
+            return events.join(' '); // events의 배열의 모든 요소를 연결해 하나의 문자열로 만듦
         },
         bindEvents : function () {
-            $(win).on(this.changeEvents('resize orientationchange'), $.proxy(this.resizeFunc, this));
-            this.filterToggler.on(this.changeEvents('click'), $.proxy(this.filterToggleFunc, this));
-            this.listToggleBtn.on(this.changeEvents('click'), $.proxy(this.listToggleFunc, this));
-            this.listWrap.on(this.changeEvents('ajaxafter'), $.proxy(this.listAjaxAfter, this));
+            $(win).on(this.changeEvents('resize orientationchange'), $.proxy(this.resizeFunc, this)); // resize, orientationchange의 changeEvents가 있으면 resizeFunc를 실행
+            this.filterToggler.on(this.changeEvents('click'), $.proxy(this.filterToggleFunc, this)); // filterToggler를 click하면 filterToggleFunc를 실행
+            this.listToggleBtn.on(this.changeEvents('click'), $.proxy(this.listToggleFunc, this)); // listToggleBtn을 click하면 listToggleFunc를 실행
+            this.listWrap.on(this.changeEvents('ajaxafter'), $.proxy(this.listAjaxAfter, this)); // listWrap에 ajaxafter의 changeEvents가 있으면 listAjaxAfter를 실행
         },
-        bindResponsiveEvents : function (type) {
-            if (type) {
-                $(win).off(this.changeEvents('scroll'));
-                this.filterMoToggler.off(this.changeEvents('click'));
-            } else {
-                $(win).on(this.changeEvents('scroll'), $.proxy(this.scrollFunc, this));
-                this.filterMoToggler.on(this.changeEvents('click'), $.proxy(this.filterMoClickFunc, this));
+        bindResponsiveEvents : function (type) { // 반응형 이벤트
+            if (type) { // bindResponsiveEvents이 true 일 때 = PC
+                $(win).off(this.changeEvents('scroll')); // scroll 이벤트 끄기
+                this.filterMoToggler.off(this.changeEvents('click')); // filterMoToggler click 이벤트 끄기
+            } else { // bindResponsiveEvents이 false 일 때 = MO
+                $(win).on(this.changeEvents('scroll'), $.proxy(this.scrollFunc, this)); // scroll 이벤트 켜기 = scroll 하면 scrollFunc 실행
+                this.filterMoToggler.on(this.changeEvents('click'), $.proxy(this.filterMoClickFunc, this)); // filterMoToggler click 이벤트 켜기 = click 하면 filterMoClickFunc 실행
             }
         },
         resizeFunc : function () {
-            this.winWidth = UTIL.winSize().w;
-            if (this.opts.resizeStart == null) {
-                this.opts.resizeStart = this.winWidth;
-                this.resizeAnimateFunc();
+            this.winWidth = UTIL.winSize().w; // window width
+            if (this.opts.resizeStart == null) { // resizeStart의 값이 없을 때
+                this.opts.resizeStart = this.winWidth; // resizeStart를 winWidth로 지정
+                this.resizeAnimateFunc(); // resizeAnimateFunc 실행
             }
-            win.clearTimeout(this.resizeEndTime);
-            this.resizeEndTime = win.setTimeout($.proxy(this.resizeEndFunc, this), 150);
+            win.clearTimeout(this.resizeEndTime); // setTimeout () 메서드로 설정된 타이머를 지움
+            this.resizeEndTime = win.setTimeout($.proxy(this.resizeEndFunc, this), 150); // 0.15초 후에 resizeEndFunc를 실행
         },
         resizeEndFunc : function () {
             this.opts.resizeStart = null;
             this.setLayout();
-            if (UTIL.winSize().w <= BREAKPOINTS.MOBILE) {
+            if (UTIL.winSize().w <= BREAKPOINTS.MOBILE) { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 작거나 같을 때 아래 함수 실행
                 this.createHeightFunc();
                 this.fixedObjFunc();
                 this.setFilterRange();
             }
-            UTIL.cancelAFrame.call(win, this.resizeRequestFrame);
+            UTIL.cancelAFrame.call(win, this.resizeRequestFrame); // cancelAFrame에서 resizeRequestFrame을 호출
         },
         resizeAnimateFunc : function () {
             this.setLayout();
-            if (UTIL.winSize().w <= BREAKPOINTS.MOBILE) {
+            if (UTIL.winSize().w <= BREAKPOINTS.MOBILE) { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 작거나 같을 때 아래 함수 실행
                 this.createHeightFunc();
                 this.fixedObjFunc();
                 this.setFilterRange();
             }
-            this.resizeRequestFrame = UTIL.requestAFrame.call(win, $.proxy(this.resizeAnimateFunc, this));
+            this.resizeRequestFrame = UTIL.requestAFrame.call(win, $.proxy(this.resizeAnimateFunc, this)); // requestAFrame에서 resizeAnimateFunc을 호출한 것을 resizeRequestFrame으로 명명
         },
         setLayout : function () {
             if (!UTIL.isSupportTransform) {
-                if (this.opts.viewType != 'pc') {
-                    this.opts.viewType = 'pc';
+                if (this.opts.viewType != 'pc') { // viewType이 pc로 지정되어 있지 않으면
+                    this.opts.viewType = 'pc'; // viewType을 pc로 명시
                     this.setPcLayout();
                 }
             } else {
-                if (UTIL.winSize().w > BREAKPOINTS.MOBILE) {
-                    if (this.opts.viewType != 'pc') {
-                        this.opts.viewType = 'pc';
+                if (UTIL.winSize().w > BREAKPOINTS.MOBILE) { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 클 때 아래 함수 실행
+                    if (this.opts.viewType != 'pc') { // viewType이 pc로 지정되어 있지 않으면
+                        this.opts.viewType = 'pc'; // viewType을 pc로 명시
                         this.setPcLayout();
-                        this.bindResponsiveEvents(true);
+                        this.bindResponsiveEvents(true); // 반응형 이벤트 true = PC
                     }
-                } else {
-                    if (this.opts.viewType != 'mo') {
-                        this.opts.viewType = 'mo';
+                } else { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 작거나 같으면 아래 함수 실행
+                    if (this.opts.viewType != 'mo') { // viewType이 mo로 지정되어 있지 않으면
+                        this.opts.viewType = 'mo'; // viewType을 mo로 명시
                         this.setMoLayout();
-                        this.bindResponsiveEvents(false);
+                        this.bindResponsiveEvents(false); // 반응형 이벤트 false = MO
                     }
                 }
             }
         },
-        setPcLayout : function () {
+        setPcLayout : function () { // 기본 pc 세팅
             this.scrollLock.init.call(this, false);
             this.bindOutsideEvents(false);
             this.filterMoToggler.attr(this.opts.accessData.accessAria, false);
-            this.filterObjWrap.css('height', '');
-            this.filterArea.show().css('top', '');
-            this.filterArea.removeClass(this.opts.filterFixedClass);
-            this.filterArea.removeClass(this.opts.filterToggleClass);
+            this.filterObjWrap.css('height', ''); // filterObjWrap의 height 값 리셋
+            this.filterArea.show().css('top', ''); // filterArea 노출하고 top 값 리셋
+            this.filterArea.removeClass(this.opts.filterFixedClass); // filterArea에서 filterFixedClass에 해당하는 class를 제거
+            this.filterArea.removeClass(this.opts.filterToggleClass); // filterArea에서 filterToggleClass에 해당하는 class를 제거
         },
-        setMoLayout : function () {
-            this.filterArea.removeClass(this.opts.filterFixedClass);
-            this.filterArea.removeClass(this.opts.filterToggleClass);
+        setMoLayout : function () { // 기본 mo 세팅
+            this.filterArea.removeClass(this.opts.filterFixedClass); // filterArea에서 filterFixedClass에 해당하는 class를 제거
+            this.filterArea.removeClass(this.opts.filterToggleClass); // filterArea에서 filterToggleClass에 해당하는 class를 제거
         },
         scrollFunc : function () {
             this.fixedObjFunc();
@@ -422,7 +422,7 @@
             }
         },
         onLayerOutsideFunc : function (e) {
-            e.preventDefault();
+            e.preventDefault(); // 이벤트 스크롤 튀는 현상 막기
             win.setTimeout($.proxy(function () {
                 this.layerViewType = false;
                 this.filterArea.removeClass(this.opts.filterToggleClass);
@@ -433,12 +433,12 @@
             }, this), 10);
         },
         filterToggleFunc : function (e) {
-            e.preventDefault();
+            e.preventDefault(); // 이벤트 스크롤 튀는 현상 막기
             this.filterViewFunc(e);
             this.accessbilityFunc(true);
         },
         filterViewFunc : function (e) {
-            var target = $(e.currentTarget);
+            var target = $(e.currentTarget); // 지금 선택된 타겟
             var targetList = target.parent(this.opts.filterWrap),
             targetListWrap = targetList.find(this.opts.filterListWrap);
             if (!targetList.hasClass(this.opts.filterActiveClass)) {
@@ -454,17 +454,17 @@
             }
         },
         filterViewAfterFunc : function () {
-            if (!UTIL.isSupportTransform || (UTIL.isSupportTransform && this.winWidth > BREAKPOINTS.MOBILE)) {
+            if (!UTIL.isSupportTransform || (UTIL.isSupportTransform && this.winWidth > BREAKPOINTS.MOBILE)) { // isSupportTransform이 아니거나 isSupportTransform에 winWidth가 모바일 분기보다 클 때
                 this.outCallback('loadAfter');
             }
         },
         accessbilityFunc : function (type) {
-            if (type) {
+            if (type) { // accessbilityFunc = true
                 var currentAccessType = !this.filterToggler.data(this.opts.accessData.dataActive),
                     globalTxt = (currentAccessType) ? this.globalText.Expand : this.globalText.Collapse;
                 this.filterToggler.data(this.opts.accessData.dataActive, currentAccessType);
                 this.filterToggler.find(this.opts.accessText).text(globalTxt);
-            } else {
+            } else { // accessbilityFunc = false
                 this.listToggleBtn.toggleClass(this.opts.icoUpClass, this.currentAllView);
                 this.listToggleBtn.toggleClass(this.opts.icoDownClass, !this.currentAllView);
                 this.listToggleBtn.text(this.currentAllView ? this.globalText.showLess : this.globalText.showMore);
@@ -472,41 +472,41 @@
         },
         initListView : function () {
             this.currentAllView = false;
-            if (this.listNum <= this.listViewNum) {
-                this.listBtnArea.hide();
-            } else {
-                this.listBtnArea.show();
+            if (this.listNum <= this.listViewNum) { // listNum이 listViewNum보다 작거나 같으면
+                this.listBtnArea.hide(); // listBtnArea 숨기기
+            } else { // 아니면
+                this.listBtnArea.show(); // listBtnArea 보이기
             }
-            for (var i = 0, max = this.listNum; i < max; i++) {
-                var contChildTarget = this.listChild.eq(i);
-                if (i < this.listViewNum) {
-                    contChildTarget.addClass(this.opts.listViewClass);
-                } else {
-                    contChildTarget.removeClass(this.opts.listViewClass);
+            for (var i = 0, max = this.listNum; i < max; i++) { // i는 0, 최대값은 listNum 갯수이며 i가 최대값보다 작으면 1씩 증가한다.
+                var contChildTarget = this.listChild.eq(i); // contChildTarget는 listChild의 인덱스 i 순서
+                if (i < this.listViewNum) { // 만약 i가 listViewNum보다 작으면
+                    contChildTarget.addClass(this.opts.listViewClass); // contChildTarget에 listViewClass 추가
+                } else { // 아니면
+                    contChildTarget.removeClass(this.opts.listViewClass); // contChildTarget에 listViewClass 제거
                 }
             }
-            this.listToggleBtn.toggleClass(this.opts.icoUpClass, this.currentAllView);
-            this.listToggleBtn.toggleClass(this.opts.icoDownClass, !this.currentAllView);
+            this.listToggleBtn.toggleClass(this.opts.icoUpClass, this.currentAllView); // currentAllView라면 listToggleBtn에 icoUpClass를 toggle
+            this.listToggleBtn.toggleClass(this.opts.icoDownClass, !this.currentAllView); // currentAllView가 아니라면 listToggleBtn에 icoDownClass를 toggle
             this.accessbilityFunc(false);
             this.outCallback('loadAfter');
         },
         listToggleFunc : function (e) {
-            e.preventDefault();
-            this.currentAllView = !this.currentAllView;
+            e.preventDefault(); // 이벤트 스크롤 튀는 현상 막기
+            this.currentAllView = !this.currentAllView; // currentAllView는 currentAllView가 아님
             this.setListLayout();
             this.scrollMoveFunc(this.listWrap);
             this.accessbilityFunc(false);
         },
         listAjaxAfter : function () {
-            this.listChild = this.listParent.children();
-            this.listNum = this.listParent.children().length;
+            this.listChild = this.listParent.children(); // listParent의 자식요소
+            this.listNum = this.listParent.children().length; // listParent의 자식요소의 갯수
             this.initListView();
         },
         setListLayout : function () {
-            if (this.currentAllView) {
-                this.listChild.addClass(this.opts.listViewClass);
-            } else {
-                this.listChild.eq(this.listViewNum - 1).addClass(this.opts.listViewClass).nextAll().removeClass(this.opts.listViewClass);
+            if (this.currentAllView) { // currentAllView 일 때
+                this.listChild.addClass(this.opts.listViewClass); // listChild에 listViewClass 추가
+            } else { // 아니면
+                this.listChild.eq(this.listViewNum - 1).addClass(this.opts.listViewClass).nextAll().removeClass(this.opts.listViewClass); // listChild 중 listViewNum - 1인 순서의 요소에 listViewClass 추가하고 선택한 요소 다음의 모든 형제 요소에 listViewClass를 제거
             }
             this.outCallback('loadAfter');
         },
@@ -555,7 +555,7 @@
     };
     win.smg.support[personaPluginName].prototype = {
         init : function () {
-            if (UTIL.winSize().w > BREAKPOINTS.MOBILE) {
+            if (UTIL.winSize().w > BREAKPOINTS.MOBILE) { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 클 때 아래 함수 실행
                 this.setElements();
                 this.initLayout();
                 this.resizeFunc();
@@ -567,103 +567,103 @@
             this.objInput = this.obj.find(this.opts.objInput);
         },
         initLayout : function () {
-            this.objResetBtn.toggleClass(this.opts.disabledClass, !this.objInput.prop('checked'));
-            this.objResetBtn.prop('disabled', !this.objInput.prop('checked'));
+            this.objResetBtn.toggleClass(this.opts.disabledClass, !this.objInput.prop('checked')); // objInput이 checked 되지 않으면 objResetBtn에 disabledClass를 toggle
+            this.objResetBtn.prop('disabled', !this.objInput.prop('checked')); // objInput이 checked 되지 않으면 objResetBtn는 disabled 상태
         },
         changeEvents : function (event) {
-            var events = [],
-                eventNames = event.split(' ');
-            for (var key in eventNames) {
+            var events = [], // events라는 배열 생성
+                eventNames = event.split(' '); // event의 문자열을 부분 문자열의 배열로 나눔
+            for (var key in eventNames) { // 개체의 각 속성이나 배열의 각 요소에 대해 하나 이상의 문을 실행
                 events.push(eventNames[key] + this.opts.customEvent);
             }
-            return events.join(' ');
+            return events.join(' '); // events의 배열의 모든 요소를 연결해 하나의 문자열로 만듦
         },
         bindEvents : function () {
-            $(win).on(this.changeEvents('resize orientationchange'), $.proxy(this.resizeFunc, this));
+            $(win).on(this.changeEvents('resize orientationchange'), $.proxy(this.resizeFunc, this)); // resize, orientationchange의 changeEvents가 있으면 resizeFunc를 실행
         },
         resizeBindEvents : function (type) {
-            if (type) {
-                this.obj.on(this.changeEvents('focusin mouseenter mouseleave'), $.proxy(this.onHoverFunc, this));
-                this.objInput.on(this.changeEvents('change'), $.proxy(this.onChangeFunc, this));
-                this.objResetBtn.on(this.changeEvents('click'), $.proxy(this.onResetFunc, this));
-            } else {
-                this.obj.off(this.changeEvents('focusin mouseenter mouseleave'));
-                this.objInput.off(this.changeEvents('change'));
-                this.objResetBtn.off(this.changeEvents('click'));
+            if (type) { // resizeBindEvents = true
+                this.obj.on(this.changeEvents('focusin mouseenter mouseleave'), $.proxy(this.onHoverFunc, this)); // obj에 focusin, mouseenter, mouseleave 이벤트 onHoverFunc 지정
+                this.objInput.on(this.changeEvents('change'), $.proxy(this.onChangeFunc, this)); // objInput의 상태 변화 시 onChangeFunc 실행
+                this.objResetBtn.on(this.changeEvents('click'), $.proxy(this.onResetFunc, this)); // objResetBtn를 click하면 onResetFunc 실행
+            } else { // resizeBindEvents = false
+                this.obj.off(this.changeEvents('focusin mouseenter mouseleave')); // obj에 focusin, mouseenter, mouseleave 이벤트를 끄기
+                this.objInput.off(this.changeEvents('change')); // objInput의 상태 변화 이벤트 끄기
+                this.objResetBtn.off(this.changeEvents('click')); // objResetBtn를 click 이벤트 끄기
             }
         },
         resizeFunc : function () {
-            this.winWidth = UTIL.winSize().w;
-            if (this.opts.resizeStart == null) {
-                this.opts.resizeStart = this.winWidth;
-                this.resizeAnimateFunc();
+            this.winWidth = UTIL.winSize().w; // window width
+            if (this.opts.resizeStart == null) { // resizeStart의 값이 없을 때
+                this.opts.resizeStart = this.winWidth; // resizeStart를 winWidth로 지정
+                this.resizeAnimateFunc(); // resizeAnimateFunc 실행
             }
-            win.clearTimeout(this.resizeEndTime);
-            this.resizeEndTime = win.setTimeout($.proxy(this.resizeEndFunc, this), 150);
+            win.clearTimeout(this.resizeEndTime); // setTimeout () 메서드로 설정된 타이머를 지움
+            this.resizeEndTime = win.setTimeout($.proxy(this.resizeEndFunc, this), 150); // 0.15초 후에 resizeEndFunc를 실행
         },
         resizeEndFunc : function () {
-            this.opts.resizeStart = null;
+            this.opts.resizeStart = null; // resizeStart를 비
             this.resizeControl();
-            UTIL.cancelAFrame.call(win, this.resizeRequestFrame);
+            UTIL.cancelAFrame.call(win, this.resizeRequestFrame); // cancelAFrame에 resizeRequestFrame를 저장
         },
         resizeAnimateFunc : function () {
             this.resizeControl();
-            this.resizeRequestFrame = UTIL.requestAFrame.call(win, $.proxy(this.resizeAnimateFunc, this));
+            this.resizeRequestFrame = UTIL.requestAFrame.call(win, $.proxy(this.resizeAnimateFunc, this)); // requestAFrame에 호출한 resizeAnimateFunc를 resizeRequestFrame에 저장
         },
         resizeControl : function () {
-            if (!UTIL.isSupportTransform || UTIL.isSupportTransform && (this.winWidth > BREAKPOINTS.MOBILE)) {
-                if (this.opts.viewType !== 'pc') {
-                    this.opts.viewType = 'pc';
-                    this.resizeBindEvents(true);
+            if (!UTIL.isSupportTransform || UTIL.isSupportTransform && (this.winWidth > BREAKPOINTS.MOBILE)) { // isSupportTransform이 아니거나 isSupportTransform에 winWidth가 모바일 분기보다 클 때
+                if (this.opts.viewType !== 'pc') { // viewType이 pc가 아닐 때
+                    this.opts.viewType = 'pc'; // viewType을 pc로 지정
+                    this.resizeBindEvents(true); // resizeBindEvents = true 실행
                 }
-            } else {
-                if (this.opts.viewType !== 'mo') {
-                    this.opts.viewType = 'mo';
-                    this.resizeBindEvents(false);
+            } else { // 그렇지 않으면
+                if (this.opts.viewType !== 'mo') { // viewType이 mo가 아닐 때
+                    this.opts.viewType = 'mo'; // viewType을 mo로 지정
+                    this.resizeBindEvents(false); // resizeBindEvents = false 실행
                 }
             }
         },
         onChangeFunc : function () {
-            if (this.objInput.filter(':checked').length) {
-                this.objResetBtn.removeClass(this.opts.disabledClass);
-                this.objResetBtn.prop('disabled', false);
-            } else {
-                this.objResetBtn.addClass(this.opts.disabledClass);
-                this.objResetBtn.prop('disabled', true);
+            if (this.objInput.filter(':checked').length) { // objInput 중 checked 상태인 요소의 갯수를 반환
+                this.objResetBtn.removeClass(this.opts.disabledClass); // objResetBtn에 disabledClass 제거
+                this.objResetBtn.prop('disabled', false); // objResetBtn의 disabled 상태 해제
+            } else { // 아닐 경우
+                this.objResetBtn.addClass(this.opts.disabledClass); // objResetBtn에 disabledClass 추가
+                this.objResetBtn.prop('disabled', true); // objResetBtn의 disabled 상태 추가
             }
         },
         onResetFunc : function () {
-            this.objInput.prop('checked', false);
-            this.objInput.closest(this.opts.inputWrap).removeClass(this.opts.checkedClass);
-            this.objResetBtn.addClass(this.opts.disabledClass);
-            this.objResetBtn.prop('disabled', true);
-            this.obj.triggerHandler('mouseleave');
+            this.objInput.prop('checked', false); // objInput의 checked 상태를 해제
+            this.objInput.closest(this.opts.inputWrap).removeClass(this.opts.checkedClass); // objInput에서 가장 가까운 inputWrap에서 checkedClass를 제거
+            this.objResetBtn.addClass(this.opts.disabledClass); // objResetBtn에 disabledClass 추가
+            this.objResetBtn.prop('disabled', true); // objResetBtn을 disabled 상태로 변경
+            this.obj.triggerHandler('mouseleave'); // 마우스 오버를 잃었을 때 지정된 이벤트 trigger
         },
         onHoverFunc : function (e) {
-            var target = $(e.currentTarget);
-            if (target.hasClass(this.opts.windowClass)) return;
-            if (e.type === 'mouseenter' || e.type === 'focusin') {
-                if (!target.hasClass(this.opts.activeClass)) {
-                    target.addClass(this.opts.activeClass);
-                    this.bindOutsideEvents(target, true);
+            var target = $(e.currentTarget); // 지금 선택된 타겟
+            if (target.hasClass(this.opts.windowClass)) return; // target에 windowClass가 있으면 발생
+            if (e.type === 'mouseenter' || e.type === 'focusin') { // obj에 마우스를 올리거나, 포커스가 갔을 때
+                if (!target.hasClass(this.opts.activeClass)) { // target이 activeClass를 가지고 있지 않으면
+                    target.addClass(this.opts.activeClass); // target에 activeClass를 넣
+                    this.bindOutsideEvents(target, true); // target 기준으로 bindOutsideEvents를 true 상태로 실행
                 }
-            } else if (e.type === 'mouseleave' || e.type === 'focusout') {
-                if (this.objInput.filter(':checked').length) return;
-                this.bindOutsideEvents(target, false);
+            } else if (e.type === 'mouseleave' || e.type === 'focusout') { // obj에서 마우스를 내리거나, 포커스가 나갔을 때
+                if (this.objInput.filter(':checked').length) return; // objInput이 checked된 갯수를 return
+                this.bindOutsideEvents(target, false); // target 기준으로 bindOutsideEvents를 false 상태로 실행
             }
             this.outCallback('loadAfter');
         },
         bindOutsideEvents : function (target, type) {
-            if (type) {
-                this.obj.removeClass(this.opts.activeClass);
-                target.on('focusoutside', $.proxy(function () {
-                    target.triggerHandler('mouseleave');
+            if (type) { // bindOutsideEvents = true
+                this.obj.removeClass(this.opts.activeClass); // obj에서 activeClass를 제거
+                target.on('focusoutside', $.proxy(function () { // focus 잃을 때 이벤트 발생
+                    target.triggerHandler('mouseleave'); // 마우스 오버를 잃었을 때 지정된 이벤트 trigger
                 }, this));
-                target.addClass(this.opts.activeClass);
-            } else {
+                target.addClass(this.opts.activeClass); // target에 activeClass를 추가
+            } else { // bindOutsideEvents = false
                 if (target) {
-                    target.removeClass(this.opts.activeClass);
-                    target.off('focusoutside');
+                    target.removeClass(this.opts.activeClass); // target에서 activeClass를 제거
+                    target.off('focusoutside'); // focus 잃을 때 이벤트 끄기
                 }
             }
         },
@@ -689,19 +689,19 @@
         },
         callComponent : function () {
             this.callPlugins = [];
-            for (var i = 0, max = this.obj.length; i < max; i++) {
-                this.callPlugins.push(new win.smg.support[pluginName](this.obj.eq(i), {
+            for (var i = 0, max = this.obj.length; i < max; i++) { // i는 0, 최대값은 obj 갯수이며 i가 최대값보다 작으면 1씩 증가한다.
+                this.callPlugins.push(new win.smg.support[pluginName](this.obj.eq(i), { // 새로운 요소를 배열의 끝에 추가
                     loadAfter : $.proxy(this.globalObjsCall, this)
                 }));
             }
         },
         globalObjs : function () {
-            for (var i = 0, max = this.callPlugins.length; i < max; i++) {
-                CST_EVENT.PAGEIS.PAGEOBJS.push(this.callPlugins[i]);
+            for (var i = 0, max = this.callPlugins.length; i < max; i++) { // i는 0, 최대값은 callPlugins 갯수이며 i가 최대값보다 작으면 1씩 증가한다.
+                CST_EVENT.PAGEIS.PAGEOBJS.push(this.callPlugins[i]); // 새로운 요소를 배열의 끝에 추가
             }
         },
         globalObjsCall : function () {
-            CST_EVENT.PAGEIS.EVENT_MANAGER.trigger(CST_EVENT.PAGEIS.REPOSITION);
+            CST_EVENT.PAGEIS.EVENT_MANAGER.trigger(CST_EVENT.PAGEIS.REPOSITION); // 선택된 요소에 대해 지정된 이벤트와 이벤트의 기본 동작을 trigger
         }
     }, UTIL.emitter);
     $(function () {
