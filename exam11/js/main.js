@@ -439,16 +439,16 @@
         },
         filterViewFunc : function (e) {
             var target = $(e.currentTarget); // 지금 선택된 타겟
-            var targetList = target.parent(this.opts.filterWrap),
-            targetListWrap = targetList.find(this.opts.filterListWrap);
-            if (!targetList.hasClass(this.opts.filterActiveClass)) {
-                targetList.toggleClass(this.opts.filterActiveClass);
-                targetListWrap.slideToggle(this.opts.filterToggleSpeed, $.proxy(function () {
+            var targetList = target.parent(this.opts.filterWrap), // 지금 선택된 요소의 부모 요소 중 filterWrap
+            targetListWrap = targetList.find(this.opts.filterListWrap); // targetList에서 filterListWrap을 찾아 targetListWrap에 저장
+            if (!targetList.hasClass(this.opts.filterActiveClass)) { // targetList가 filterActiveClass를 가지고 있지 않다면
+                targetList.toggleClass(this.opts.filterActiveClass); // targetList에 filterActiveClass를 toggle
+                targetListWrap.slideToggle(this.opts.filterToggleSpeed, $.proxy(function () { // targetListWrap에 slideToggle
                     this.filterViewAfterFunc();
                 }, this));
-            } else {
-                targetListWrap.slideUp(this.opts.filterToggleSpeed, $.proxy(function () {
-                    targetList.removeClass(this.opts.filterActiveClass);
+            } else { // targetList가 filterActiveClass를 가지고 있으면
+                targetListWrap.slideUp(this.opts.filterToggleSpeed, $.proxy(function () { // targetListWrap에 slideUp
+                    targetList.removeClass(this.opts.filterActiveClass); // targetList에 filterActiveClass를 제거
                     this.filterViewAfterFunc();
                 }, this));
             }
