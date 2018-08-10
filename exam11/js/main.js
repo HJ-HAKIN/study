@@ -390,7 +390,7 @@
         filterMoClickFunc : function (e) {
             e.preventDefault();
             var filterOffsetTop = Math.ceil(this.filterObjWrap.offset().top - this.anchorObjHeight, 10);
-            if (!this.opts.filterViewType) {
+            if (!this.opts.filterViewType) { // filterViewType이 false
                 if (!this.filterArea.hasClass(this.opts.filterFixedClass)) {
                     $('html, body').stop().animate({
                         scrollTop : filterOffsetTop
@@ -400,13 +400,13 @@
                             this.bindOutsideEvents(true);
                         }, this), 10);
                     }, this))
-                } else {
+                } else { // filterViewType이 true면
                     this.filterMoToggleFunc();
                 }
             }
         },
         filterMoToggleFunc : function () {
-            this.filterArea.addClass(this.opts.filterToggleClass);
+            this.filterArea.addClass(this.opts.filterToggleClass); // filterArea에 filterToggleClass 추가
             win.setTimeout($.proxy(function () {
                 this.scrollLock.init.call(this, true);
                 this.bindOutsideEvents(true);
@@ -416,9 +416,9 @@
         },
         bindOutsideEvents : function (type) {
             if (type) { // bindOutsideEvents가 true일 때
-                this.filterLayerArea.on('clickoutside touchendoutside', $.proxy(this.onLayerOutsideFunc, this));
+                this.filterLayerArea.on('clickoutside touchendoutside', $.proxy(this.onLayerOutsideFunc, this)); // filterLayerArea에 clickoutside touchendoutside 이벤트 발생 시 onLayerOutsideFunc 실행
             } else { // false일 때
-                this.filterLayerArea.off('clickoutside touchendoutside');
+                this.filterLayerArea.off('clickoutside touchendoutside'); // filterLayerArea에 clickoutside touchendoutside 이벤트 끄기
             }
         },
         onLayerOutsideFunc : function (e) {
