@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>manual-download-filter-new</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+<!--/* component css */-->
+<link rel="stylesheet" type="text/css" href="clientlibs/css/template.css">
+<link rel="stylesheet" type="text/css" href="clientlibs/css/template-support.css">
+<link rel="stylesheet" type="text/css" href="clientlibs/css/main.css">
+<!--[if lt IE 9]>
+    <script src="/etc/designs/smg/global/ie9/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="wrap">
+    <!--/* header */-->
+    
+    <!--/* content */-->
+    <div id="content" role="main">
+
+        <!--/* Component */-->
+        <section class="manual-download-filter-new" id="manual" data-global-text='{
+            "Collapse" : "Collapse",
+            "Expand" : "Expand",
+            "showMore" : "Show More",
+            "showLess" : "Show Less"
+        }'>
+            <!--/* persona : only PC */-->
+            <div class="manual-download-filter-new__persona">
+                <ul class="manual-download-filter-new__persona-list">
+                    <li>
+                        <div class="manual-download-filter-new__persona-box">
+                            <a href="#" class="manual-download-filter-new__persona-toggler">
+                                <div class="manual-download-filter-new__persona-ico"><img src="imgs/ico-manual-persona01.png" alt=""></div>
+                                <span class="s-title">User Guide</span>
+                            </a>
+                            <div class="manual-download-filter-new__persona-detail">
+                                <div class="manual-download-filter-new__persona-text">
+                                    <strong class="s-title">User Guide</strong>
+                                    <div class="manual-download-filter-new__persona-btn-list">
+                                        <ul>
+                                        <li>
+                                            <div class="manual-download-filter-new__persona-btn support-checkbox js-chkbox-wrap">
+                                                <input type="checkbox" id="persona1-1" name="persona1" class="support-checkbox__input">
+                                                <label for="persona1-1" class="support-checkbox__label">User Manual</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="manual-download-filter-new__persona-btn support-checkbox js-chkbox-wrap">
+                                                <input type="checkbox" id="persona1-2" name="persona1" class="support-checkbox__input">
+                                                <label for="persona1-2" class="support-checkbox__label">Quick Guide</label>
+                                            </div>
+                                        </li>
+                                        </ul>
+                                        <div class="manual-download-filter-new__persona-noresult" style="display: none">
+                                            <p class="manual-download-filter-new__persona-noresult-text">There are no user guides<br>that match this product.</p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <button type="button" class="s-btn-reset is-disabled" disabled="disabled"><span>Clear All</span></button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="manual-download-filter-new__persona-box">
+                            <a href="#" class="manual-download-filter-new__persona-toggler">
+                                <div class="manual-download-filter-new__persona-ico"><img src="imgs/ico-manual-persona02.png" alt=""></div>
+                                <span class="s-title">Recently updated softwares</span>
+                            </a>
+                            <div class="manual-download-filter-new__persona-detail">
+                                <div class="manual-download-filter-new__persona-text">
+                                    <strong class="s-title">Recently updated softwares</strong>
+                                    <div class="manual-download-filter-new__persona-btn-list">
+                                        <ul>
+                                        <li>
+                                            <div class="manual-download-filter-new__persona-btn support-checkbox js-chkbox-wrap">
+                                                <input type="checkbox" id="persona2-1" name="persona2" class="support-checkbox__input">
+                                                <label for="persona2-1" class="support-checkbox__label">Software</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="manual-download-filter-new__persona-btn support-checkbox js-chkbox-wrap">
+                                                <input type="checkbox" id="persona2-2" name="persona2" class="support-checkbox__input">
+                                                <label for="persona2-2" class="support-checkbox__label">Firmware</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="manual-download-filter-new__persona-btn support-checkbox js-chkbox-wrap">
+                                                <input type="checkbox" id="persona2-3" name="persona2" class="support-checkbox__input">
+                                                <label for="persona2-3" class="support-checkbox__label">Driver</label>
+                                            </div>
+                                        </li>
+                                        </ul>
+                                        <div class="manual-download-filter-new__persona-noresult" style="display: none">
+                                            <p class="manual-download-filter-new__persona-noresult-text">There are no user guides<br>that match this product.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="s-btn-reset"><span>Clear All</span></button>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="display: none">
+                        <!--/* [D] In Case of Samsung Update or Printer Software : add .s-detail-window class */-->
+                        <div class="manual-download-filter-new__persona-box s-detail-window">
+                            <div class="manual-download-filter-new__persona-ico"><img src="imgs/ico-manual-persona03.png" alt=""></div>
+                            <div class="manual-download-filter-new__persona-detail">
+                                <div class="manual-download-filter-new__persona-text">
+                                    <strong class="s-title">Samsung Update</strong>
+                                    <div class="manual-download-filter-new__persona-btn-list">
+                                        <ul>
+                                        <li>
+                                            <div class="manual-download-filter-new__persona-btn">
+                                                <a href="#" target="_blank" title="Open in a new window">Windows 7 or Higher<span class="svg-ico-newwindow"></span></a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="manual-download-filter-new__persona-btn">
+                                                <a href="#" target="_blank" title="Open in a new window">Windows 10 or Higher<span class="svg-ico-newwindow"></span></a>
+                                            </div>
+                                        </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/* //[D] In Case of Window */-->
+                    </li>
+                    <li>
+                        <!--/* [D] In Case of Samsung Update or Printer Software : add .s-detail-window class */-->
+                        <div class="manual-download-filter-new__persona-box s-detail-window">
+                            <div class="manual-download-filter-new__persona-ico"><img src="imgs/ico-manual-persona04.png" alt=""></div>
+                            <div class="manual-download-filter-new__persona-detail">
+                                <div class="manual-download-filter-new__persona-text">
+                                    <strong class="s-title">Printer Software</strong>
+                                    <div class="manual-download-filter-new__persona-btn-list">
+                                        <ul>
+                                        <li>
+                                            <div class="manual-download-filter-new__persona-btn">
+                                                <a href="#">Wireless Setup<span class="svg-ico-search"></span></a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="manual-download-filter-new__persona-btn">
+                                                <a href="#">Easy Printer Manager<span class="svg-ico-search"></span></a>
+                                            </div>
+                                        </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/* //[D] In Case of Window */-->
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="manual-download-filter-new__header">
+                <h2 class="manual-download-filter-new__title">Manual &amp; Download
+                    <em class="manual-download-filter-new__sku">LH55UIDPLGC (UE55D) LH55UIDPLGC (UE55D)</em>
+                </h2>
+                <div class="manual-download-filter-new__search">
+                    <div class="support-input__wrap s-search s-search-clear js-inptext-wrap">
+                        <label for="inp2" class="support-input__label" title="Search Manual &amp; Download">Search Manual &amp; Download</label>
+                        <input type="text" id="inp2" class="support-input__input">
+                        <button type="button" class="support-input__search"><span class="s-svg s-ico-search">Search</span></button>
+                        <button type="button" class="support-input__clear"><span class="s-svg s-ico-clear">Keyword Clear</span></button>
+                    </div>
+
+                    <div class="support-select select-type2 js-select-wrap" data-global-text='{ 
+                        "Expand" : "Click to Expand",
+                        "Collapse" : "Click to Collapse"}'>
+                        <a href="#" class="support-select__placeholder"><em>Sort: </em>
+                            <span class="js-align-placeholder"><span>Newest</span></span>
+                            <span class="blind">Click to Expand</span></a>
+                        <div class="support-select__options" role="listbox" aria-hidden="true" style="display: none;">
+                            <ul role="presentation">
+                            <li role="presentation"><a href="#" role="option">Newest</a></li>
+                            <li role="presentation"><a href="#" role="option">Most Views</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="manual-download-filter-new__search-result" style="display:block">
+                <!--/* Search results area */-->
+                <div class="manual-download-filter-new__search-summary">
+                    <div class="manual-download-filter-new__search-summary-inn">
+                        <p><strong class="s-result-number">12</strong> results for <strong class="s-result-keyword">"User"</strong></p>
+                    </div>
+                </div>
+                <!--/* Message area for 0 (zero) search results */-->
+                <div class="manual-download-filter-new__search-noresult" style="display:block">
+                    <p>There is no search result.</p>
+                </div>
+            </div>
+            <!--/* [D] no search result for Manual : .has-noresult
+                no filter content for Manual : .has-nofilter
+             */-->
+            <div class="manual-download-filter-new__module">
+                <h3 class="manual-download-filter-new__module-title"><span class="s-icon s-icon-manual"></span>Manuals</h3>
+                <div class="manual-download-filter-new__module-aside">
+                    <div class="manual-download-filter-new__filters">
+                        <span class="cm-support-layer__dimmed"></span>
+                        <div class="manual-download-filter-new__tab">
+                            <div class="manual-download-filter-new__tab-list">
+                                <button type="button" class="manual-download-filter-new__tab-btn support-filter-btn" aria-expanded="false">Manuals Filter</button>
+                            </div>
+                        </div>
+                        <div class="manual-download-filter-new__list-wrap">
+                            <div class="manual-download-filter-new__list-group">
+                                <div class="manual-download-filter-new__list filter-active">
+                                    <a href="#" class="manual-download-filter-new__list-title">Language 
+                                        <span class="manual-download-filter-new__list-expand">
+                                            <span class="blind">Collapse</span>
+                                        </span>
+                                    </a>
+                                    <div class="manual-download-filter-new__list-items">
+                                        <ul>
+                                        <li>
+                                            <!--/* disabled checkbox */-->
+                                            <div class="support-checkbox s-depth2 js-chkbox-wrap is-disabled">
+                                                <input type="checkbox" id="chk1" name="chk" class="support-checkbox__input" disabled="disabled">
+                                                <label for="chk1" class="support-checkbox__label"><span class="s-box"></span>KOREAN</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="support-checkbox s-depth2 js-chkbox-wrap">
+                                                <input type="checkbox" id="chk2" name="chk" class="support-checkbox__input">
+                                                <label for="chk2" class="support-checkbox__label"><span class="s-box"></span>ENGLISH</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="support-checkbox s-depth2 js-chkbox-wrap">
+                                                <input type="checkbox" id="chk3" name="chk" class="support-checkbox__input">
+                                                <label for="chk3" class="support-checkbox__label"><span class="s-box"></span>MULTILANGUAGE</label>
+                                            </div>
+                                        </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="manual-download-filter-new__content">
+                    <div class="manual-download-filter-new__content-list" data-view-list="3">
+                        <ul>
+                        <li>
+                            <div class="manual-download-filter-new__content-info">
+                                <!--/* [D] Wrap words matching search result with 'mark' tag */-->
+                                <strong class="manual-download-filter-new__content-title"><mark>User</mark> Manual</strong>
+                                <span class="manual-download-filter-new__content-desc"><span class="s-version">ver 1.0</span> (<span class="s-language">KOREAN</span>)</span>
+                                <span class="manual-download-filter-new__content-desc s-type-02">: Windows 10</span>
+                                <time datetime="2017-06-09">2017.06.09</time>
+                            </div>
+                            <div class="manual-download-filter-new__content-download">
+                                <a href="#" class="s-btn-download">Downloads <span class="s-filesize-counter">[0.1 MB]</span></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="manual-download-filter-new__content-info">
+                                <strong class="manual-download-filter-new__content-title"><mark>User</mark> Manual</strong>
+                                <span class="manual-download-filter-new__content-desc"><span class="s-version">ver 1.0</span> (<span class="s-language">KOREAN</span>)</span>
+                                <span class="manual-download-filter-new__content-desc s-type-02">: Win XP/2003/2008/2012/Vista/Win 7/Win 8/Win 8.1/Win 10(32,64bit)</span>
+                                <time datetime="2017-06-09">2017.06.09</time>
+                            </div>
+                            <div class="manual-download-filter-new__content-download">
+                                <a href="#" class="s-btn-download">Downloads <span class="s-filesize-counter">[999.99 MB]</span></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="manual-download-filter-new__content-info">
+                                <strong class="manual-download-filter-new__content-title"><mark>User</mark> Manual</strong>
+                                <span class="manual-download-filter-new__content-desc"><span class="s-version">ver 1.0</span> (<span class="s-language">KOREAN</span>)</span>
+                                <time datetime="2017-06-09">2017.06.09</time>
+                            </div>
+                            <div class="manual-download-filter-new__content-download">
+                                <a href="#" class="s-btn-download">Downloads <span class="s-filesize-counter">[0.1 MB]</span></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="manual-download-filter-new__content-info">
+                                <strong class="manual-download-filter-new__content-title"><mark>User</mark> Manual</strong>
+                                <span class="manual-download-filter-new__content-desc"><span class="s-version">ver 1.0</span> (<span class="s-language">KOREAN</span>)</span>
+                                <span class="manual-download-filter-new__content-desc s-type-02">: Win XP/2003/2008/2012/Vista/Win 7/Win 8/Win 8.1/Win 10(32,64bit)</span>
+                                <time datetime="2017-06-09">2017.06.09</time>
+                            </div>
+                            <div class="manual-download-filter-new__content-download">
+                                <a href="#" class="s-btn-download">Downloads <span class="s-filesize-counter">[600.99 MB]</span></a>
+                            </div>
+                        </li>               
+                        </ul>
+                        <div class="manual-download-filter-new__content-cta">
+                            <a href="#" class="s-btn-text s-ico-down">Show More</a>
+                        </div>
+                    </div>
+                    <!--/* No results message area for Manual (by filter) */-->
+                    <div class="manual-download-filter-new__content-nofilter">
+                        <p>There are no manuals for the selected language.<br>Please select another language filter.</p>
+                    </div>
+                    <!--/* No results message area for Manual */-->
+                    <div class="manual-download-filter-new__content-noresult">
+                        <p>No results for <strong>Manuals "<span class="s-result-keyword">User</span>"</strong></p>
+                    </div>
+                </div>
+            </div>
+            <!--/* [D] no search result for Download : .has-noresult
+                no filter content for Download : .has-nofilter
+             */-->
+            <div class="manual-download-filter-new__module">
+                <h3 class="manual-download-filter-new__module-title"><span class="s-icon s-icon-download"></span>Downloads</h3>
+                <div class="manual-download-filter-new__module-aside">
+                    <div class="manual-download-filter-new__filters">
+                        <span class="cm-support-layer__dimmed"></span>
+                        <div class="manual-download-filter-new__tab">
+                            <div class="manual-download-filter-new__tab-list">
+                                <button type="button" class="manual-download-filter-new__tab-btn support-filter-btn" aria-expanded="false">Downloads Filter</button>
+                            </div>
+                        </div>
+                        <div class="manual-download-filter-new__list-wrap">
+                            <div class="manual-download-filter-new__list-group">
+                                <div class="manual-download-filter-new__list filter-active">
+                                    <a href="#" class="manual-download-filter-new__list-title">Language 
+                                        <span class="manual-download-filter-new__list-expand">
+                                            <span class="blind">Collapse</span>
+                                        </span>
+                                    </a>
+                                    <div class="manual-download-filter-new__list-items">
+                                        <ul>
+                                        <li>
+                                            <div class="support-checkbox s-depth2 js-chkbox-wrap">
+                                                <input type="checkbox" id="chk4" name="chk" class="support-checkbox__input">
+                                                <label for="chk4" class="support-checkbox__label"><span class="s-box"></span>KOREAN</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="support-checkbox s-depth2 js-chkbox-wrap">
+                                                <input type="checkbox" id="chk5" name="chk" class="support-checkbox__input">
+                                                <label for="chk5" class="support-checkbox__label"><span class="s-box"></span>ENGLISH</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="support-checkbox s-depth2 js-chkbox-wrap">
+                                                <input type="checkbox" id="chk6" name="chk" class="support-checkbox__input">
+                                                <label for="chk6" class="support-checkbox__label"><span class="s-box"></span>CHINESE(Simplified)</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="support-checkbox s-depth2 js-chkbox-wrap">
+                                                <input type="checkbox" id="chk7" name="chk" class="support-checkbox__input">
+                                                <label for="chk7" class="support-checkbox__label"><span class="s-box"></span>CHINESE(Traditional)</label>
+                                            </div>
+                                        </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="manual-download-filter-new__list filter-active">
+                                    <a href="#" class="manual-download-filter-new__list-title">OS
+                                        <span class="manual-download-filter-new__list-expand">
+                                            <span class="blind">Collapse</span>
+                                        </span>
+                                    </a>
+                                    <div class="manual-download-filter-new__list-items">
+                                        <ul>
+                                        <li>
+                                            <div class="support-checkbox s-depth2 js-chkbox-wrap">
+                                                <input type="checkbox" id="chk8" name="chk" class="support-checkbox__input">
+                                                <label for="chk8" class="support-checkbox__label"><span class="s-box"></span>WINDOWS</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="support-checkbox s-depth2 js-chkbox-wrap">
+                                                <input type="checkbox" id="chk9" name="chk" class="support-checkbox__input">
+                                                <label for="chk9" class="support-checkbox__label"><span class="s-box"></span>MAC</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="support-checkbox s-depth2 js-chkbox-wrap">
+                                                <input type="checkbox" id="chk10" name="chk" class="support-checkbox__input">
+                                                <label for="chk10" class="support-checkbox__label"><span class="s-box"></span>OTHERS</label>
+                                            </div>
+                                        </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="manual-download-filter-new__content">
+                    <div class="manual-download-filter-new__content-list" data-view-list="5">
+                        <ul>
+                        <li>
+                            <div class="manual-download-filter-new__content-info">
+                                <strong class="manual-download-filter-new__content-title">Easy Color Manager</strong>
+                                <span class="manual-download-filter-new__content-desc"><span class="s-version">ver 1.0</span> (<span class="s-language">KOREAN</span>)</span>
+                                <span class="manual-download-filter-new__content-desc s-type-02">: Windows 10</span>
+                                <time datetime="2017-06-09">2017.06.09</time>
+                            </div>
+                            <div class="manual-download-filter-new__content-download">
+                                <a href="#" class="s-btn-download">Downloads <span class="s-filesize-counter">[0.1 MB]</span></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="manual-download-filter-new__content-info">
+                                <strong class="manual-download-filter-new__content-title">Easy Color Manager</strong>
+                                <span class="manual-download-filter-new__content-desc"><span class="s-version">ver 1.0</span> (<span class="s-language">KOREAN</span>)</span>
+                                <span class="manual-download-filter-new__content-desc s-type-02">: Win XP/2003/2008/2012/Vista/Win 7/Win 8/Win 8.1/Win 10(32,64bit)</span>
+                                <time datetime="2017-06-09">2017.06.09</time>
+                            </div>
+                            <div class="manual-download-filter-new__content-download">
+                                <a href="#" class="s-btn-download">Downloads <span class="s-filesize-counter">[999.99 MB]</span></a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="manual-download-filter-new__content-info">
+                                <strong class="manual-download-filter-new__content-title">Easy Color Manager</strong>
+                                <span class="manual-download-filter-new__content-desc"><span class="s-version">ver 1.0</span> (<span class="s-language">KOREAN</span>)</span>
+                                <time datetime="2017-06-09">2017.06.09</time>
+                            </div>
+                            <div class="manual-download-filter-new__content-download">
+                                <a href="#" class="s-btn-download">Downloads <span class="s-filesize-counter">[0.1 MB]</span></a>
+                            </div>
+                        </li> 
+                        <li>
+                            <div class="manual-download-filter-new__content-info">
+                                <strong class="manual-download-filter-new__content-title">Easy Color Manager</strong>
+                                <span class="manual-download-filter-new__content-desc"><span class="s-version">ver 1.0</span> (<span class="s-language">KOREAN</span>)</span>
+                                <time datetime="2017-06-09">2017.06.09</time>
+                            </div>
+                            <div class="manual-download-filter-new__content-download">
+                                <a href="#" class="s-btn-download">Downloads <span class="s-filesize-counter">[0.1 MB]</span></a>
+                            </div>
+                        </li> 
+                        <li>
+                            <div class="manual-download-filter-new__content-info">
+                                <strong class="manual-download-filter-new__content-title">Easy Color Manager</strong>
+                                <span class="manual-download-filter-new__content-desc"><span class="s-version">ver 1.0</span> (<span class="s-language">KOREAN</span>)</span>
+                                <time datetime="2017-06-09">2017.06.09</time>
+                            </div>
+                            <div class="manual-download-filter-new__content-download">
+                                <a href="#" class="s-btn-download">Downloads <span class="s-filesize-counter">[0.1 MB]</span></a>
+                            </div>
+                        </li>            
+                        </ul>
+                        <div class="manual-download-filter-new__content-cta">
+                            <a href="#" class="s-btn-text s-ico-down">Show More</a>
+                        </div>
+                    </div>
+                    <!--/* No results message area for Download (by filter) */-->
+                    <div class="manual-download-filter-new__content-nofilter">
+                        <p>There is no Software for the selected language/OS.<br>Please select another language/OS filter.</p>
+                    </div>
+                    <!--/* No results message area for Download */-->
+                    <div class="manual-download-filter-new__content-noresult">
+                        <p>No result for <strong>Downloads "<span class="s-result-">User</span>"</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--/* //Component */-->
+
+    </div>
+
+    <!--/* footer */-->
+</div>
+<!--/* component js */-->
+<script src="clientlibs/devjs/libs/jquery-1.12.4.min.js"></script>
+<script src="clientlibs/devjs/apps/common.js"></script>
+<script src="clientlibs/devjs/main.js"></script>
+</script>
+</body>
+</html>

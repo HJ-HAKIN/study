@@ -204,7 +204,7 @@
         resizeEndFunc : function () {
             this.opts.resizeStart = null;
             this.setLayout();
-            if (UTIL.winSize().w <= BREAKPOINTS.MOBILE) { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 작거나 같을 때 아래 함수 실행
+            if (UTIL.winSize().w <= BREAKPOINTS.MOBILE) { // 윈도우 가로 사이즈가 모바일 분기 지정 사이즈보다 작거나 같을 때 아래 함수 실행
                 this.createHeightFunc();
                 this.fixedObjFunc();
                 this.setFilterRange();
@@ -213,7 +213,7 @@
         },
         resizeAnimateFunc : function () {
             this.setLayout();
-            if (UTIL.winSize().w <= BREAKPOINTS.MOBILE) { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 작거나 같을 때 아래 함수 실행
+            if (UTIL.winSize().w <= BREAKPOINTS.MOBILE) { // 윈도우 가로 사이즈가 모바일 분기 지정 사이즈보다 작거나 같을 때 아래 함수 실행
                 this.createHeightFunc();
                 this.fixedObjFunc();
                 this.setFilterRange();
@@ -227,13 +227,13 @@
                     this.setPcLayout();
                 }
             } else {
-                if (UTIL.winSize().w > BREAKPOINTS.MOBILE) { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 클 때 아래 함수 실행
+                if (UTIL.winSize().w > BREAKPOINTS.MOBILE) { // 윈도우 가로 사이즈가 모바일 분기 지정 사이즈보다 클 때 아래 함수 실행
                     if (this.opts.viewType != 'pc') { // viewType이 pc로 지정되어 있지 않으면
                         this.opts.viewType = 'pc'; // viewType을 pc로 명시
                         this.setPcLayout();
                         this.bindResponsiveEvents(true); // 반응형 이벤트 true = PC
                     }
-                } else { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 작거나 같으면 아래 함수 실행
+                } else { // 윈도우 가로 사이즈가 모바일 분기 지정 사이즈보다 작거나 같으면 아래 함수 실행
                     if (this.opts.viewType != 'mo') { // viewType이 mo로 지정되어 있지 않으면
                         this.opts.viewType = 'mo'; // viewType을 mo로 명시
                         this.setMoLayout();
@@ -264,7 +264,7 @@
                 this.filterObjWrap.css('height', '');
                 this.filterArea.css('top', '');
             } else { // 맞으면
-                if (UTIL.winSize().w > BREAKPOINTS.MOBILE) { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 클 때 아래 함수 실행
+                if (UTIL.winSize().w > BREAKPOINTS.MOBILE) { // 윈도우 가로 사이즈가 모바일 분기 지정 사이즈보다 클 때 아래 함수 실행
                     this.filterObjWrap.css('height', '');
                     this.filterArea.css('top', '');
                 } else { // 그 외의 경우
@@ -555,7 +555,7 @@
     };
     win.smg.support[personaPluginName].prototype = {
         init : function () {
-            if (UTIL.winSize().w > BREAKPOINTS.MOBILE) { // 원도우 가로 사이즈가 모바일 분기 지정 사이즈보다 클 때 아래 함수 실행
+            if (UTIL.winSize().w > BREAKPOINTS.MOBILE) { // 윈도우 가로 사이즈가 모바일 분기 지정 사이즈보다 클 때 아래 함수 실행
                 this.setElements();
                 this.initLayout();
                 this.resizeFunc();
