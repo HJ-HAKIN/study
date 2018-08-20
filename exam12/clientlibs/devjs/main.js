@@ -34,6 +34,7 @@
         },
         setLayout : function () {
         	this.personaBx.removeClass(this.opts.activeClass);
+        	this.selectOpt.hide();
         },
         onHoverFunc : function (e) {
         	var target = $(e.currentTarget);
