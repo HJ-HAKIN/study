@@ -7,7 +7,8 @@
         	activeClass : 'is-active',
         	personaWrap : '.manual-download-filter-new__persona',
         	personaBx : '.manual-download-filter-new__persona-box',
-        	personaLink : '.manual-download-filter-new__persona-toggler',
+        	selectPlaceholder : '.support-select__placeholder',
+        	selectOpt : '.support-select__options',
             viewType : null,
             resizeStart : null
         };
@@ -24,12 +25,15 @@
         setElements : function () {
         	this.personaWrap = this.obj.find(this.opts.personaWrap);
         	this.personaBx = this.obj.find(this.opts.personaBx);
-        	this.personaLink = this.obj.find(this.opts.personaLink);
+        	this.selectPlaceholder = this.obj.find(this.opts.selectPlaceholder);
+        	this.selectOpt = this.obj.find(this.opts.selectOpt);
         },
         bindEvents : function () {
         	this.personaBx.on('mouseenter focusin mouseleave focusout', $.proxy(this.onHoverFunc, this));
+        	this.selectPlaceholder.on('click', $.proxy(this.onSelectFunc, this));
         },
         setLayout : function () {
+        	this.personaBx.removeClass(this.opts.activeClass);
         },
         onHoverFunc : function (e) {
         	var target = $(e.currentTarget);
@@ -40,6 +44,9 @@
     		} else if (e.type === 'mouseleave' || e.type === 'focusout') {
         		target.removeClass(this.opts.activeClass);
     		}
+        },
+        onSelectFunc : function () {
+        	this.selectOpt.show();
         }
     };
     $.fn.pluginCall = function () {
