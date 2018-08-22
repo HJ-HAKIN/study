@@ -5,8 +5,13 @@
         var defParams = {
         	obj : container,
         	activeClass : 'is-active',
+        	showClass : 'is-show',
+            disabledClass : 'is-disabled',
+            checkedClass : 'is-checked',
+            filterActiveClass : 'filter-active',
         	personaWrap : '.manual-download-filter-new__persona',
         	personaBx : '.manual-download-filter-new__persona-box',
+        	resetBtn : '.s-btn-reset',
         	searchWrap : '.js-inptext-wrap',
         	inpClear : '.support-input__clear',
         	selectWrap : '.js-select-wrap',
@@ -16,15 +21,11 @@
         	selectOptLink : '.support-select__options a',
         	manualWrap : '.manual-download-filter-new__module',
         	manualList : '.manual-download-filter-new__content-list li',
-        	showClass : 'is-show',
             resetBtn : '.s-btn-reset',
             checkWrap : '.js-chkbox-wrap',
-            disabledClass : 'is-disabled',
-            checkedClass : 'is-checked',
             filterWrap : '.manual-download-filter-new__list',
             filterBtn : '.manual-download-filter-new__list-title',
             filterList : '.manual-download-filter-new__list-items',
-            filterActiveClass : 'filter-active',
             viewType : null,
             resizeStart : null
         };
@@ -41,6 +42,7 @@
         setElements : function () {
         	this.personaWrap = this.obj.find(this.opts.personaWrap);
         	this.personaBx = this.obj.find(this.opts.personaBx);
+        	this.resetBtn = this.obj.find(this.opts.resetBtn);
         	this.searchWrap = this.obj.find(this.opts.searchWrap);
         	this.searchLabel = this.searchWrap.find('label');
         	this.searchInput = this.searchWrap.find('input');
@@ -56,6 +58,8 @@
         	this.filterWrap = this.obj.find(this.opts.filterWrap);
         	this.filterBtn = this.obj.find(this.opts.filterBtn);
         	this.filterList = this.obj.find(this.opts.filterList);
+            this.currentIndex = null;
+            this.oldIndex = null;
         },
         bindEvents : function () {
         	this.personaBx.on('mouseenter focusin mouseleave focusout', $.proxy(this.onHoverFunc, this));
@@ -68,6 +72,8 @@
         },
         setLayout : function () {
         	this.personaBx.removeClass(this.opts.activeClass);
+        	this.resetBtn.addClass(this.opts.disabledClass);
+        	this.checkWrap.removeClass(this.opts.disabledClass);
         	this.selectOpt.hide();
         	this.manualList.addClass(this.opts.showClass);
         	this.checkWrap.removeClass(this.opts.checkedClass);
@@ -101,11 +107,16 @@
         },
         filterFunc : function (e) {
         	e.preventDefault();
+        	this.slideFunc();
         	var target = $(e.currentTarget);
             this.currentIndex = target.parent().index();
-        	this.slideFunc();
+        	console.log(target);
+        	console.log(this.currentIndex);
+        	console.log(target.parent(this.filterWrap).index());
         },
         slideFunc : function () {
+    		this.filterWrap.eq(this.oldIndex).removeClass(this.opts.filterActiveClass);
+    		this.filterList.eq(this.oldIndex).slideUp();
     		this.filterWrap.eq(this.currentIndex).toggleClass(this.opts.filterActiveClass);
     		this.filterList.eq(this.currentIndex).slideToggle();
             // 각각 나누기
