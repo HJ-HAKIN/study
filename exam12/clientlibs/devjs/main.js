@@ -1,7 +1,7 @@
 (function (win, $, doc) {
     'use strict';
     
-    var defaultEvt = function (container, args) {
+    var filterPersona = function (container, args) {
         var defParams = {
         	obj : container,
         	activeClass : 'is-active',
@@ -10,26 +10,14 @@
             checkedClass : 'is-checked',
         	personaWrap : '.manual-download-filter-new__persona',
         	personaBx : '.manual-download-filter-new__persona-box',
-        	resetBtn : '.s-btn-reset',
-        	searchWrap : '.js-inptext-wrap',
-        	inpClear : '.support-input__clear',
-        	selectWrap : '.js-select-wrap',
-        	selectBtn : '.support-select__placeholder',
-        	selectTxt : '.js-align-placeholder',
-        	selectOpt : '.support-select__options',
-        	selectOptLink : '.support-select__options a',
-        	manualWrap : '.manual-download-filter-new__module',
-        	manualList : '.manual-download-filter-new__content-list li',
-            resetBtn : '.s-btn-reset',
             checkWrap : '.js-chkbox-wrap',
-            viewType : null,
-            resizeStart : null
+        	resetBtn : '.s-btn-reset'
         };
         this.obj = $('#content');
         this.opts = $.extend(defParams, {});
         this.init();
     };
-    defaultEvt.prototype = {
+    filterPersona.prototype = {
         init : function () {
             this.setElements();
             this.bindEvents();
@@ -38,39 +26,17 @@
         setElements : function () {
         	this.personaWrap = this.obj.find(this.opts.personaWrap);
         	this.personaBx = this.obj.find(this.opts.personaBx);
-        	this.resetBtn = this.obj.find(this.opts.resetBtn);
-        	this.searchWrap = this.obj.find(this.opts.searchWrap);
-        	this.searchLabel = this.searchWrap.find('label');
-        	this.searchInput = this.searchWrap.find('input');
-        	this.inpClear = this.obj.find(this.opts.inpClear);
-        	this.selectBtn = this.obj.find(this.opts.selectBtn);
-        	this.selectTxt = this.obj.find(this.opts.selectTxt);
-        	this.selectOpt = this.obj.find(this.opts.selectOpt);
-        	this.selectOptLink = this.obj.find(this.opts.selectOptLink);
-        	this.manualWrap = this.obj.find(this.opts.manualWrap);
-        	this.manualList = this.obj.find(this.opts.manualList);
-        	this.checkWrap = this.obj.find(this.opts.checkWrap);
+        	this.checkWrap = this.personaWrap.find(this.opts.checkWrap);
         	this.checkInput = this.checkWrap.find('input');
-            this.currentIndex = null;
-            this.oldIndex = null;
+        	this.resetBtn = this.obj.find(this.opts.resetBtn);
         },
         bindEvents : function () {
         	this.personaBx.on('mouseenter focusin mouseleave focusout', $.proxy(this.onHoverFunc, this));
-        	this.selectBtn.on('click', $.proxy(this.onSelectEvt, this));
-            this.selectOptLink.on('click', $.proxy(this.onSelectOpt, this));
-            this.searchLabel.on('click', $.proxy(this.searchFunc, this));
-            this.searchInput.on('mouseenter focusin', $.proxy(this.searchFunc, this));
             this.checkInput.on('change', $.proxy(this.checkFunc, this));
         },
         setLayout : function () {
         	this.personaBx.removeClass(this.opts.activeClass);
         	this.resetBtn.addClass(this.opts.disabledClass);
-        	this.checkWrap.removeClass(this.opts.disabledClass);
-        	this.selectOpt.hide();
-        	this.manualList.addClass(this.opts.showClass);
-        	this.checkWrap.removeClass(this.opts.checkedClass);
-        	this.filterWrap.removeClass(this.opts.filterActiveClass);
-        	this.filterList.hide();
         },
         onHoverFunc : function (e) {
         	var target = $(e.currentTarget);
@@ -83,19 +49,61 @@
     		}
     		// 선택 시 고정/리셋 버튼 활성화 추가
         },
-        searchFunc : function (e) {
-        	if (e.type === 'mouseenter' || e.type === 'focusin') {
-        		this.searchLabel.hide();
-        		this.inpClear.show();
-        	}
-        	// close 버튼 처리, 리셋 기능, 내용이 없을 경우 placeholder 활성화
-        },
         checkFunc : function () {
             if (this.checkWrap.find('input').filter(':checked')) {
                 this.checkWrap.toggleClass(this.opts.checkedClass);
                 console.log(this.checkWrap.prop('checked'));
             }
             // 각각 나누기
+        }
+    };
+
+    var filterSearch = function (container, args) {
+        var defParams = {
+        	obj : container,
+        	searchWrap : '.js-inptext-wrap',
+        	inpClear : '.support-input__clear',
+        	selectWrap : '.js-select-wrap',
+        	selectBtn : '.support-select__placeholder',
+        	selectTxt : '.js-align-placeholder',
+        	selectOpt : '.support-select__options',
+        	selectOptLink : '.support-select__options a'
+        };
+        this.obj = $('#content');
+        this.opts = $.extend(defParams, {});
+        this.init();
+    };
+    filterSearch.prototype = {
+        init : function () {
+            this.setElements();
+            this.bindEvents();
+            this.setLayout();
+        },
+        setElements : function () {
+        	this.searchWrap = this.obj.find(this.opts.searchWrap);
+        	this.searchLabel = this.searchWrap.find('label');
+        	this.searchInput = this.searchWrap.find('input');
+        	this.inpClear = this.obj.find(this.opts.inpClear);
+        	this.selectBtn = this.obj.find(this.opts.selectBtn);
+        	this.selectTxt = this.obj.find(this.opts.selectTxt);
+        	this.selectOpt = this.obj.find(this.opts.selectOpt);
+        	this.selectOptLink = this.obj.find(this.opts.selectOptLink);
+        },
+        bindEvents : function () {
+        	this.selectBtn.on('click', $.proxy(this.onSelectEvt, this));
+            this.selectOptLink.on('click', $.proxy(this.onSelectOpt, this));
+            this.searchLabel.on('click', $.proxy(this.searchFunc, this));
+            this.searchInput.on('mouseenter focusin', $.proxy(this.searchFunc, this));
+        },
+        setLayout : function () {
+        	this.selectOpt.hide();
+        },
+        searchFunc : function (e) {
+        	if (e.type === 'mouseenter' || e.type === 'focusin') {
+        		this.searchLabel.hide();
+        		this.inpClear.show();
+        	}
+        	// close 버튼 처리, 리셋 기능, 내용이 없을 경우 placeholder 활성화
         },
         onSelectEvt : function () {
         	this.selectOpt.show();
@@ -176,7 +184,8 @@
             // 각각 나누기
         },
         checkFunc : function (e) {
-        	this.currentFunc();
+        	var target = $(e.currentTarget);
+        	this.currentIndex = target.parent().index();
             if (this.checkWrap.find('input').filter(':checked')) {
                 this.checkWrap.toggleClass(this.opts.checkedClass);
                 console.log(this.checkWrap.prop('checked'));
@@ -188,6 +197,8 @@
     $.fn.pluginCall = function () {
         for (var i = 0, max = this.length; i < max; i++) {
             // new defaultEvt(this.eq(i));
+            new filterSearch(this.eq(i));
+            new filterPersona(this.eq(i));
             new filterNewList(this.eq(i));
         }
     };
