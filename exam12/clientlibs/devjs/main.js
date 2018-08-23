@@ -1,5 +1,29 @@
 (function (win, $, doc) {
     'use strict';
+
+    var defaultEvt = function (container, args) {
+        var defParams = {
+        	obj : container,
+        	viewType : null
+        }
+        this.obj = $('#content');
+        this.opts = $.extend(defParams, {});
+        this.init();
+    };
+    filterPersona.prototype = {
+        init : function () {
+            this.setElements();
+            this.bindEvents();
+            this.setLayout();
+        },
+        setElements : function () {
+        	// resize ?
+        },
+        bindEvents : function () {
+        },
+        setLayout : function () {
+        }
+    };
     
     var filterPersona = function (container, args) {
         var defParams = {
