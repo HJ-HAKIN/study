@@ -8,7 +8,6 @@
         	showClass : 'is-show',
             disabledClass : 'is-disabled',
             checkedClass : 'is-checked',
-            filterActiveClass : 'filter-active',
         	personaWrap : '.manual-download-filter-new__persona',
         	personaBx : '.manual-download-filter-new__persona-box',
         	resetBtn : '.s-btn-reset',
@@ -23,9 +22,6 @@
         	manualList : '.manual-download-filter-new__content-list li',
             resetBtn : '.s-btn-reset',
             checkWrap : '.js-chkbox-wrap',
-            filterWrap : '.manual-download-filter-new__list',
-            filterBtn : '.manual-download-filter-new__list-title',
-            filterList : '.manual-download-filter-new__list-items',
             viewType : null,
             resizeStart : null
         };
@@ -55,9 +51,6 @@
         	this.manualList = this.obj.find(this.opts.manualList);
         	this.checkWrap = this.obj.find(this.opts.checkWrap);
         	this.checkInput = this.checkWrap.find('input');
-        	this.filterWrap = this.obj.find(this.opts.filterWrap);
-        	this.filterBtn = this.obj.find(this.opts.filterBtn);
-        	this.filterList = this.obj.find(this.opts.filterList);
             this.currentIndex = null;
             this.oldIndex = null;
         },
@@ -68,7 +61,6 @@
             this.searchLabel.on('click', $.proxy(this.searchFunc, this));
             this.searchInput.on('mouseenter focusin', $.proxy(this.searchFunc, this));
             this.checkInput.on('change', $.proxy(this.checkFunc, this));
-            this.filterBtn.on('click', $.proxy(this.filterFunc, this));
         },
         setLayout : function () {
         	this.personaBx.removeClass(this.opts.activeClass);
@@ -105,22 +97,6 @@
             }
             // 각각 나누기
         },
-        filterFunc : function (e) {
-        	e.preventDefault();
-        	this.slideFunc();
-        	var target = $(e.currentTarget);
-            this.currentIndex = target.parent().index();
-        	console.log(target);
-        	console.log(this.currentIndex);
-        	console.log(target.parent(this.filterWrap).index());
-        },
-        slideFunc : function () {
-    		this.filterWrap.eq(this.oldIndex).removeClass(this.opts.filterActiveClass);
-    		this.filterList.eq(this.oldIndex).slideUp();
-    		this.filterWrap.eq(this.currentIndex).toggleClass(this.opts.filterActiveClass);
-    		this.filterList.eq(this.currentIndex).slideToggle();
-            // 각각 나누기
-        },
         onSelectEvt : function () {
         	this.selectOpt.show();
             var selectOutsideTime = setTimeout($.proxy(function () {
@@ -147,9 +123,72 @@
             }, this), 30);
         }
     };
+
+    var filterNewList = function (container, args) {
+        var defParams = {
+        	obj : container,
+            filterActiveClass : 'filter-active',
+            filterWrap : '.manual-download-filter-new__list',
+            filterBtn : '.manual-download-filter-new__list-title',
+            filterList : '.manual-download-filter-new__list-items',
+            checkWrap : '.js-chkbox-wrap',
+            checkedClass : 'is-checked'
+        };
+        this.obj = $('#content');
+        this.opts = $.extend(defParams, {});
+        this.init();
+    };
+    filterNewList.prototype = {
+        init : function () {
+            this.setElements();
+            this.bindEvents();
+            this.setLayout();
+        },
+        setElements : function () {
+        	this.filterWrap = this.obj.find(this.opts.filterWrap);
+        	this.filterBtn = this.filterWrap.find(this.opts.filterBtn);
+        	this.filterList = this.filterWrap.find(this.opts.filterList);
+        	this.checkWrap = this.filterWrap.find(this.opts.checkWrap);
+        	this.checkInput = this.checkWrap.find('input');
+        },
+        bindEvents : function () {
+            this.filterBtn.on('click', $.proxy(this.filterFunc, this));
+            this.checkInput.on('change', $.proxy(this.checkFunc, this));
+        },
+        setLayout : function () {
+        	this.filterWrap.removeClass(this.opts.filterActiveClass);
+        	this.filterList.hide();
+        	this.checkWrap.removeClass(this.opts.checkedClass);
+        },
+        filterFunc : function (e) {
+        	e.preventDefault();
+        	var target = $(e.currentTarget);
+        	this.currentIndex = target.parent().index();
+        	this.slideFunc();
+        	console.log(target);
+        	console.log(target.parent());
+        	console.log(target.parent().index());
+        	console.log(this.currentIndex);
+        },
+        slideFunc : function () {
+    		this.filterWrap.eq(this.currentIndex).toggleClass(this.opts.filterActiveClass);
+    		this.filterList.eq(this.currentIndex).slideToggle();
+            // 각각 나누기
+        },
+        checkFunc : function (e) {
+        	this.currentFunc();
+            if (this.checkWrap.find('input').filter(':checked')) {
+                this.checkWrap.toggleClass(this.opts.checkedClass);
+                console.log(this.checkWrap.prop('checked'));
+            }
+            // 각각 나누기
+        }
+    };
+
     $.fn.pluginCall = function () {
         for (var i = 0, max = this.length; i < max; i++) {
-            new defaultEvt(this.eq(i));
+            // new defaultEvt(this.eq(i));
+            new filterNewList(this.eq(i));
         }
     };
     $(function () {
