@@ -10,7 +10,7 @@
         this.opts = $.extend(defParams, {});
         this.init();
     };
-    filterPersona.prototype = {
+    defaultEvt.prototype = {
         init : function () {
             this.setElements();
             this.bindEvents();
@@ -29,7 +29,6 @@
         var defParams = {
         	obj : container,
         	activeClass : 'is-active',
-        	showClass : 'is-show',
             disabledClass : 'is-disabled',
             checkedClass : 'is-checked',
         	personaWrap : '.manual-download-filter-new__persona',
@@ -48,7 +47,7 @@
             this.setLayout();
         },
         setElements : function () {
-        	this.personaWrap = this.obj.find(this.opts.personaWrap);
+        	this.personaWrap = $(this.opts.personaWrap);
         	this.personaBx = this.obj.find(this.opts.personaBx);
         	this.checkWrap = this.personaWrap.find(this.opts.checkWrap);
         	this.checkInput = this.checkWrap.find('input');
@@ -57,6 +56,7 @@
         bindEvents : function () {
         	this.personaBx.on('mouseenter focusin mouseleave focusout', $.proxy(this.onHoverFunc, this));
             this.checkInput.on('change', $.proxy(this.checkFunc, this));
+            this.resetBtn.on('click', $.proxy(this.resetBtnFunc, this));
         },
         setLayout : function () {
         	this.personaBx.removeClass(this.opts.activeClass);
@@ -69,16 +69,30 @@
 	    			target.addClass(this.opts.activeClass);
 	    		}
     		} else if (e.type === 'mouseleave' || e.type === 'focusout') {
-        		target.removeClass(this.opts.activeClass);
+    			if (this.checkWrap.hasClass(this.opts.checkedClass)) {
+    				target.addClass(this.opts.activeClass);
+    			} else {
+        			target.removeClass(this.opts.activeClass);
+    			}
     		}
-    		// 선택 시 고정/리셋 버튼 활성화 추가
         },
         checkFunc : function () {
             if (this.checkWrap.find('input').filter(':checked')) {
-                this.checkWrap.toggleClass(this.opts.checkedClass);
-                console.log(this.checkWrap.prop('checked'));
+            	this.personaBx.addClass(this.opts.activeClass);
+                this.checkWrap.addClass(this.opts.checkedClass);
             }
             // 각각 나누기
+            this.resetCheckFunc();
+        },
+        resetBtnFunc : function () {
+        	this.checkWrap.removeClass(this.opts.checkedClass);
+        	this.resetBtn.addClass(this.opts.disabledClass);
+        },
+        resetCheckFunc : function () {
+        	if (this.checkWrap.hasClass(this.opts.checkedClass)) {
+        		this.personaBx.addClass(this.opts.activeClass);
+        		this.resetBtn.removeClass(this.opts.disabledClass);
+        	}
         }
     };
 
@@ -86,7 +100,7 @@
         var defParams = {
         	obj : container,
         	searchWrap : '.js-inptext-wrap',
-        	inpClear : '.support-input__clear',
+        	btnClear : '.support-input__clear',
         	selectWrap : '.js-select-wrap',
         	selectBtn : '.support-select__placeholder',
         	selectTxt : '.js-align-placeholder',
@@ -104,10 +118,10 @@
             this.setLayout();
         },
         setElements : function () {
-        	this.searchWrap = this.obj.find(this.opts.searchWrap);
+        	this.searchWrap = $(this.opts.searchWrap);
         	this.searchLabel = this.searchWrap.find('label');
         	this.searchInput = this.searchWrap.find('input');
-        	this.inpClear = this.obj.find(this.opts.inpClear);
+        	this.btnClear = this.obj.find(this.opts.btnClear);
         	this.selectBtn = this.obj.find(this.opts.selectBtn);
         	this.selectTxt = this.obj.find(this.opts.selectTxt);
         	this.selectOpt = this.obj.find(this.opts.selectOpt);
@@ -117,7 +131,7 @@
         	this.selectBtn.on('click', $.proxy(this.onSelectEvt, this));
             this.selectOptLink.on('click', $.proxy(this.onSelectOpt, this));
             this.searchLabel.on('click', $.proxy(this.searchFunc, this));
-            this.searchInput.on('mouseenter focusin', $.proxy(this.searchFunc, this));
+            this.searchInput.on('mouseenter focusin change', $.proxy(this.searchFunc, this));
         },
         setLayout : function () {
         	this.selectOpt.hide();
@@ -125,7 +139,9 @@
         searchFunc : function (e) {
         	if (e.type === 'mouseenter' || e.type === 'focusin') {
         		this.searchLabel.hide();
-        		this.inpClear.show();
+        	} else if (e.type === 'change') {
+        		this.searchLabel.hide();
+        		this.btnClear.show();
         	}
         	// close 버튼 처리, 리셋 기능, 내용이 없을 경우 placeholder 활성화
         },
@@ -160,11 +176,14 @@
         var defParams = {
         	obj : container,
             filterActiveClass : 'filter-active',
+            checkedClass : 'is-checked',
+        	showClass : 'is-show',
             filterWrap : '.manual-download-filter-new__list',
             filterBtn : '.manual-download-filter-new__list-title',
             filterList : '.manual-download-filter-new__list-items',
             checkWrap : '.js-chkbox-wrap',
-            checkedClass : 'is-checked'
+            manualWrap : '.manual-download-filter-new__module',
+            manualList : '.manual-download-filter-new__content-list li'
         };
         this.obj = $('#content');
         this.opts = $.extend(defParams, {});
@@ -177,11 +196,13 @@
             this.setLayout();
         },
         setElements : function () {
-        	this.filterWrap = this.obj.find(this.opts.filterWrap);
-        	this.filterBtn = this.filterWrap.find(this.opts.filterBtn);
-        	this.filterList = this.filterWrap.find(this.opts.filterList);
-        	this.checkWrap = this.filterWrap.find(this.opts.checkWrap);
+        	this.filterWrap = $(this.opts.filterWrap);
+        	this.filterBtn = this.obj.find(this.opts.filterBtn);
+        	this.filterList = this.obj.find(this.opts.filterList);
+        	this.checkWrap = this.obj.find(this.opts.checkWrap);
         	this.checkInput = this.checkWrap.find('input');
+        	this.manualWrap = this.obj.find(this.opts.manualWrap);
+        	this.manualList = this.obj.find(this.opts.manualList);
         },
         bindEvents : function () {
             this.filterBtn.on('click', $.proxy(this.filterFunc, this));
@@ -191,16 +212,13 @@
         	this.filterWrap.removeClass(this.opts.filterActiveClass);
         	this.filterList.hide();
         	this.checkWrap.removeClass(this.opts.checkedClass);
+        	this.manualList.addClass(this.opts.showClass);
         },
         filterFunc : function (e) {
         	e.preventDefault();
         	var target = $(e.currentTarget);
         	this.currentIndex = target.parent().index();
         	this.slideFunc();
-        	console.log(target);
-        	console.log(target.parent());
-        	console.log(target.parent().index());
-        	console.log(this.currentIndex);
         },
         slideFunc : function () {
     		this.filterWrap.eq(this.currentIndex).toggleClass(this.opts.filterActiveClass);
@@ -212,7 +230,6 @@
         	this.currentIndex = target.parent().index();
             if (this.checkWrap.find('input').filter(':checked')) {
                 this.checkWrap.toggleClass(this.opts.checkedClass);
-                console.log(this.checkWrap.prop('checked'));
             }
             // 각각 나누기
         }
@@ -220,7 +237,7 @@
 
     $.fn.pluginCall = function () {
         for (var i = 0, max = this.length; i < max; i++) {
-            // new defaultEvt(this.eq(i));
+            new defaultEvt(this.eq(i));
             new filterSearch(this.eq(i));
             new filterPersona(this.eq(i));
             new filterNewList(this.eq(i));
